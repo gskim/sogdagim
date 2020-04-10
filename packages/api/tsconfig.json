@@ -1,0 +1,32 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "sourceRoot": "./src",
+    	"mapRoot": "./dist",
+    "incremental": true,
+    "paths": {
+			"@sogdagim/orm/*": ["./node_modules/@sogdagim/orm/dist/*"],
+			"@sogdagim/orm": ["./node_modules/@sogdagim/orm/dist"],
+			"@sogdagim/model/*": ["./node_modules/@sogdagim/orm/node_modules/@sogdagim/model/dist/*"],
+			"@sogdagim/model": ["./node_modules/@sogdagim/orm/node_modules/@sogdagim/model/dist"],
+			"@controllers/*": ["src/controllers/*"],
+			"@repositories/*": ["src/repositories/*"],
+			"@representors/*": ["src/representors/*"],
+			"@middlewares/*": ["src/middlewares/*"],
+			"@services/*": ["src/services/*"],
+			"@utils/*": ["src/utils/*"],
+			"typeorm": ["./node_modules/@sogdagim/orm/node_modules/typeorm"],
+			"class-transformer": ["./node_modules/@sogdagim/orm/node_modules/@sogdagim/model/node_modules/class-transformer"],
+			"class-validator": ["./node_modules/@sogdagim/orm/node_modules/@sogdagim/model/node_modules/class-validator"]
+		}
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
+}

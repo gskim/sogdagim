@@ -1,0 +1,40 @@
+{
+  "name": "@sogdagim/orm",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration": "npx tsc && yarn typeorm migration:generate -n ",
+    "migration-run": "yarn typeorm migration:run",
+    "build": "yarn clean && yarn compile",
+    "clean": "rm -rf ./dist",
+    "compile": "npx tsc -p tsconfig.json",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@sogdagim/model": "^1.0.0",
+    "module-alias": "2.2.2",
+    "mysql": "2.15.0",
+    "typeorm": "0.2.24",
+    "typeorm-naming-strategies": "1.1.0",
+    "password-hash": "^1.2.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^4.0.2",
+    "@types/node": "^8.5.5",
+    "ts-node": "^5.0.0",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "6.1.1",
+    "tslint-eslint-rules": "5.4.0",
+    "typescript": "3.7.5",
+    "@types/password-hash": "^1.2.20"
+  },
+  "_moduleAliases": {
+    "@sogdagim/model": "node_modules/@sogdagim/model/dist"
+  }
+}

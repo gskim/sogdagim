@@ -1,4 +1,4 @@
-import { BaseModel, GetTestRequest, GetTestResponse } from '../../models'
+import { BaseModel } from '../../models'
 import { APIOptions, BaseAPI } from '../BaseAPI'
 
 export class Test extends BaseAPI {
@@ -9,10 +9,10 @@ export class Test extends BaseAPI {
 		super(options)
 	}
 
-	async getTestRequest(request: GetTestRequest): Promise<BaseModel<GetTestResponse, string>> {
+	async getTestRequest(request: any): Promise<BaseModel<any, string>> {
 		const endpoint = this.endpoint || Test.defaultEndpoint
 		const path = `/test`
-		return await this.get(path, request, GetTestRequest, endpoint)
+		return await this.get(path, request, BaseModel, endpoint)
 	}
 
 }

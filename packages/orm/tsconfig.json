@@ -1,0 +1,15 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist",
+		"declaration": true,
+		"paths": {
+			"@sogdagim/model/*": ["./node_modules/@sogdagim/model/dist/*"],
+			"@sogdagim/model": ["./node_modules/@sogdagim/model/dist"]
+		}
+	},
+	"include": [
+	  "src/**/*.ts"
+	]
+}

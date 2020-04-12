@@ -10,18 +10,18 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import Image from './Image'
-import Like from './Like'
-import PostMapping from './PostMapping'
-import Unlike from './Unlike'
-import User from './User'
+import { Image } from './Image'
+import { Like } from './Like'
+import { PostMapping } from './PostMapping'
+import { Unlike } from './Unlike'
+import { User } from './User'
 
 @Entity({
 	orderBy: {
 		orderId: 'ASC'
 	}
 })
-class Post extends BaseEntity {
+export class Post extends BaseEntity {
 
 	@PrimaryGeneratedColumn() id: number
 
@@ -64,4 +64,3 @@ class Post extends BaseEntity {
 	@UpdateDateColumn() updatedAt: Date
 
 }
-export default Post

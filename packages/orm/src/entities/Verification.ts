@@ -9,10 +9,10 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import User from './User'
+import {User} from './User'
 
 @Entity()
-class Verification extends BaseEntity {
+export class Verification extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
 	@OneToOne((type) => User)
@@ -36,4 +36,3 @@ class Verification extends BaseEntity {
 				.substr(2)
 	}
 }
-export default Verification

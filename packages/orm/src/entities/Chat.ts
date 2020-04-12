@@ -12,11 +12,11 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import Message from './Message'
-import User from './User'
+import { Message } from './Message'
+import { User } from './User'
 
 @Entity()
-class Chat extends BaseEntity {
+export class Chat extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	id: number
 
@@ -65,4 +65,3 @@ class Chat extends BaseEntity {
 		return passwordHash.generate(password)
 	}
 }
-export default Chat

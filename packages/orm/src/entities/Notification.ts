@@ -9,7 +9,7 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import User from './User'
+import { User } from './User'
 
 @Entity({
 	orderBy: {
@@ -17,7 +17,7 @@ import User from './User'
 	}
 })
 
-class Notification extends BaseEntity {
+export class Notification extends BaseEntity {
 
 	@PrimaryGeneratedColumn() id: number
 
@@ -48,4 +48,3 @@ class Notification extends BaseEntity {
 	@UpdateDateColumn() updatedAt: Date
 
 }
-export default Notification

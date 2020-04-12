@@ -1,17 +1,17 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "sourceRoot": "./src",
-    	"mapRoot": "./dist",
-    "incremental": true,
-    "paths": {
+	"declaration": true,
+	"removeComments": true,
+	"emitDecoratorMetadata": true,
+	"experimentalDecorators": true,
+	"sourceMap": true,
+	"outDir": "./dist",
+	"baseUrl": "./",
+	"sourceRoot": "./src",
+	"mapRoot": "./dist",
+	"incremental": true,
+	"paths": {
 			"@sogdagim/orm/*": ["./node_modules/@sogdagim/orm/dist/*"],
 			"@sogdagim/orm": ["./node_modules/@sogdagim/orm/dist"],
 			"@sogdagim/model/*": ["./node_modules/@sogdagim/orm/node_modules/@sogdagim/model/dist/*"],

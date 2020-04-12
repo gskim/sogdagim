@@ -1,7 +1,8 @@
 import 'module-alias/register'
-export * from './ormConfig'
-export * from './entities'
-export * from 'typeorm'
-// @ts-ignore
 export * from '@sogdagim/model'
+export * from './entities'
+export * from './ormConfig'
+// @ts-ignore
+export * from 'typeorm'
+
 // export * from 'typeorm-typedi-extensions'

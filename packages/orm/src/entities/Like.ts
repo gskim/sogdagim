@@ -7,11 +7,11 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import Post from './Post'
-import User from './User'
+import { Post } from './Post'
+import { User } from './User'
 
 @Entity()
-class Like extends BaseEntity {
+export class Like extends BaseEntity {
 
 	@PrimaryGeneratedColumn() id: number
 
@@ -29,4 +29,3 @@ class Like extends BaseEntity {
 	@UpdateDateColumn() updatedAt: Date
 
 }
-export default Like

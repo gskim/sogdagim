@@ -7,10 +7,10 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import Post from './Post'
+import { Post } from './Post'
 
 @Entity()
-class Image extends BaseEntity {
+export class Image extends BaseEntity {
 
 	@PrimaryGeneratedColumn() id: number
 
@@ -34,4 +34,3 @@ class Image extends BaseEntity {
 	@UpdateDateColumn() updatedAt: Date
 
 }
-export default Image

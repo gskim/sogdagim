@@ -5,7 +5,6 @@ import {
 } from 'typeorm'
 
 @Entity()
-class PostOrderSequence extends BaseEntity {
+export class PostOrderSequence extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 }
-export default PostOrderSequence

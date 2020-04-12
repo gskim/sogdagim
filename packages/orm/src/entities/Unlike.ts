@@ -7,11 +7,11 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import Post from './Post'
-import User from './User'
+import { Post } from './Post'
+import { User } from './User'
 
 @Entity()
-class Unlike extends BaseEntity {
+export class Unlike extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
 	@Column({ default: true })
@@ -28,4 +28,3 @@ class Unlike extends BaseEntity {
 	@UpdateDateColumn() updatedAt: Date
 
 }
-export default Unlike

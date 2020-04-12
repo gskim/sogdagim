@@ -5,11 +5,11 @@ import {
 	PrimaryGeneratedColumn,
 	Unique
 } from 'typeorm'
-import Post from './Post'
+import { Post } from './Post'
 
 @Entity()
 @Unique('parent_child', ['parent', 'child'])
-class PostMapping extends BaseEntity {
+export class PostMapping extends BaseEntity {
 
 	@PrimaryGeneratedColumn()
 	id: number
@@ -21,4 +21,3 @@ class PostMapping extends BaseEntity {
 	child: number
 
 }
-export default PostMapping

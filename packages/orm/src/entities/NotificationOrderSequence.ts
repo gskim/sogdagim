@@ -5,7 +5,6 @@ import {
 } from 'typeorm'
 
 @Entity()
-class NotificationOrderSequence extends BaseEntity {
+export class NotificationOrderSequence extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 }
-export default NotificationOrderSequence

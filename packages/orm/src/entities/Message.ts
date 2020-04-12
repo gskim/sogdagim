@@ -8,8 +8,8 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import Chat from './Chat'
-import User from './User'
+import { Chat } from './Chat'
+import { User } from './User'
 
 @Entity({
 	orderBy: {
@@ -17,7 +17,7 @@ import User from './User'
 	}
 })
 
-class Message extends BaseEntity {
+export class Message extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
 	@Column({ type: 'text' })
@@ -46,4 +46,3 @@ class Message extends BaseEntity {
 
 	@UpdateDateColumn() updatedAt: Date
 }
-export default Message

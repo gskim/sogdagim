@@ -13,14 +13,14 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import Chat from './Chat'
-import Device from './Device'
-import Like from './Like'
-import Post from './Post'
-import Unlike from './Unlike'
+import { Chat } from './Chat'
+import { Device } from './Device'
+import { Like } from './Like'
+import { Post } from './Post'
+import { Unlike } from './Unlike'
 
 @Entity()
-class User extends BaseEntity {
+export class User extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
 	@Column({ type: 'varchar', length: 30, nullable: true })
@@ -113,5 +113,3 @@ class User extends BaseEntity {
 		return passwordHash.generate(password)
 	}
 }
-
-export default User

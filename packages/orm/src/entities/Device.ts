@@ -7,10 +7,10 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import User from './User'
+import { User } from './User'
 
 @Entity()
-class Device extends BaseEntity {
+export class Device extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
 	@Column({ type: 'boolean' })
@@ -76,5 +76,3 @@ class Device extends BaseEntity {
 	user: User
 
 }
-
-export default Device

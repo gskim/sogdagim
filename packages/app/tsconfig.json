@@ -1,14 +1,8 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/tsc-out",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "experimentalDecorators": true,
     "jsx": "react-native",
     "module": "es2015",
     "target": "es2017",
@@ -17,8 +11,12 @@
       "es2016"
     ],
     "paths": {
-      "@src/*": ["./src/*"],
-      "@kitten/*": ["./node_modules/react-native-ui-kitten/*"]
+      "@src/*": [
+        "./src/*"
+      ],
+      "@kitten/*": [
+        "./node_modules/react-native-ui-kitten/*"
+      ]
     },
     "typeRoots": [
       "./node_modules/@types"

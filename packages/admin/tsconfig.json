@@ -6,6 +6,10 @@
     "sourceMap": true,
     "outDir": "./dist",
     "removeComments": false,
+    "rootDirs": [
+      "./src",
+      "./test"
+    ],
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
     "paths": {
@@ -31,22 +35,18 @@
         "./node_modules/@sogdagim/model/dist"
       ]
     },
-    "noEmit": false,
     "isolatedModules": true,
-    "allowJs": true,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false,
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "target": "es5",
     "lib": [
       "es2015",
       "es2017",
       "dom",
       "es2017.object"
-    ]
+    ],
+    "allowJs": true,
+    "noEmit": true
   },
   "exclude": [
     "node_modules"
@@ -56,6 +56,5 @@
     "src/*",
     "**/*.ts",
     "**/*.tsx"
-  ],
-  "compileOnSave": false
+  ]
 }

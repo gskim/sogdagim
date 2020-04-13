@@ -1,10 +1,8 @@
-/* @import '~antd/dist/antd.css'; */
-
 body,
 html {
 	width: 100% !important;
 	height: 100% !important;
-	background: #111 !important;
+	background: #FFFFFF !important;
 	font-family: 'Nanum Gothic', serif !important;
 }
 

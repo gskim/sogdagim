@@ -20,6 +20,6 @@ async function bootstrap() {
 		disableErrorMessages: process.env.DEBUG !== 'true'
   }))
   await nestApp.init()
-  await nestApp.listen(3000)
+  await nestApp.listen(80)
 }
 bootstrap()

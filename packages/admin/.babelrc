@@ -1,28 +1,24 @@
 {
 	"presets": [
-		"next/babel",
-		"@zeit/next-typescript/babel"
+		[
+			"next/babel",
+			{
+				"targets": {
+					"browsers": ["ie >= 10"]
+				},
+				"class-properties": {
+					"loose": true
+				},
+				"decorators": {
+					"legacy": true
+				}
+			}
+		]
 	],
 	"plugins": [
-		[
-			"@babel/plugin-proposal-decorators",
-			{
-				"legacy": true
-			}
-		],
-		[
-			"@babel/plugin-proposal-class-properties",
-			{
-				"loose": true
-			}
-		],
-		[
-			"import",
-			{
-				"libraryName": "antd",
-				"style": "css"
-			}
-		],
+		["@babel/plugin-proposal-decorators", {"legacy": true}],
+		["@babel/plugin-proposal-class-properties", {"loose": true}],
+		["import",{"libraryName": "antd","style": "css"}],
 		[
 			"module-resolver",
 			{

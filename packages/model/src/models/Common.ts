@@ -8,6 +8,10 @@ export class BaseModel<T, I> {
 	} | null
 }
 
+export class CommonUser {
+	nickname: string
+}
+
 export enum PostStatus {
 	PUBLIC = 'public',
 	PRIVATE = 'private',

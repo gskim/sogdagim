@@ -1,0 +1,9 @@
+dist
+out
+bundles
+.next
+.build
+.serverless
+
+package-lock.json
+node_modules

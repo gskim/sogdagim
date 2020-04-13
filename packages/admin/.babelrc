@@ -1,0 +1,46 @@
+{
+	"presets": [
+		"next/babel",
+		"@zeit/next-typescript/babel"
+	],
+	"plugins": [
+		[
+			"@babel/plugin-proposal-decorators",
+			{
+				"legacy": true
+			}
+		],
+		[
+			"@babel/plugin-proposal-class-properties",
+			{
+				"loose": true
+			}
+		],
+		[
+			"import",
+			{
+				"libraryName": "antd",
+				"style": "css"
+			}
+		],
+		[
+			"module-resolver",
+			{
+				"root": [
+					"./"
+				],
+				"alias": {
+					"@src": "./src",
+					"@pages": "./pages",
+					"class-transformer": "./node_modules/@sogdagim/model/node_modules/class-transformer",
+					"class-validator": "./node_modules/@sogdagim/model/node_modules/class-validator",
+					"@sogdagim/model": "./node_modules/@sogdagim/model/dist"
+				},
+				"extensions": [
+					".tsx",
+					".ts"
+				]
+			}
+		]
+	]
+}

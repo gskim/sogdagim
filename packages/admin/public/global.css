@@ -1,10 +1,10 @@
-@import '~antd/dist/antd.css';
+/* @import '~antd/dist/antd.css'; */
 
-/* body,
+body,
 html {
 	width: 100% !important;
 	height: 100% !important;
-	background: #fff !important;
+	background: #111 !important;
 	font-family: 'Nanum Gothic', serif !important;
 }
 
@@ -14,4 +14,4 @@ body > #__next {
 	flex: 1;
 	width: 100%;
 	height: 100%;
-} */
+}

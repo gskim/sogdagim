@@ -3,6 +3,14 @@
     "../../tslint.json"
   ],
   "rules": {
-    "callable-types": true
+    "callable-types": true,
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-leading-underscore",
+        "allow-pascal-case"
+      ]
+    }
   }
 }

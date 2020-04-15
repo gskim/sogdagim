@@ -1,10 +1,12 @@
 import { IndexController } from '@controllers/IndexController'
+import { UserController } from '@controllers/UserController'
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { UserRepository } from '@repositories/UserRepository'
 import { IndexService } from '@services/IndexService'
+import { UserService } from '@services/UserService'
 import { Chat, Device, Image, Like, Message, MessageOrderSequence
   ,Notification, NotificationOrderSequence, Post, PostMapping
 , PostOrderSequence, Unlike, User, Verification } from '@sogdagim/orm'
@@ -28,10 +30,10 @@ import { jwtConstants } from './Constants'
 		])
 	],
 	controllers: [
-		IndexController
+		IndexController, UserController
 	],
 	providers: [
-	IndexService
+	IndexService, UserService
 	]
 })
 class AllModule {

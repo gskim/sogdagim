@@ -16,7 +16,7 @@ app.disable('x-powered-by')
 async function bootstrap() {
   const nestApp = await NestFactory.create(AppModule, new ExpressAdapter(app))
   nestApp.useGlobalPipes(new ValidationPipe({
-		transform: true,
+	transform: true,
 		disableErrorMessages: process.env.DEBUG !== 'true'
   }))
   await nestApp.init()

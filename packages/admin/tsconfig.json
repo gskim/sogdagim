@@ -6,6 +6,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "removeComments": false,
+    "noImplicitAny": false,
     "rootDirs": [
       "./src",
       "./test"

@@ -1,44 +1,36 @@
-import { CommonUser } from '@sogdagim/model/models'
-import { NextPage } from 'next'
-import fetch from 'node-fetch'
+import { CommonUser } from '@sogdagim/model/models/app'
+import { PageComponent } from '@src/@types'
+import UserFetcher from '@src/fetchers/user'
+import { NextPageContext } from 'next'
 import React from 'react'
 
-interface UsersProps {
-	users: CommonUser[]
-}
+const userFetcher = new UserFetcher()
 
-const Users: NextPage<UsersProps> = (props) => {
+const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
 	return (
-
+		<>
 		<ul>
-			{props.users.map((user: CommonUser) => (
-				<li>{user.nickname}</li>
+			{users.map((user: CommonUser) => (
+				<li>{JSON.stringify(user)}</li>
 			))}
 		</ul>
+		</>
 	)
 }
 
-// Users.getInitialProps = async () => {
-// 	const res = await fetch('http://localhost/users')
-// 	const users = await res.json()
+Users.getInitialProps = async (context: NextPageContext) => {
+	userFetcher.setContext(context)
+	const users: CommonUser[] = await userFetcher.getUsers()
+	return { users }
+}
+
+// export async function getServerSideProps() {
+// 	const users: CommonUser[] = await userFetcher.getUsers()
 // 	return {
-// 		users
+// 		props: {
+// 			users
+// 		}
 // 	}
 // }
-
-export async function getServerSideProps() {
-	return {
-		props: {
-
-		}
-	}
-	// const res = await fetch('http://localhost/users')
-	// const users = await res.json()
-	// return {
-	// 	props: {
-	// 		users
-	// 	}
-	// }
-}
 
 export default Users

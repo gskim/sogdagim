@@ -1,19 +1,19 @@
-import { NextPageContext } from 'next'
-import { ErrorProps } from 'next/error'
-import React from 'react'
-const Error = ({ statusCode }: ErrorProps) => {
+import Link from 'next/link'
+
+const Error = ({ message }) => {
 	return (
-	  <p>
-		{statusCode
-		  ? `An error ${statusCode} occurred on server`
-		  : 'An error occurred on client'}
-	  </p>
+		<>
+			<p>{ message }</p>
+			<Link href='/'><a>메인화면으로 가기</a></Link>
+		</>
 	)
-  }
+}
 
-  Error.getInitialProps = ({ res, err }: NextPageContext) => {
-	const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-	return { statusCode }
-  }
+Error.getInitialProps = (context) => {
+	const { message } = context.query
+	return { message }
+}
 
-  export default Error
+Error.isPublicPage = true
+
+export default Error

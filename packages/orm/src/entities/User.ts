@@ -23,11 +23,11 @@ import { Unlike } from './Unlike'
 export class User extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
-	@Column({ type: 'varchar', length: 30, nullable: true })
+	@Column({ type: 'varchar', length: 30 })
 	nickname: string
 
-	@Column({ type: 'text', nullable: true })
-	email?: string
+	@Column({ type: 'varchar', length: 200 })
+	email: string
 
 	@Column({ type: 'boolean', default: false })
 	verified: boolean

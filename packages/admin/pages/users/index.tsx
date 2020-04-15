@@ -7,11 +7,11 @@ interface UsersProps {
 	users: CommonUser[]
 }
 
-const Users: NextPage<UsersProps> = ({ users }) => {
-
+const Users: NextPage<UsersProps> = (props) => {
 	return (
+
 		<ul>
-			{users.map((user: CommonUser) => (
+			{props.users.map((user: CommonUser) => (
 				<li>{user.nickname}</li>
 			))}
 		</ul>
@@ -26,14 +26,19 @@ const Users: NextPage<UsersProps> = ({ users }) => {
 // 	}
 // }
 
-export async function getStaticProps() {
-	const res = await fetch('http://localhost/users')
-	const users = await res.json()
+export async function getServerSideProps() {
 	return {
 		props: {
-			users
+
 		}
 	}
+	// const res = await fetch('http://localhost/users')
+	// const users = await res.json()
+	// return {
+	// 	props: {
+	// 		users
+	// 	}
+	// }
 }
 
 export default Users

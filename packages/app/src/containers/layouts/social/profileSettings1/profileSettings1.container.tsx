@@ -1,11 +1,11 @@
 import React from 'react'
-import {NavigationScreenConfig, NavigationScreenProps} from 'react-navigation'
-import {Profile} from '@src/core/model'
-import {profile1} from '@src/core/data/profile'
-import {ProfileSettings1} from './profileSettings1.component'
-import {Profile1Header} from '@src/containers/layouts/social/profile1/profile1.header'
-import {TopNavigationElement} from '@src/core/navigation/options'
-import {ProfileSettings1Header} from '@src/containers/layouts/social/profileSettings1/profileSettings1.header'
+import { NavigationScreenConfig, NavigationScreenProps } from 'react-navigation'
+import { Profile } from '@src/core/model'
+import { profile1 } from '@src/core/data/profile'
+import { ProfileSettings1 } from './profileSettings1.component'
+import { Profile1Header } from '@src/containers/layouts/social/profile1/profile1.header'
+import { TopNavigationElement } from '@src/core/navigation/options'
+import { ProfileSettings1Header } from '@src/containers/layouts/social/profileSettings1/profileSettings1.header'
 
 interface State {
 	profile: Profile
@@ -18,14 +18,14 @@ interface ProfileSettings1NavigationStateParams {
 
 export class ProfileSettings1Container extends React.Component<NavigationScreenProps, State> {
 
-	static navigationOptions: NavigationScreenConfig<any> = ({navigation, screenProps}) => {
+	static navigationOptions: NavigationScreenConfig<any> = ({ navigation, screenProps }) => {
 		const profile1HeaderConfig: ProfileSettings1NavigationStateParams = {
 			onBack: navigation.getParam('onBack'),
 			onSearchPress: navigation.getParam('onSearchPress'),
 		}
 
 		const renderHeader = (headerProps: NavigationScreenProps,
-							  config: ProfileSettings1NavigationStateParams) => {
+			config: ProfileSettings1NavigationStateParams) => {
 
 			return (
 				<ProfileSettings1Header
@@ -60,7 +60,7 @@ export class ProfileSettings1Container extends React.Component<NavigationScreenP
 
 	private onBackPress = (): void => {
 		this.props.navigation.goBack(null)
-	};
+	}
 
 	private onUploadPhotoButtonPress = () => {
 	}

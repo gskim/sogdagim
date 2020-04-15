@@ -6,18 +6,18 @@ import { ModalShowcase } from './modalShowcase.component'
 type ModalElement = React.ReactElement<ModalProps>
 
 export const StyledModal = (): ModalElement => {
-  return (
-    <ModalShowcase style={styles.modal}/>
-  )
+	return (
+		<ModalShowcase style={styles.modal} />
+	)
 }
 
 const styles = StyleSheet.create({
-  modal: {
-    width: 200,
-    height: 150,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-  },
+	modal: {
+		width: 200,
+		height: 150,
+		backgroundColor: 'white',
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 8,
+	},
 })

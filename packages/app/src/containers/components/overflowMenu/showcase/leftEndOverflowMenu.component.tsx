@@ -5,7 +5,7 @@ import { OverflowMenuShowcase } from './overflowMenuShowcase.component'
 type OverflowMenuElement = React.ReactElement<OverflowMenuProps>
 
 export const LeftEndOverflowMenu = (): OverflowMenuElement => {
-  return (
-    <OverflowMenuShowcase placement='left end'/>
-  )
+	return (
+		<OverflowMenuShowcase placement='left end' />
+	)
 }

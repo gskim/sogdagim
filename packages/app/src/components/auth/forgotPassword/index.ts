@@ -1,5 +1,5 @@
 export {
-  ForgotPasswordForm,
-  ForgotPasswordFormProps,
+	ForgotPasswordForm,
+	ForgotPasswordFormProps,
 } from './forgotPasswordForm.component'
 export { ForgotPasswordFormData } from './type'

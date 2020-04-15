@@ -1,10 +1,10 @@
 export {
-  LayoutsList,
-  LayoutsListProps,
-  LayoutsListItemData,
+	LayoutsList,
+	LayoutsListProps,
+	LayoutsListItemData,
 } from './layoutsList'
 export {
-  ComponentsList,
-  ComponentsListProps,
-  ComponentsListItemData,
+	ComponentsList,
+	ComponentsListProps,
+	ComponentsListItemData,
 } from './componentsList'

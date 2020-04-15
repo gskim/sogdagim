@@ -1,4 +1,4 @@
 export {
-  SocialAuth,
-  SocialAuthProps,
+	SocialAuth,
+	SocialAuthProps,
 } from './socialAuth.component'

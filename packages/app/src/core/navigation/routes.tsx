@@ -21,7 +21,7 @@ import {
 	MenuContainer
 } from '@src/containers/menu'
 import React from 'react'
-import {useScreens} from 'react-native-screens'
+import { useScreens } from 'react-native-screens'
 import {
 	createAppContainer,
 	createBottomTabNavigator,

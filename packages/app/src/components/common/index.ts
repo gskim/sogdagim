@@ -1,68 +1,68 @@
 export {
-  ActivityAuthoring,
-  ActivitiAuthoringProps,
+	ActivityAuthoring,
+	ActivitiAuthoringProps,
 } from './activityAuthoring.component'
 export {
-  ScrollableAvoidKeyboard,
-  ScrollableAvoidKeyboardProps,
+	ScrollableAvoidKeyboard,
+	ScrollableAvoidKeyboardProps,
 } from './scrollableAvoidKeyboard.component'
 export {
-  ContainerView,
-  ContainerViewProps,
+	ContainerView,
+	ContainerViewProps,
 } from './containerView.component'
 export {
-  AvoidKeyboard,
-  AvoidKeyboardProps,
+	AvoidKeyboard,
+	AvoidKeyboardProps,
 } from './avoidKeyboard.component'
 export {
-  CommentsButton,
-  CommentsButtonProps,
+	CommentsButton,
+	CommentsButtonProps,
 } from './commentsButton.component'
 export {
-  ActivityBar,
-  ActivityBarProps,
+	ActivityBar,
+	ActivityBarProps,
 } from './activityBar.component'
 export {
-  ImageOverlay,
-  ImageOverlayProps,
+	ImageOverlay,
+	ImageOverlayProps,
 } from './imageOverlay.component'
 export {
-  LikeButton,
-  LikeButtonProps,
+	LikeButton,
+	LikeButtonProps,
 } from './likeButton.component'
 export {
-  RateBar,
-  RateBarProps,
+	RateBar,
+	RateBarProps,
 } from './rateBar.component'
 export {
-  ReactionBar,
-  ReactionBarProps,
+	ReactionBar,
+	ReactionBarProps,
 } from './reactionBar.component'
 export {
-  ShareButton,
-  ShareButtonProps,
+	ShareButton,
+	ShareButtonProps,
 } from './shareButton.component'
 export {
-  TextIcon,
-  TextIconProps,
+	TextIcon,
+	TextIconProps,
 } from './textIcon.component'
 export {
-  ValidationInput,
-  ValidationInputProps,
+	ValidationInput,
+	ValidationInputProps,
 } from './validationInput.component'
 export {
-  Chips,
-  ChipsProps,
+	Chips,
+	ChipsProps,
 } from './chips.component'
 export {
-  LayoutMenu,
-  LayoutMenuProps,
-  LayoutMenuItemData,
+	LayoutMenu,
+	LayoutMenuProps,
+	LayoutMenuItemData,
 } from './layoutMenu'
 export {
-  textStyle,
+	textStyle,
 } from './style'
 export {
-  DynamicStatusBar,
-  DynamicStatusBarProps,
+	DynamicStatusBar,
+	DynamicStatusBarProps,
 } from './dynamicStatusBar.component'

@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavigationScreenConfig, NavigationScreenProps} from 'react-navigation'
+import { NavigationScreenConfig, NavigationScreenProps } from 'react-navigation'
 import {
 	Profile,
 	ProfileSocials,
@@ -9,10 +9,10 @@ import {
 	profile1,
 	profileSocials1,
 } from '@src/core/data/profile'
-import {posts} from '@src/core/data/post'
-import {Profile1} from './profile1.component'
-import {TopNavigationElement} from '@src/core/navigation/options'
-import {Profile1Header} from '@src/containers/layouts/social/profile1/profile1.header'
+import { posts } from '@src/core/data/post'
+import { Profile1 } from './profile1.component'
+import { TopNavigationElement } from '@src/core/navigation/options'
+import { Profile1Header } from '@src/containers/layouts/social/profile1/profile1.header'
 
 interface Profile1NavigationStateParams {
 	onBack: () => void
@@ -27,7 +27,7 @@ interface State {
 
 export class Profile1Container extends React.Component<NavigationScreenProps, State> {
 
-	static navigationOptions: NavigationScreenConfig<any> = ({navigation, screenProps}) => {
+	static navigationOptions: NavigationScreenConfig<any> = ({ navigation, screenProps }) => {
 		const profile1HeaderConfig: Profile1NavigationStateParams = {
 			onBack: navigation.getParam('onBack'),
 			onSettingsPress: navigation.getParam('onSearchPress'),
@@ -39,7 +39,7 @@ export class Profile1Container extends React.Component<NavigationScreenProps, St
 		}
 
 		const renderHeader = (headerProps: NavigationScreenProps,
-							  config: Profile1NavigationStateParams) => {
+			config: Profile1NavigationStateParams) => {
 
 			return (
 				<Profile1Header

@@ -1,4 +1,4 @@
 export interface SignInForm2Data {
-  username: string
-  password: string
+	username: string
+	password: string
 }

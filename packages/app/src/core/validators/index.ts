@@ -10,49 +10,49 @@ export const PATTERN_CARD_CVV: RegExp = /\d{3}/
 export const PATTERN_FULLNAME: RegExp = /^$|^[a-zA-ZčČćĆđĐšŠžŽ-]+ [a-zA-ZčČćĆđĐšŠžŽ-]+$/
 
 export const NameValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_NAME, value)
+	return RegExpValidator(PATTERN_NAME, value)
 }
 
 export const DOBValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_DOB, value)
+	return RegExpValidator(PATTERN_DOB, value)
 }
 
 export const EmailValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_EMAIL, value)
+	return RegExpValidator(PATTERN_EMAIL, value)
 }
 
 export const PasswordValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_PASSWORD, value)
+	return RegExpValidator(PATTERN_PASSWORD, value)
 }
 
 export const PhoneNumberValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_PHONE, value)
+	return RegExpValidator(PATTERN_PHONE, value)
 }
 
 export const SMSCodeValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_SMS_CODE, value)
+	return RegExpValidator(PATTERN_SMS_CODE, value)
 }
 
 export const CardNumberValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_CARD_NUMBER, value)
+	return RegExpValidator(PATTERN_CARD_NUMBER, value)
 }
 
 export const ExpirationDateValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_CARD_EXPIRE_DATE, value)
+	return RegExpValidator(PATTERN_CARD_EXPIRE_DATE, value)
 }
 
 export const CvvValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_CARD_CVV, value)
+	return RegExpValidator(PATTERN_CARD_CVV, value)
 }
 
 export const CardholderNameValidator = (value: string): boolean => {
-  return RegExpValidator(PATTERN_FULLNAME, value)
+	return RegExpValidator(PATTERN_FULLNAME, value)
 }
 
 export const StringValidator = (value: string): boolean => {
-  return !!value && value.length > 0
+	return !!value && value.length > 0
 }
 
 const RegExpValidator = (regexp: RegExp, value: string): boolean => {
-  return regexp.test(value)
+	return regexp.test(value)
 }

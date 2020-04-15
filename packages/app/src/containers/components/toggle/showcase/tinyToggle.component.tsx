@@ -1,43 +1,43 @@
 import React from 'react'
 import {
-  Toggle,
-  ToggleProps,
+	Toggle,
+	ToggleProps,
 } from '@kitten/ui'
 
 interface ToggleShowcaseComponentState {
-  checked: boolean
+	checked: boolean
 }
 
 class ToggleShowcaseComponent extends React.Component<ToggleProps, ToggleShowcaseComponentState> {
 
-  static defaultProps: ToggleProps = {
-    checked: true,
-  }
+	static defaultProps: ToggleProps = {
+		checked: true,
+	}
 
-  public state: ToggleShowcaseComponentState = {
-    checked: this.props.checked,
-  }
+	public state: ToggleShowcaseComponentState = {
+		checked: this.props.checked,
+	}
 
-  private onChange = (checked: boolean) => {
-    this.setState({ checked })
-  };
+	private onChange = (checked: boolean) => {
+		this.setState({ checked })
+	}
 
-  public render(): React.ReactElement<ToggleProps> {
-    return (
-      <Toggle
-        {...this.props}
-        checked={this.state.checked}
-        onChange={this.onChange}
-      />
-    )
-  }
+	public render(): React.ReactElement<ToggleProps> {
+		return (
+			<Toggle
+				{...this.props}
+				checked={this.state.checked}
+				onChange={this.onChange}
+			/>
+		)
+	}
 }
 
 export const TinyToggle = (props?: ToggleProps): React.ReactElement<ToggleProps> => {
-  return (
-    <ToggleShowcaseComponent
-      size='tiny'
-      {...props}
-    />
-  )
+	return (
+		<ToggleShowcaseComponent
+			size='tiny'
+			{...props}
+		/>
+	)
 }

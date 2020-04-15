@@ -4,6 +4,6 @@ import { StyleType } from '@kitten/theme'
 import { ThemeKey } from '@src/core/themes'
 
 export interface LayoutsListItemData {
-  title: string
-  icon: (style: StyleType, currentTheme: ThemeKey) => React.ReactElement<ImageProps>
+	title: string
+	icon: (style: StyleType, currentTheme: ThemeKey) => React.ReactElement<ImageProps>
 }

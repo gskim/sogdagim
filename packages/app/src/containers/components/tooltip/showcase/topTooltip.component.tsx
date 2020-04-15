@@ -5,7 +5,7 @@ import { TooltipShowcase } from './tooltipShowcase.component'
 type TooltipElement = React.ReactElement<TooltipProps>
 
 export const TopTooltip = (): TooltipElement => {
-  return (
-    <TooltipShowcase placement='top'/>
-  )
+	return (
+		<TooltipShowcase placement='top' />
+	)
 }

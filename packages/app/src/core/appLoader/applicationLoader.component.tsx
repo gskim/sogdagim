@@ -41,19 +41,19 @@ export class ApplicationLoader extends React.Component<Props, State> {
   private onLoadSuccess = () => {
     this.setState({ loaded: true })
     SplashScreen.hide()
-  };
+  }
 
   private onLoadError = (error: Error) => {
     console.warn(error)
-  };
+  }
 
   private loadResources = (): Promise<void> => {
     return this.loadResourcesAsync(this.props.assets)
-  };
+  }
 
-  private loadFonts = (fonts: {[key: string]: number}): Promise<void> => {
+  private loadFonts = (fonts: { [key: string]: number }): Promise<void> => {
     return Font.loadAsync(fonts)
-  };
+  }
 
   private loadImages = (images: ImageRequireSource[]): Promise<void[]> => {
     const tasks: Promise<void>[] = images.map((image: ImageRequireSource): Promise<void> => {
@@ -61,7 +61,7 @@ export class ApplicationLoader extends React.Component<Props, State> {
     })
 
     return Promise.all(tasks)
-  };
+  }
 
   private async loadResourcesAsync(assets: Assets): Promise<void> {
     const { fonts, images } = assets
@@ -82,13 +82,13 @@ export class ApplicationLoader extends React.Component<Props, State> {
         autoHideSplash={false}
       />
     )
-  };
+  }
 
   public render(): React.ReactNode {
     return (
       <React.Fragment>
         {this.state.loaded ? this.props.children : this.renderLoading()}
-        <LoadingAnimationComponent isLoaded={this.state.loaded}/>
+        <LoadingAnimationComponent isLoaded={this.state.loaded} />
       </React.Fragment>
     )
   }

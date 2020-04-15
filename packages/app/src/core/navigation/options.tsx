@@ -1,11 +1,11 @@
-import {MenuContainer} from '@src/containers/menu'
+import { MenuContainer } from '@src/containers/menu'
 import React from 'react'
-import {Alert, View} from 'react-native'
+import { Alert, View } from 'react-native'
 import {
 	NavigationParams,
 	NavigationScreenProps
 } from 'react-navigation'
-import {KEY_NAVIGATION_BACK} from './constants'
+import { KEY_NAVIGATION_BACK } from './constants'
 import {
 	getCurrentRouteState,
 	NavigationRouteState
@@ -62,7 +62,7 @@ const EcommerceMenuTopNavigationParams: TopNavigationParams = {
 		}
 
 		return (
-			<View/>
+			<View />
 			// <EcommerceHeader
 			// 	title={state.routeName}
 			// 	onBack={onBackPress}

@@ -6,7 +6,7 @@ import { StarIconFill } from '@src/assets/icons'
 type TooltipElement = React.ReactElement<TooltipProps>
 
 export const IconTooltip = (): TooltipElement => {
-  return (
-    <TooltipShowcase icon={StarIconFill}/>
-  )
+	return (
+		<TooltipShowcase icon={StarIconFill} />
+	)
 }

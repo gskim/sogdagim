@@ -5,7 +5,7 @@ import { PopoverShowcase } from './popoverShowcase.component'
 type PopoverElement = React.ReactElement<PopoverProps>
 
 export const BottomEndPopover = (): PopoverElement => {
-  return (
-    <PopoverShowcase placement='bottom end'/>
-  )
+	return (
+		<PopoverShowcase placement='bottom end' />
+	)
 }

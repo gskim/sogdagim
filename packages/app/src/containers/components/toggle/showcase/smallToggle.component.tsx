@@ -11,33 +11,33 @@ interface ToggleShowcaseComponentState {
 class ToggleShowcaseComponent extends React.Component<ToggleProps, ToggleShowcaseComponentState> {
 
   static defaultProps: ToggleProps = {
-    checked: true,
+	checked: true,
   }
 
   public state: ToggleShowcaseComponentState = {
-    checked: this.props.checked,
+	checked: this.props.checked,
   }
 
   private onChange = (checked: boolean) => {
-    this.setState({ checked })
+	this.setState({ checked })
   };
 
   public render(): React.ReactElement<ToggleProps> {
-    return (
-      <Toggle
-        {...this.props}
-        checked={this.state.checked}
-        onChange={this.onChange}
-      />
-    )
+	return (
+		<Toggle
+		{...this.props}
+		checked={this.state.checked}
+		onChange={this.onChange}
+		/>
+	)
   }
 }
 
 export const SmallToggle = (props?: ToggleProps): React.ReactElement<ToggleProps> => {
   return (
-    <ToggleShowcaseComponent
-      size='small'
-      {...props}
-    />
+	<ToggleShowcaseComponent
+		size='small'
+		{...props}
+	/>
   )
 }

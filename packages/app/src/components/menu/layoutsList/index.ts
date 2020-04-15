@@ -1,5 +1,5 @@
 export {
-  LayoutsList,
-  LayoutsListProps,
+	LayoutsList,
+	LayoutsListProps,
 } from './layoutsList.component'
 export { LayoutsListItemData } from './type'

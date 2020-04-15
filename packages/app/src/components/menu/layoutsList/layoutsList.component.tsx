@@ -1,20 +1,20 @@
 import React from 'react'
 import {
-  Dimensions,
-  ListRenderItemInfo,
+	Dimensions,
+	ListRenderItemInfo,
 } from 'react-native'
 import {
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
+	ThemedComponentProps,
+	ThemeType,
+	withStyles,
 } from '@kitten/theme'
 import {
-  List,
-  ListProps,
+	List,
+	ListProps,
 } from '@kitten/ui'
 import {
-  LayoutsListItem,
-  LayoutsListItemProps,
+	LayoutsListItem,
+	LayoutsListItemProps,
 } from './layoutsListItem.component'
 import { LayoutsListItemData } from './type'
 
@@ -23,9 +23,9 @@ const itemWidth: number = width / 2 - 32
 
 // @ts-ignore (override `renderItem` prop)
 interface ComponentProps extends ListProps {
-  data: LayoutsListItemData[]
-  onItemPress: (index: number) => void
-  renderItem?: (info: ListItemElementInfo) => ListItemElement
+	data: LayoutsListItemData[]
+	onItemPress: (index: number) => void
+	renderItem?: (info: ListItemElementInfo) => ListItemElement
 }
 
 export type LayoutsListProps = ThemedComponentProps & ComponentProps
@@ -35,41 +35,41 @@ type ListItemElementInfo = ListRenderItemInfo<LayoutsListItemData>
 
 class LayoutsListComponent extends React.Component<LayoutsListProps> {
 
-  private onItemPress = (index: number) => {
-    this.props.onItemPress(index)
-  };
+	private onItemPress = (index: number) => {
+		this.props.onItemPress(index)
+	};
 
-  private renderItem = (info: ListItemElementInfo): ListItemElement => {
-    return (
-      <LayoutsListItem
-        style={this.props.themedStyle.item}
-        data={info.item}
-        onPress={this.onItemPress}
-      />
-    )
-  };
+	private renderItem = (info: ListItemElementInfo): ListItemElement => {
+		return (
+			<LayoutsListItem
+				style={this.props.themedStyle.item}
+				data={info.item}
+				onPress={this.onItemPress}
+			/>
+		)
+	};
 
-  public render(): React.ReactNode {
-    const { themedStyle, ...restProps } = this.props
+	public render(): React.ReactNode {
+		const { themedStyle, ...restProps } = this.props
 
-    return (
-      <List
-        style={themedStyle.container}
-        numColumns={2}
-        renderItem={this.renderItem}
-        {...restProps}
-      />
-    )
-  }
+		return (
+			<List
+				style={themedStyle.container}
+				numColumns={2}
+				renderItem={this.renderItem}
+				{...restProps}
+			/>
+		)
+	}
 }
 
 export const LayoutsList = withStyles(LayoutsListComponent, (theme: ThemeType) => ({
-  container: {},
-  item: {
-    flex: 1,
-    height: 160,
-    maxWidth: itemWidth,
-    marginHorizontal: 8,
-    marginVertical: 8,
-  },
+	container: {},
+	item: {
+		flex: 1,
+		height: 160,
+		maxWidth: itemWidth,
+		marginHorizontal: 8,
+		marginVertical: 8,
+	},
 }))

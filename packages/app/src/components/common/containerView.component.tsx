@@ -1,7 +1,7 @@
 import React from 'react'
 import {
-  ScrollView,
-  ScrollViewProps,
+	ScrollView,
+	ScrollViewProps,
 } from 'react-native'
 
 export type ContainerViewProps = ScrollViewProps
@@ -13,15 +13,15 @@ export type ContainerViewProps = ScrollViewProps
  */
 export class ContainerView extends React.Component<ContainerViewProps> {
 
-  public render(): React.ReactElement<ScrollViewProps> {
-    return (
-      <ScrollView
-        bounces={false}
-        bouncesZoom={false}
-        alwaysBounceVertical={false}
-        alwaysBounceHorizontal={false}
-        {...this.props}
-      />
-    )
-  }
+	public render(): React.ReactElement<ScrollViewProps> {
+		return (
+			<ScrollView
+				bounces={false}
+				bouncesZoom={false}
+				alwaysBounceVertical={false}
+				alwaysBounceHorizontal={false}
+				{...this.props}
+			/>
+		)
+	}
 }

@@ -1,7 +1,7 @@
 import React from 'react'
-import {NavigationScreenProps} from 'react-navigation'
-import {SignInForm1Data} from '@src/components/auth'
-import {SignIn1} from './signIn1.component'
+import { NavigationScreenProps } from 'react-navigation'
+import { SignInForm1Data } from '@src/components/auth'
+import { SignIn1 } from './signIn1.component'
 
 export class SignIn1Container extends React.Component<NavigationScreenProps> {
 

@@ -1,8 +1,8 @@
 export {
-  TopNavigationBar,
-  ComponentProps,
+	TopNavigationBar,
+	ComponentProps,
 } from './components/topNavigationBar.component'
 export {
-  SafeAreaView,
+	SafeAreaView,
 } from './components/safeAreaView.component'
 export * from './util'

@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavigationScreenProps} from 'react-navigation'
+import { NavigationScreenProps } from 'react-navigation'
 import {
 	ThemedComponentProps,
 	ThemeType,
@@ -10,7 +10,7 @@ import {
 	TopNavigationAction,
 	TopNavigation,
 } from '@kitten/ui'
-import {SafeAreaView} from '@src/core/navigation'
+import { SafeAreaView } from '@src/core/navigation'
 import {
 	ArrowIosBackFill, GridIconOutline,
 } from '@src/assets/icons'
@@ -51,7 +51,7 @@ class Profile1HeaderComponent extends React.Component<Profile1HeaderProps> {
 	}
 
 	public render(): React.ReactNode {
-		const {themedStyle} = this.props
+		const { themedStyle } = this.props
 
 		return (
 			<SafeAreaView style={themedStyle.container}>

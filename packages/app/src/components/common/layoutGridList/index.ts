@@ -1,9 +1,9 @@
 export {
-  LayoutGridList,
-  LayoutGridListProps,
+	LayoutGridList,
+	LayoutGridListProps,
 } from './layoutGridList.component'
 export {
-  LayoutGridListItem,
-  LayoutGridListItemProps,
+	LayoutGridListItem,
+	LayoutGridListItemProps,
 } from './layoutGridListItem.component'
 export { LayoutGridListItemData } from './type'

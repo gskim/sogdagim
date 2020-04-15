@@ -40,40 +40,40 @@ class TooltipContainerComponent extends React.Component<ComponentProps> {
         </ShowcaseSection>
         <ShowcaseSection title='Placement'>
           <ShowcaseItem style={themedStyle.bottomItem} title='Bottom'>
-            <BottomTooltip/>
+            <BottomTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.bottomItem} title='Bottom Start'>
-            <BottomStartTooltip/>
+            <BottomStartTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.bottomItem} title='Bottom End'>
-            <BottomEndTooltip/>
+            <BottomEndTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.rightItem} title='Right'>
-            <RightTooltip/>
+            <RightTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.rightItem} title='Right Start'>
-            <RightStartTooltip/>
+            <RightStartTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.rightItem} title='Right End'>
-            <RightEndTooltip/>
+            <RightEndTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.leftItem} title='Left'>
-            <LeftTooltip/>
+            <LeftTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.leftItem} title='Left Start'>
-            <LeftStartTooltip/>
+            <LeftStartTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.leftItem} title='Left End'>
-            <LeftEndTooltip/>
+            <LeftEndTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.topItem} title='Top'>
-            <TopTooltip/>
+            <TopTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.topItem} title='Top Start'>
-            <TopStartTooltip/>
+            <TopStartTooltip />
           </ShowcaseItem>
           <ShowcaseItem style={themedStyle.topItem} title='Top End'>
-            <TopEndTooltip/>
+            <TopEndTooltip />
           </ShowcaseItem>
         </ShowcaseSection>
       </Showcase>
@@ -82,8 +82,7 @@ class TooltipContainerComponent extends React.Component<ComponentProps> {
 }
 
 export const TooltipContainer = withStyles(TooltipContainerComponent, (theme: ThemeType) => ({
-  container: {
-  },
+  container: {},
   bottomItem: {
     justifyContent: 'flex-start',
   },

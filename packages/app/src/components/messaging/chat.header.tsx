@@ -1,106 +1,106 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import {
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
+	ThemedComponentProps,
+	ThemeType,
+	withStyles,
 } from '@kitten/theme'
 import {
-  Avatar,
-  AvatarProps,
-  TopNavigation,
-  TopNavigationAction,
-  TopNavigationActionProps,
-  TopNavigationProps,
+	Avatar,
+	AvatarProps,
+	TopNavigation,
+	TopNavigationAction,
+	TopNavigationActionProps,
+	TopNavigationProps,
 } from '@kitten/ui'
 import { ArrowIosBackFill } from '@src/assets/icons'
 import { SafeAreaView } from '@src/core/navigation'
 import { Profile } from '@src/core/model'
 
 interface ComponentProps {
-  interlocutor: Profile
-  lastSeen: string
-  onBack: () => void
-  onProfile: (profile: Profile) => void
+	interlocutor: Profile
+	lastSeen: string
+	onBack: () => void
+	onProfile: (profile: Profile) => void
 }
 
 export interface ChatHeaderNavigationStateParams {
-  interlocutor: Profile
-  lastSeen: string
-  onBack: () => void
-  onProfile: (profile: Profile) => void
+	interlocutor: Profile
+	lastSeen: string
+	onBack: () => void
+	onProfile: (profile: Profile) => void
 }
 
 export type ChatHeaderProps = ThemedComponentProps & ComponentProps & NavigationScreenProps
 
 class ChatHeaderComponent extends React.Component<ChatHeaderProps> {
 
-  private onBack = (): void => {
-    this.props.onBack()
-  };
+	private onBack = (): void => {
+		this.props.onBack()
+	};
 
-  private onProfile = (): void => {
-    const { interlocutor, onProfile } = this.props
+	private onProfile = (): void => {
+		const { interlocutor, onProfile } = this.props
 
-    onProfile(interlocutor)
-  };
+		onProfile(interlocutor)
+	};
 
-  private renderLeftControl = (): React.ReactElement<TopNavigationActionProps> => {
-    return (
-      <TopNavigationAction
-        icon={ArrowIosBackFill}
-        onPress={this.onBack}
-      />
-    )
-  };
+	private renderLeftControl = (): React.ReactElement<TopNavigationActionProps> => {
+		return (
+			<TopNavigationAction
+				icon={ArrowIosBackFill}
+				onPress={this.onBack}
+			/>
+		)
+	};
 
-  private renderProfileAvatar = (): React.ReactElement<AvatarProps> => {
-    const { interlocutor } = this.props
+	private renderProfileAvatar = (): React.ReactElement<AvatarProps> => {
+		const { interlocutor } = this.props
 
-    return (
-      <Avatar source={interlocutor.photo.imageSource}/>
-    )
-  };
+		return (
+			<Avatar source={interlocutor.photo.imageSource} />
+		)
+	};
 
-  private renderRightControls = (): React.ReactElement<TopNavigationActionProps> => {
-    const { themedStyle } = this.props
+	private renderRightControls = (): React.ReactElement<TopNavigationActionProps> => {
+		const { themedStyle } = this.props
 
-    return (
-      <TopNavigationAction
-        icon={this.renderProfileAvatar}
-        onPress={this.onProfile}
-      />
-    )
-  };
+		return (
+			<TopNavigationAction
+				icon={this.renderProfileAvatar}
+				onPress={this.onProfile}
+			/>
+		)
+	};
 
-  private renderInterlocutorProps = (): TopNavigationProps | null => {
-    const { interlocutor, lastSeen } = this.props
+	private renderInterlocutorProps = (): TopNavigationProps | null => {
+		const { interlocutor, lastSeen } = this.props
 
-    return interlocutor && {
-      title: `${interlocutor.firstName} ${interlocutor.lastName}`,
-      subtitle: `Last seen ${lastSeen}`,
-      rightControls: this.renderRightControls(),
-    }
-  };
+		return interlocutor && {
+			title: `${interlocutor.firstName} ${interlocutor.lastName}`,
+			subtitle: `Last seen ${lastSeen}`,
+			rightControls: this.renderRightControls(),
+		}
+	};
 
-  public render(): React.ReactNode {
-    const { themedStyle, interlocutor } = this.props
+	public render(): React.ReactNode {
+		const { themedStyle, interlocutor } = this.props
 
-    return (
-      <SafeAreaView style={themedStyle.container}>
-        <TopNavigation
-          alignment='center'
-          leftControl={this.renderLeftControl()}
-          {...this.renderInterlocutorProps()}
-        />
-      </SafeAreaView>
-    )
-  }
+		return (
+			<SafeAreaView style={themedStyle.container}>
+				<TopNavigation
+					alignment='center'
+					leftControl={this.renderLeftControl()}
+					{...this.renderInterlocutorProps()}
+				/>
+			</SafeAreaView>
+		)
+	}
 }
 
 export const ChatHeader = withStyles(ChatHeaderComponent, (theme: ThemeType) => ({
-  container: {
-    backgroundColor: theme['background-basic-color-1'],
-  },
+	container: {
+		backgroundColor: theme['background-basic-color-1'],
+	},
 }))
 

@@ -1,36 +1,36 @@
 import React from 'react'
-import { NavigationScreenProps } from 'react-navigation'
-import { Components } from './components.component'
-import { ComponentsContainerData } from './type'
-import { routes } from './routes'
+import {NavigationScreenProps} from 'react-navigation'
+import {Components} from './components.component'
+import {ComponentsContainerData} from './type'
+import {routes} from './routes'
 
 interface State {
-  data: ComponentsContainerData[]
+	data: ComponentsContainerData[]
 }
 
 export class ComponentsContainer extends React.Component<NavigationScreenProps, State> {
 
-  public state: State = {
-    data: routes,
-  }
+	public state: State = {
+		data: routes,
+	}
 
-  private navigationKey: string = 'ComponentsContainer'
+	private navigationKey: string = 'ComponentsContainer'
 
-  private onItemSelect = (index: number) => {
-    const { [index]: selectedItem } = this.state.data
+	private onItemSelect = (index: number) => {
+		const {[index]: selectedItem} = this.state.data
 
-    this.props.navigation.navigate({
-      key: this.navigationKey,
-      routeName: selectedItem.route,
-    })
-  };
+		this.props.navigation.navigate({
+			key: this.navigationKey,
+			routeName: selectedItem.route,
+		})
+	}
 
-  public render(): React.ReactNode {
-    return (
-      <Components
-        data={this.state.data}
-        onItemSelect={this.onItemSelect}
-      />
-    )
-  }
+	public render(): React.ReactNode {
+		return (
+			<Components
+				data={this.state.data}
+				onItemSelect={this.onItemSelect}
+			/>
+		)
+	}
 }

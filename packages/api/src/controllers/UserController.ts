@@ -1,7 +1,7 @@
 import { ClassSerializerInterceptor, Controller, Get, Inject, SerializeOptions, UseInterceptors } from '@nestjs/common'
 import { UserService } from '@services/UserService'
 import { plainToClass } from '@sogdagim/model'
-import { CommonUser } from '@sogdagim/model/models/app'
+import { CommonUser, GetUsersResponse } from '@sogdagim/model/models/app'
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -12,8 +12,8 @@ export class UserController {
 	private readonly userService: UserService
 
 	@Get('/users')
-	async users(): Promise<CommonUser[]> {
+	async users(): Promise<GetUsersResponse> {
 		const users = await this.userService.getUsers()
-		return plainToClass(CommonUser, users)
+		return plainToClass(GetUsersResponse, { users: users })
 	}
 }

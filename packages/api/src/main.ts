@@ -17,8 +17,9 @@ async function bootstrap() {
   const nestApp = await NestFactory.create(AppModule, new ExpressAdapter(app))
   nestApp.useGlobalPipes(new ValidationPipe({
 	transform: true,
-		disableErrorMessages: process.env.DEBUG !== 'true'
+  disableErrorMessages: process.env.DEBUG !== 'true'
   }))
+
   await nestApp.init()
   await nestApp.listen(80)
 }

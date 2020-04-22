@@ -50,6 +50,9 @@ class MyDocument extends Document {
 			<Html>
 			<Head>
 				<meta name='viewport' content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no' />
+				<style>
+				@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+				</style>
 			</Head>
 			<body>
 				<Main />

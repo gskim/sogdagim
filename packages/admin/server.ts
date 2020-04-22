@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 import next from 'next'
 
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev: dev })
+const app = next({ dev })
 const handle = app.getRequestHandler()
 const server = express()
 server.disable('x-powered-by')

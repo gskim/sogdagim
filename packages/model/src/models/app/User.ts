@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer'
+import { Expose, Type } from 'class-transformer'
 import { Gender } from '../Common'
 
 export class CommonUser {
@@ -14,4 +14,10 @@ export class CommonUser {
 	birthMonth?: number
 	@Expose()
 	birthDay?: number
+}
+
+export class GetUsersResponse {
+	@Expose()
+	@Type(() => CommonUser)
+	users: CommonUser[]
 }

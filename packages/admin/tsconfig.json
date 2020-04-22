@@ -47,7 +47,7 @@
       "es2017.object"
     ],
     "allowJs": true,
-    "noEmit": true
+    "noEmit": false
   },
   "exclude": [
     "node_modules"

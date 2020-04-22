@@ -63,6 +63,7 @@ export default class Api {
 
 	private async request(config: RequestConfig, isPublic: boolean = false): Promise<Response> {
 		const isServer = (typeof window === 'undefined')
+		console.log(isServer)
 		try {
 			if (!isPublic) {
 				config.headers = {
@@ -71,6 +72,7 @@ export default class Api {
 			}
 
 			const response = await this.axiosInstance.request(config)
+			console.log(response)
 			return response.data
 		} catch (e) {
 			if (e.response.status === 401) {

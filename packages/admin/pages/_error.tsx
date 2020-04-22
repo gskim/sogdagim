@@ -1,3 +1,4 @@
+import { NextPageContext } from 'next'
 import Link from 'next/link'
 
 const Error = ({ message }) => {
@@ -9,7 +10,7 @@ const Error = ({ message }) => {
 	)
 }
 
-Error.getInitialProps = (context) => {
+Error.getInitialProps = (context: NextPageContext) => {
 	const { message } = context.query
 	return { message }
 }

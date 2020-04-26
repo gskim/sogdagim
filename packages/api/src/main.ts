@@ -9,12 +9,14 @@ import express from 'express'
 import { AppModule } from './AppModule'
 
 export const app = express()
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true, limit: '30mb' }))
 app.disable('x-powered-by')
 
 async function bootstrap() {
   const nestApp = await NestFactory.create(AppModule, new ExpressAdapter(app))
+  nestApp.enableCors()
   nestApp.useGlobalPipes(new ValidationPipe({
 	transform: true,
   disableErrorMessages: process.env.DEBUG !== 'true'

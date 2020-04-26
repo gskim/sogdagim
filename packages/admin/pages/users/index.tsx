@@ -5,9 +5,11 @@ import { Button, Col, Divider, Row, Table, Typography } from 'antd'
 import { NextPageContext } from 'next'
 import React from 'react'
 const userFetcher = new UserFetcher()
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
+
 	const columns = [
 		{ title: 'Nickname', dataIndex: 'nickname', key: 'nickname' },
 		{ title: 'Email', dataIndex: 'email', key: 'email' },
@@ -16,6 +18,12 @@ const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
 		{ title: 'BirthMonth', dataIndex: 'birthMonth', key: 'birthMonth' },
 		{ title: 'BirthDay', dataIndex: 'birthDay', key: 'birthDay' }
 	]
+	const router = useRouter()
+
+	const addButtonClick = (e) => {
+		router.push('/users/add')
+	}
+
 	return (
 		<>
 		<Divider orientation='left' style={{ color: '#333', fontWeight: 'normal' }}>
@@ -23,7 +31,7 @@ const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
 		</Divider>
 		<Row justify='end'>
 			<Col span={2}>
-			<AddButton type='primary' >
+				<AddButton type='primary' onClick={addButtonClick} >
 				등록
 				</AddButton>
 			</Col>
@@ -33,6 +41,7 @@ const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
 				<Table
 					dataSource={users}
 					columns={columns}
+					rowKey='nickname'
 				>
 				</Table>
 			</Col>

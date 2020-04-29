@@ -32,20 +32,20 @@ export class User extends BaseEntity {
 	@Column({ type: 'boolean', default: false })
 	verified: boolean
 
-	@Column({ type: 'enum', enum: Gender, nullable: true })
-	gender?: Gender
+	@Column({ type: 'enum', enum: Gender, default: Gender.Man })
+	gender: Gender
 
-	@Column({ type: 'int', nullable: true })
-	birthYear?: number
+	@Column({ type: 'int', length: 4 })
+	birthYear: number
 
-	@Column({ type: 'int', nullable: true })
-	birthMonth?: number
+	@Column({ type: 'int', length: 2 })
+	birthMonth: number
 
-	@Column({ type: 'int', nullable: true })
-	birthDay?: number
+	@Column({ type: 'int', length: 2 })
+	birthDay: number
 
-	@Column({ type: 'text', nullable: true })
-	password?: string
+	@Column({ type: 'varchar', length: 300 })
+	password: string
 
 	@Column({ type: 'text', nullable: true })
 	profilePhoto?: string
@@ -55,12 +55,6 @@ export class User extends BaseEntity {
 
 	@Column({ type: 'float', default: 0, precision: 12 })
 	lon: number
-
-	@Column({ type: 'int', nullable: true })
-	snsId?: number
-
-	@Column({ type: 'varchar', length: 10, nullable: true })
-	snsType?: string
 
 	@Column({ type: 'int', default: 0 })
 	point: number
@@ -101,7 +95,6 @@ export class User extends BaseEntity {
 	}
 
 	@BeforeInsert()
-	// @BeforeUpdate()
 	savePassword(): void {
 		if (this.password) {
 			const hashedPassword = this.hashPassword(this.password)

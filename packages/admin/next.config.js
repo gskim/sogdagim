@@ -26,7 +26,7 @@ module.exports = withCss(
 			]
 
 			if (isServer) {
-				const antStyles = /antd\/.*?\/style\/css.*?/
+				const antStyles = /antd\/.*?\/style.*?/
 				const origExternals = [...config.externals]
 				config.externals = [
 					(context, request, callback) => {

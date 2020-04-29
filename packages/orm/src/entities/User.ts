@@ -23,7 +23,7 @@ import { Unlike } from './Unlike'
 export class User extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
-	@Column({ type: 'varchar', length: 30 })
+	@Column({ type: 'varchar', length: 30, comment: '닉네임' })
 	nickname: string
 
 	@Column({ type: 'varchar', length: 200 })
@@ -32,17 +32,20 @@ export class User extends BaseEntity {
 	@Column({ type: 'boolean', default: false })
 	verified: boolean
 
+	@Column('varchar', { length: 100, nullable: true, comment: '로그인시 업데이트되는 토큰' })
+	accessToken: string | null
+
 	@Column({ type: 'enum', enum: Gender, default: Gender.Man })
 	gender: Gender
 
-	@Column({ type: 'int', length: 4 })
-	birthYear: number
+	@Column({ type: 'varchar', length: 4 })
+	birthYear: string
 
-	@Column({ type: 'int', length: 2 })
-	birthMonth: number
+	@Column({ type: 'varchar', length: 2 })
+	birthMonth: string
 
-	@Column({ type: 'int', length: 2 })
-	birthDay: number
+	@Column({ type: 'varchar', length: 2 })
+	birthDay: string
 
 	@Column({ type: 'varchar', length: 300 })
 	password: string

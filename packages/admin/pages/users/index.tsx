@@ -5,12 +5,14 @@ import { Button, Col, Divider, Row, Table, Typography } from 'antd'
 import { NextPageContext } from 'next'
 import React from 'react'
 const userFetcher = new UserFetcher()
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
 
 	const columns = [
+		{ title: 'Id', dataIndex: 'id', key: 'id', render: (id) => <Link href='users/[id]' as={`users/${id}`} ><a>{id}</a></Link> },
 		{ title: 'Nickname', dataIndex: 'nickname', key: 'nickname' },
 		{ title: 'Email', dataIndex: 'email', key: 'email' },
 		{ title: 'Gender', dataIndex: 'gender', key: 'gender' },
@@ -21,7 +23,7 @@ const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
 	const router = useRouter()
 
 	const addButtonClick = (e) => {
-		router.replace('/users/add')
+		router.push('/users/add')
 	}
 
 	return (

@@ -16,6 +16,20 @@ export class UserService {
 		return await this.userRepository.getUsers()
 	}
 
+	async getUser(id: number) {
+		return await this.userRepository.findOneOrFail(id)
+	}
+
+	async modifyUser(id: number, nickname: string, gender: Gender, birthYear: string, birthMonth: string, birthDay: string) {
+		const user = await this.getUser(id)
+		user.nickname = nickname
+		user.gender = gender
+		user.birthYear = birthYear
+		user.birthMonth = birthMonth
+		user.birthDay = birthDay
+		return await user.save()
+	}
+
 	async findByEmail(email: string) {
 		return await this.userRepository.findOneOrFail({ where: { email: email } })
 	}

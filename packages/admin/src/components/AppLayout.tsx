@@ -12,10 +12,10 @@ const { Header, Content, Footer, Sider } = Layout
 const AppLayout: FC<LayoutOptions> = ({ layoutType, path, children, logout }) => {
 	const router = useRouter()
 	const defaultKey = () => {
-		switch (router.pathname) {
-			case '/':
+		switch (true) {
+			case /^\/users$/.test(router.pathname):
 				return '1'
-			case '/users':
+			case /^\/posts$/.test(router.pathname):
 				return '2'
 			default:
 				return '1'
@@ -29,11 +29,11 @@ const AppLayout: FC<LayoutOptions> = ({ layoutType, path, children, logout }) =>
 		switch (e.key) {
 			case '1':
 				// 히스토리 안남음 (뒤로가기하면 이동전페이지로 못돌아옴)
-				router.replace('/')
+				router.push('/users')
 				break
 			case '2':
 				// 히스토리 남음 (뒤로가기하면 이동전페이지로 돌아옴)
-				router.push('/users')
+				router.push('/posts')
 				break
 			default:
 		}

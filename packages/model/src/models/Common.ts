@@ -36,3 +36,10 @@ export enum ChatType {
 	RANDOM = 'random',
 	CLOSE = 'close'
 }
+
+export class SimpleUser {
+	id: number
+	nickname: string
+	email: string
+	profileImage: string | undefined
+}

@@ -1,5 +1,5 @@
-import { CommonUser } from '@sogdagim/model/models/app'
-import { PageComponent } from '@src/@types'
+import { CommonUser } from '@sogdagim/model/models/admin'
+import { LayoutType, PageComponent } from '@src/@types'
 import UserFetcher from '@src/fetchers/user'
 import { Button, Col, Divider, Row, Table, Typography } from 'antd'
 import { NextPageContext } from 'next'
@@ -21,7 +21,7 @@ const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
 	const router = useRouter()
 
 	const addButtonClick = (e) => {
-		router.push('/users/add')
+		router.replace('/users/add')
 	}
 
 	return (
@@ -55,6 +55,9 @@ Users.getInitialProps = async (context: NextPageContext) => {
 	const users: CommonUser[] = await userFetcher.getUsers()
 	return { users }
 }
+
+Users.layoutType = LayoutType.기본화면
+Users.isPublicPage = false
 
 export default Users
 

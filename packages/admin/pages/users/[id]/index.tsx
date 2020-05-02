@@ -5,12 +5,13 @@ import UserFetcher from '@src/fetchers/user'
 import { Button, Checkbox, Col, Divider, Form, Input, Row, Select, Table, Tooltip, Typography } from 'antd'
 import { NextPageContext } from 'next'
 import React from 'react'
+import 'reflect-metadata'
 import styled from 'styled-components'
 
 const userFetcher = new UserFetcher()
 const { Option } = Select
 
-const UserAdd: PageComponent = (props) => {
+const UserEdit: PageComponent = (props) => {
 	const formItemLayout = {
 		labelCol: { span: 6 },
 		wrapperCol: { span: 12 }
@@ -137,12 +138,13 @@ const UserAdd: PageComponent = (props) => {
 	)
 }
 
-UserAdd.layoutType = LayoutType.기본화면
-UserAdd.isPublicPage = false
+UserEdit.layoutType = LayoutType.기본화면
+UserEdit.isPublicPage = false
 
-UserAdd.getInitialProps = async (context: NextPageContext) => {
+UserEdit.getInitialProps = async (context: NextPageContext) => {
 	userFetcher.setContext(context)
+	context.query.id
 	return {}
 }
 
-export default UserAdd
+export default UserEdit

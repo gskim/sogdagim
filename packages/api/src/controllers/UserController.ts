@@ -1,7 +1,7 @@
-import { ClassSerializerInterceptor, Controller, Get, Inject, SerializeOptions, UseInterceptors } from '@nestjs/common'
+import { Body, ClassSerializerInterceptor, Controller, Get, Inject, Post, SerializeOptions, UseInterceptors } from '@nestjs/common'
 import { UserService } from '@services/UserService'
 import { plainToClass } from '@sogdagim/model'
-import { CommonUser, GetUsersResponse } from '@sogdagim/model/models/app'
+import { CommonUser, GetUsersResponse, PostUsersRequest, PostUsersResponse } from '@sogdagim/model/models/admin'
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -15,5 +15,13 @@ export class UserController {
 	async users(): Promise<GetUsersResponse> {
 		const users = await this.userService.getUsers()
 		return plainToClass(GetUsersResponse, { users: users })
+	}
+
+	@Post('/users')
+	async addUser(@Body() params: PostUsersRequest): Promise<PostUsersResponse> {
+		const addedUser = await this.userService.addUser(params.email, params.nickname, params.birthYear, params.birthMonth, params.birthDay, params.gender)
+		return {
+			id: addedUser.id
+		}
 	}
 }

@@ -1,6 +1,7 @@
+import { LayoutType } from '@src/@types'
 import { createGlobalStyle } from 'styled-components'
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{layoutType}>`
 	html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -283,6 +284,13 @@ const GlobalStyle = createGlobalStyle`
         color: #000;
         padding: 0.2em 0;
     }
+
+    ${(props) => props.layoutType === LayoutType.전체화면 ? `
+        html, body, #__next {
+            width: 100%;
+            height: 100%;
+        }
+    ` : ''}
 `
 
 export default GlobalStyle

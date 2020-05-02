@@ -1,13 +1,36 @@
-import { plainToClass } from '@sogdagim/model'
-import { CommonUser, GetUsersResponse } from '@sogdagim/model/models/app'
+import { CommonUser, GetUsersResponse, PostUsersRequest, PostUsersResponse,
+
+ } from '@sogdagim/model/models'
 import Api from '../api'
 
-export default class User extends Api {
+export default class UserFetcher extends Api {
+
+	async getUserMe(): Promise<CommonUser> {
+		const url = `/auths/me`
+		const res: CommonUser = await this.get(url, {})
+
+		return res
+	}
 	async getUsers(): Promise<CommonUser[]> {
 		const url = `/users`
-		const res: GetUsersResponse = await this.get(url, {}, true)
-		console.log('==================')
-		console.log(res)
+		const res: GetUsersResponse = await this.get(url, {})
 		return res.users
 	}
+
+	async addUser(params: PostUsersRequest): Promise<PostUsersResponse> {
+		const url = `/users`
+		const res = await this.post(url, params)
+		return res
+	}
+
+	async getUser(id: number) {
+		const url = `/users/${id}`
+		const res = await this.get(url, {})
+		return res
+	}
+
+	async modifyUser(id: number) {
+
+	}
+
 }

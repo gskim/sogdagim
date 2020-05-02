@@ -2,6 +2,7 @@ import cookieParser from 'cookie-parser'
 import express from 'express'
 import { Request, Response } from 'express'
 import next from 'next'
+import 'reflect-metadata'
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })

@@ -25,6 +25,13 @@ module.exports = withCss(
 				})
 			]
 
+			config.resolve.alias = {
+                ...config.resolve.alias,
+				"class-transformer": path.resolve(__dirname, "node_modules/@sogdagim/model/node_modules/class-transformer"),
+				"class-validator": path.resolve(__dirname, "node_modules/@sogdagim/model/node_modules/class-validator"),
+				"@sogdagim/model": path.resolve(__dirname, "node_modules/@sogdagim/model/dist"),
+			}
+
 			if (isServer) {
 				const antStyles = /antd\/.*?\/style.*?/
 				const origExternals = [...config.externals]

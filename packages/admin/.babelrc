@@ -39,5 +39,6 @@
 				]
 			}
 		]
-	]
+	],
+	"sourceMaps": true
 }

@@ -1,5 +1,6 @@
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
+import 'reflect-metadata'
 import { ServerStyleSheet } from 'styled-components'
 
 const normalizeNextElements = `

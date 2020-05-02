@@ -4,8 +4,9 @@ import { AuthGuard } from '@nestjs/passport'
 
 /* tslint:disable */
 export const CurrentUser = createParamDecorator(
-	(data, req) => {
-		return req.user
+	(data: unknown, ctx: ExecutionContext) => {
+		const request = ctx.switchToHttp().getRequest()
+    	return request.user
 	}
 )
 

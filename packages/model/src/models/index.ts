@@ -1,3 +1,4 @@
-export * from './app'
-// export * from './admin'
+import 'reflect-metadata'
+// export * from './app'
+export * from './admin'
 export * from './Common'

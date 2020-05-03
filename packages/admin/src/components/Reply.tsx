@@ -26,9 +26,8 @@ const Reply: FC<ReplyItem> = ({ user, text, id, createdAt, children }) => {
 	}
 
 	const clickRereply = () => {
-		console.log('rereply')
 		if (!rereplyValue || rereplyValue === '') return false
-
+		return true
 	}
 
 	const inputChange = (e) => {

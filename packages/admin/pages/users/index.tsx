@@ -43,7 +43,7 @@ const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
 				<Table
 					dataSource={users}
 					columns={columns}
-					rowKey='nickname'
+					rowKey='id'
 				>
 				</Table>
 			</Col>

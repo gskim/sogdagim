@@ -4,12 +4,13 @@ import {
 	VideoCameraOutlined
   } from '@ant-design/icons'
 import { LayoutOptions, LayoutType } from '@src/@types'
-import { Layout, Menu } from 'antd'
+import { Col, Layout, Menu, Row, Space } from 'antd'
+import { Button } from 'antd'
 import { useRouter } from 'next/router'
 import { useState, FC } from 'react'
 const { Header, Content, Footer, Sider } = Layout
 
-const AppLayout: FC<LayoutOptions> = ({ layoutType, path, children, logout }) => {
+const AppLayout: FC<LayoutOptions> = ({ layoutType, path, children, logout, myInfo }) => {
 	const router = useRouter()
 	const defaultKey = () => {
 		switch (true) {
@@ -63,11 +64,11 @@ const AppLayout: FC<LayoutOptions> = ({ layoutType, path, children, logout }) =>
 						<Menu theme='dark' mode='inline' selectedKeys={[currentKey]} onClick={handleClick} >
 						<Menu.Item key='1'>
 							<UserOutlined />
-							<span className='nav-text'>nav 1</span>
+							<span className='nav-text'>Users</span>
 						</Menu.Item>
 						<Menu.Item key='2'>
 							<VideoCameraOutlined />
-							<span className='nav-text'>nav 2</span>
+							<span className='nav-text'>Posts</span>
 						</Menu.Item>
 						<Menu.Item key='3'>
 							<UploadOutlined />
@@ -80,13 +81,24 @@ const AppLayout: FC<LayoutOptions> = ({ layoutType, path, children, logout }) =>
 						</Menu>
 					</Sider>
 					<Layout>
-						<Header className='site-layout-sub-header-background' style={{ padding: 0 }} />
-						<Content style={{ margin: '24px 16px 0' }}>
-						<div className='site-layout-background' style={{ padding: 24, height: '100%' }}>
+						<Header className='site-layout-sub-header-background' style={{ padding: 0 }} >
+							<Row>
+								<Col span={8} offset={16}>
+									<Space direction='horizontal'>
+										<span>{myInfo?.nickname}</span>
+										<span>{myInfo?.email}</span>
+										<Button type='primary' onClick={logout}>Log Out</Button>
+									</Space>
+
+								</Col>
+							</Row>
+						</Header>
+						<Content style={{ margin: '24px 16px 0' }} >
+						<div className='site-layout-background' style={{ padding: 24, overflow: 'initial' }}>
 							{children}
 						</div>
 						</Content>
-						<Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+						{/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}
 					</Layout>
 				</Layout>
 	)

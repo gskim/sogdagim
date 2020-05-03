@@ -1,15 +1,19 @@
 import { AuthController } from '@controllers/AuthController'
 import { IndexController } from '@controllers/IndexController'
+import { PostController } from '@controllers/PostController'
 import { UserController } from '@controllers/UserController'
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
+import { PostOrderSequenceRepository } from '@repositories/PostOrderSequenceRepository'
+import { PostRepository } from '@repositories/PostRepository'
 import { UserRepository } from '@repositories/UserRepository'
 import { AuthService } from '@services/AuthService'
 import { EmailStrategy } from '@services/EmailStrategy'
 import { IndexService } from '@services/IndexService'
 import { JwtStrategy } from '@services/JWTStrategy'
+import { PostService } from '@services/PostService'
 import { UserService } from '@services/UserService'
 import { Chat, Device, Image, Like, Message, MessageOrderSequence
   ,Notification, NotificationOrderSequence, Post, PostMapping
@@ -30,14 +34,14 @@ import { jwtConstants } from './Constants'
 		Chat, Device, Image, Like, Message, MessageOrderSequence
 		,Notification, NotificationOrderSequence, Post, PostMapping
 		, PostOrderSequence, Unlike, User, Verification,
-		UserRepository
+		UserRepository, PostRepository, PostOrderSequenceRepository
 		])
 	],
 	controllers: [
-		IndexController, UserController, AuthController
+		IndexController, UserController, AuthController, PostController
 	],
 	providers: [
-	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy
+	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy, PostService
 	]
 })
 class AllModule {

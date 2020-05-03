@@ -2,7 +2,7 @@ import { SimpleUser } from '@sogdagim/model/models'
 import { NextPage } from 'next'
 import { AppContext as NextAppContext } from 'next/app'
 export type PageComponent<P = {}, IP = {}> = NextPage<P, IP> & {
-	myInfo?: SimpleUser | {}
+	myInfo?: SimpleUser
 	layoutType: LayoutType
 	isPublicPage?: boolean
 }
@@ -19,5 +19,6 @@ export enum LayoutType {
 export interface LayoutOptions {
 	layoutType: LayoutType
 	path: string
+	myInfo?: SimpleUser
 	logout: () => void
 }

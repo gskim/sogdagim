@@ -1,19 +1,23 @@
-import { AppContext } from '@src/@types'
+import { SimpleUser } from '@sogdagim/model/models'
+import { AppContext, LayoutType } from '@src/@types'
 import GlobalStyle from '@src/assets/GlobalStyle'
 import AppLayout from '@src/components/AppLayout'
 import { MyInfoContext } from '@src/contexts/MyInfoContext'
 import AuthFetcher from '@src/fetchers/auth'
 import UserFetcher from '@src/fetchers/user'
+import { AppProps } from 'next/app'
 import NextHead from 'next/head'
 import React, { useCallback } from 'react'
 import 'reflect-metadata'
 const userFetcher = new UserFetcher()
 const authFetcher = new AuthFetcher()
 
-function MyApp({ Component, pageProps, layoutType, myInfo, router }) {
+import '@src/assets/css/antd.less'
+
+function MyApp ({ Component, pageProps, layoutType, myInfo, router }: AppProps & {myInfo?: SimpleUser ,layoutType: LayoutType, isPublicPage?: boolean}) {
 	const { asPath } = router
 	const logout = useCallback(() => {
-
+		console.log('logout')
 	}, [])
 
 	return (
@@ -26,7 +30,7 @@ function MyApp({ Component, pageProps, layoutType, myInfo, router }) {
 			</NextHead>
 			<GlobalStyle layoutType={layoutType}/>
 			<MyInfoContext.Provider value={myInfo} >
-				<AppLayout layoutType={layoutType} path={asPath} logout={logout} >
+				<AppLayout layoutType={layoutType} path={asPath} logout={logout} myInfo={myInfo} >
 					<Component {...pageProps} />
 				</AppLayout>
 			</MyInfoContext.Provider>

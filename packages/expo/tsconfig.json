@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
@@ -6,17 +7,32 @@
       "dom",
       "esnext"
     ],
+    "rootDirs": [
+      "./src"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "react-native": [ "node_modules/react-native-web" ],
+      "@src/*": [ "src/*" ]
+    },
+    "typeRoots": [
+      "node_modules/@types",
+      "./@types"
+    ],
+    "isolatedModules": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "outDir": "./dist",
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true,
-    "target": "es5",
+    "strict": false,
+    "target": "es6",
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "isolatedModules": true
+    "module": "esnext"
   },
   "exclude": [
     "node_modules"

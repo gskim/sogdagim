@@ -1,10 +1,12 @@
-import { getInitialProps } from '@expo/next-adapter/document'
-import NextDocument, { Head, Main, NextScript } from 'next/document'
+// import { getInitialProps } from '@expo/next-adapter/document'
+import Document, { DocumentContext, Head, Main, NextScript } from 'next/document'
 import * as React from 'react'
+// @ts-ignore
+import { AppRegistry } from 'react-native-web'
 
-import { AppRegistry } from 'react-native'
+import { ServerStyleSheet } from 'styled-components'
 
-export const style = `
+const normalizeNextElements = `
 /**
  * Building on the RNWeb reset:
  * https://github.com/necolas/react-native-web/blob/master/packages/react-native-web/src/exports/StyleSheet/initialRules.js
@@ -44,7 +46,45 @@ body {
 }
 `
 
-export class Document extends NextDocument {
+class CustomDocument extends Document {
+
+  static async getInitialProps(ctx: DocumentContext) {
+	const sheet = new ServerStyleSheet()
+	const originalRenderPage = ctx.renderPage
+	try {
+		ctx.renderPage = () =>
+			originalRenderPage({
+			enhanceApp: (App) => (pageProps) =>
+				sheet.collectStyles(
+				<App {...pageProps} />
+				),
+			enhanceComponent: (Component) => Component
+			})
+		const initialProps = await Document.getInitialProps(ctx)
+		AppRegistry.registerComponent('Main', () => Main)
+		const { getStyleElement } = AppRegistry.getApplication('Main')
+		const pages = ctx.renderPage()
+		const styles = [
+		<style dangerouslySetInnerHTML={{ __html: normalizeNextElements }} />,
+		getStyleElement()
+		]
+		const props = {
+		...initialProps,
+		...pages,
+		styles: (
+			<>
+			{React.Children.toArray(styles)}
+			{initialProps.styles}
+			{sheet.getStyleElement()}
+			</>
+		)
+		}
+		return props
+	} finally {
+		sheet.seal()
+	}
+	}
+
   render() {
 	return (
 		<html>
@@ -60,6 +100,4 @@ export class Document extends NextDocument {
   }
 }
 
-Document.getInitialProps = getInitialProps
-
-export default Document
+export default CustomDocument

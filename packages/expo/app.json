@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "@sogdagim/expo",
-    "slug": "@sogdagim/expo",
+    "slug": "sogdagim",
     "platforms": [
       "ios",
       "android",

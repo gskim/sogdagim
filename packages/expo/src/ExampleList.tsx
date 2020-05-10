@@ -4,14 +4,14 @@ import { FlatList } from 'react-native'
 import { useTheme, Divider, List } from 'react-native-paper'
 import { useSafeArea } from 'react-native-safe-area-context'
 
-import AppbarExample from './Examples/AppbarExample'
+import AppBarExample from './Examples/AppBarExample'
 import BottomNavigationExample from './Examples/BottomNavigationExample'
 
 export const examples: Record<
   string,
   React.ComponentType<any> & { title: string }
 > = {
-  appbar: AppbarExample,
+  appbar: AppBarExample,
   bottomNavigation: BottomNavigationExample
 
 }

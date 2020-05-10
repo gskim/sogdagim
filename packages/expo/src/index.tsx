@@ -1,12 +1,12 @@
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { InitialState, NavigationContainer } from '@react-navigation/native'
+import axios from 'axios'
 import { AppLoading, Updates } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import { useKeepAwake } from 'expo-keep-awake'
 import * as React from 'react'
 import { AsyncStorage, I18nManager, Image, Platform, YellowBox } from 'react-native'
-import axios from 'axios'
 import {
   DarkTheme,
   DefaultTheme,
@@ -14,8 +14,8 @@ import {
   Theme
 } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import App from './RootNavigator'
 import Auth from './AuthNavigator'
+import App from './RootNavigator'
 
 YellowBox.ignoreWarnings(['Require cycle:'])
 
@@ -63,7 +63,7 @@ export default function Index() {
 		  if (token) {
 			// token 으로 login check
 		  } else {
-			  //로그인 페이지 이동
+			  // 로그인 페이지 이동
 		  }
 	  }
   })
@@ -156,6 +156,7 @@ export default function Index() {
 						AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
 						}
 					>
+						{/* <Auth /> */}
 						{isLogin ? <App /> : <Auth />}
 						{/* {Platform.OS === 'web' ? (
 						<App />

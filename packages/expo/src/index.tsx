@@ -1,28 +1,23 @@
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { InitialState, NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import axios from 'axios'
-import { AppLoading, Updates } from 'expo'
+import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import { useKeepAwake } from 'expo-keep-awake'
 import * as React from 'react'
-import { AsyncStorage, I18nManager, Image, Platform, YellowBox } from 'react-native'
+import { AsyncStorage, Image, YellowBox } from 'react-native'
+import 'react-native-gesture-handler'
 import {
-  DarkTheme,
   DefaultTheme,
-  Provider as PaperProvider,
-  Theme
-} from 'react-native-paper'
+  Provider as PaperProvider} from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import Auth from './AuthNavigator'
-import App from './RootNavigator'
+import { AuthContext } from './contexts/AuthContext'
+import { AuthStackScreen, MainStackScreen } from './StackNavigator'
+const RootStack = createStackNavigator()
 
 YellowBox.ignoreWarnings(['Require cycle:'])
-
-const PERSISTENCE_KEY = 'NAVIGATION_STATE'
-const PREFERENCES_KEY = 'APP_PREFERENCES'
-
-const PreferencesContext = React.createContext<any>(null)
 
 require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf')
 
@@ -39,17 +34,7 @@ const cacheFonts = (fonts: any[]) => fonts.map((font) => Font.loadAsync(font))
 
 export default function Index() {
   useKeepAwake()
-
-  const [isReady, setIsReady] = React.useState(false)
-  const [initialState, setInitialState] = React.useState<
-	InitialState | undefined
-  >()
-  const [theme, setTheme] = React.useState<Theme>(DefaultTheme)
-  const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL)
-  const [isLogin, setIsLogin] = React.useState(false)
-
   const loadAssets = async () => {
-	  console.log('loadAssets')
 	const images = cacheImages([
 		require('../assets/splash.png')
 	])
@@ -57,115 +42,123 @@ export default function Index() {
 	return await Promise.all([...images, ...fonts])
   }
 
-  React.useEffect(() => {
-	  const checkLogin = async () => {
-		  const token = await AsyncStorage.getItem('token')
-		  if (token) {
-			// token 으로 login check
-		  } else {
-			  // 로그인 페이지 이동
-		  }
-	  }
-  })
-
-  React.useEffect(() => {
-	const restoreState = async () => {
-		try {
-		const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY)
-		const state = JSON.parse(savedStateString || '')
-		console.log('============')
-		console.log(state)
-
-		setInitialState(state)
-		} catch (e) {
-		// ignore error
-		} finally {
-			console.log('finalliy', isReady)
-		setIsReady(true)
-		}
-	}
-	const cacheWork = async () => {
-		await loadAssets()
-	}
-	if (!isReady) {
-		cacheWork()
-		restoreState()
-	}
-  }, [isReady])
-
-  React.useEffect(() => {
-	const restorePrefs = async () => {
-		try {
-		const prefString = await AsyncStorage.getItem(PREFERENCES_KEY)
-		const preferences = JSON.parse(prefString || '')
-			console.log('+++++++')
-			console.log(preferences)
-		if (preferences) {
-			// eslint-disable-next-line react/no-did-mount-set-state
-			setTheme(preferences.theme === 'dark' ? DarkTheme : DefaultTheme)
-
-			if (typeof preferences.rtl === 'boolean') {
-			setRtl(preferences.rtl)
+  const [state, dispatch] = React.useReducer(
+	(prevState: any, action: any) => {
+		console.log('========')
+		console.log(prevState)
+		console.log(action)
+		switch (action.type) {
+		case 'RESTORE_TOKEN':
+			return {
+			...prevState,
+			userToken: action.token,
+			isLoading: false
+			}
+		case 'SIGN_IN':
+			return {
+			...prevState,
+			isSignout: false,
+			userToken: action.token
+			}
+		case 'SIGN_OUT':
+			return {
+			...prevState,
+			isSignout: true,
+			userToken: null
+			}
+		default:
+			return {
+			...prevState,
+			isSignout: true,
+			userToken: null
 			}
 		}
-		} catch (e) {
-		// ignore error
-		}
+	},
+	{
+		isLoading: true,
+		isSignout: false,
+		userToken: null
 	}
-	restorePrefs()
-  }, [])
+  )
 
   React.useEffect(() => {
-	const savePrefs = async () => {
+	// Fetch the token from storage then navigate to our appropriate place
+	const bootstrapAsync = async () => {
+		let userToken
+
 		try {
-		await AsyncStorage.setItem(
-			PREFERENCES_KEY,
-			JSON.stringify({
-			theme: theme === DarkTheme ? 'dark' : 'light',
-			rtl
-			})
-		)
+			await loadAssets()
+		userToken = await AsyncStorage.getItem('userToken')
+
+		console.log('++++++++')
+		console.log(userToken)
+			  dispatch({ type: 'RESTORE_TOKEN', token: userToken })
 		} catch (e) {
-		// ignore error
-		}
+		// Restoring token failed
+		} finally {
 
-		if (I18nManager.isRTL !== rtl) {
-		I18nManager.forceRTL(rtl)
-		Updates.reloadFromCache()
 		}
+		// After restoring token, we may need to validate it in production apps
+
+		// This will switch to the App screen or Auth screen and this loading
+		// screen will be unmounted and thrown away.
+
 	}
-	savePrefs()
-  }, [rtl, theme])
 
-  const preferences = React.useMemo(
+	bootstrapAsync()
+  }, [])
+
+  const authContext = React.useMemo(
 	() => ({
-		rtl,
-		theme
+		signIn: async (data: {email: string, password: string}) => {
+			console.log(data)
+			const response = await axios.post('http://localhost/auths/login', data)
+			console.log(response.status)
+			console.log(response.data)
+			// fetch login
+			// success
+			await AsyncStorage.setItem('userToken', response.data.accessToken)
+			dispatch({ type: 'SIGN_IN', token: response.data.accessToken })
+			// AsyncStorage save
+
+			// fail
+			// alert
+		},
+		signOut: async () => {
+			// fetch logout
+			// token reset
+			dispatch({ type: 'SIGN_OUT' })
+		},
+		signUp: async (data: any) => {
+			console.log(data)
+			// fetch sign up
+			// save token
+			dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' })
+			// fail
+			// alert
+		}
 	}),
-	[rtl, theme]
+	[]
   )
-	if (isReady) {
+
+	if (!state.isLoading) {
 		return (
-			<PaperProvider theme={theme}>
+			<PaperProvider theme={DefaultTheme}>
 				<SafeAreaProvider>
-				<PreferencesContext.Provider value={preferences}>
 					<React.Fragment>
 					<NavigationContainer
-						initialState={initialState}
-						onStateChange={(state) =>
-						AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-						}
 					>
-						{/* <Auth /> */}
-						{isLogin ? <App /> : <Auth />}
-						{/* {Platform.OS === 'web' ? (
-						<App />
-						) : (
-						<App />
-						)} */}
+						<AuthContext.Provider value={authContext}>
+							<RootStack.Navigator>
+								{state.userToken == null ? (
+									<RootStack.Screen name='SignIn' component={AuthStackScreen} options={{ headerShown: false }}/>
+								) : (
+									<RootStack.Screen name='Home' component={MainStackScreen} options={{ headerShown: false }} />
+								)}
+							</RootStack.Navigator>
+					</AuthContext.Provider>
 					</NavigationContainer>
 					</React.Fragment>
-				</PreferencesContext.Provider>
 				</SafeAreaProvider>
 			</PaperProvider>
 		)

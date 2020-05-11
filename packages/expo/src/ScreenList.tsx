@@ -4,10 +4,10 @@ import { FlatList } from 'react-native'
 import { useTheme, Divider, List } from 'react-native-paper'
 import { useSafeArea } from 'react-native-safe-area-context'
 
-import AppBarExample from './Examples/AppBarExample'
-import BottomNavigationExample from './Examples/BottomNavigationExample'
+import AppBarExample from './screens/AppBarExample'
+import BottomNavigationExample from './screens/BottomNavigationExample'
 
-export const examples: Record<
+export const screens: Record<
   string,
   React.ComponentType<any> & { title: string }
 > = {
@@ -22,14 +22,14 @@ interface Props {
 
 interface Item {
   id: string
-  data: typeof examples[string]
+  data: typeof screens[string]
 }
 
-const data = Object.keys(examples).map(
-  (id): Item => ({ id, data: examples[id] })
+const data = Object.keys(screens).map(
+  (id): Item => ({ id, data: screens[id] })
 )
 
-export default function ExampleList({ navigation }: Props) {
+export default function ScreenList({ navigation }: Props) {
   const renderItem = ({ item }: { item: Item }) => (
 	<List.Item
 		title={item.data.title}

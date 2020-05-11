@@ -1,13 +1,13 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import * as React from 'react'
+import React, { useState } from 'react'
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native'
 import {
   useTheme,
   Appbar,
-  Colors,
-  FAB,
+  Button,
   TextInput
 } from 'react-native-paper'
+import { AuthContext } from '../contexts/AuthContext'
 
 interface Props {
   navigation: StackNavigationProp<{}>
@@ -33,6 +33,11 @@ const TextInputAvoidingView = ({ children }: AvoidingViewProps) => {
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
+	const { signIn } = React.useContext(AuthContext)
+
+	const [email, setEmail] = useState<string>('')
+	const [password, setPassword] = useState<string>('')
+
   navigation.setOptions({
 	header: () => (
 		<Appbar.Header
@@ -51,6 +56,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 	colors: { background }
   } = useTheme()
 
+	const loginBtnClick = async () => {
+		await signIn({ email, password })
+	}
+
   return (
 	<TextInputAvoidingView>
 		<ScrollView
@@ -62,14 +71,22 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 		<View style={styles.formContainer}>
 			<TextInput
 				mode='outlined'
-				label='Outlined input'
+				label='Email'
+				value={email}
 				placeholder='Type something'
+				onChangeText={(text) => setEmail(text)}
 			/>
 			<TextInput
 				mode='outlined'
-				label='Outlined input'
+				label='Password'
+				value={password}
+				secureTextEntry={true}
 				placeholder='Type something'
+				onChangeText={(text) => setPassword(text)}
 			/>
+			<Button icon='camera' mode='contained' onPress={loginBtnClick} style={{ marginTop: 20 }}>
+				Press me
+  			</Button>
 		</View>
 		</ScrollView>
 	</TextInputAvoidingView>
@@ -88,24 +105,6 @@ const styles = StyleSheet.create({
 	},
 	formContainer: {
 		flex: 1,
-	marginTop: 48
-	},
-	row: {
-	flexDirection: 'row',
-	alignItems: 'center',
-	justifyContent: 'space-between',
-	paddingVertical: 8,
-	paddingHorizontal: 16
-	},
-bottom: {
-	position: 'absolute',
-	left: 0,
-	right: 0,
-	bottom: 0
-	},
-	fab: {
-	position: 'absolute',
-	right: 16,
-	bottom: 28
+		marginTop: 48
 	}
 })

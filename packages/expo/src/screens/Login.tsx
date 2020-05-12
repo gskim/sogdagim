@@ -31,7 +31,7 @@ const TextInputAvoidingView = ({ children }: AvoidingViewProps) => {
 	)
   }
 
-const LoginScreen: React.FC<Props> = ({ navigation }) => {
+const LoginScreen = ({ navigation }: Props) => {
 
 	const { signIn } = React.useContext(AuthContext)
 
@@ -92,6 +92,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 	</TextInputAvoidingView>
   )
 }
+
+LoginScreen.title = 'Login'
 
 export default LoginScreen
 

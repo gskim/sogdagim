@@ -9,7 +9,6 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@callstack/react-theme-provider": "^3.0.2",
     "@expo/vector-icons": "^10.0.0",
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/bottom-tabs": "^5.3.3",
@@ -42,6 +41,7 @@
     "babel-preset-expo": "~8.1.0",
     "tslint": "6.1.1",
     "tslint-eslint-rules": "5.4.0",
+    "@expo/webpack-config": "^0.11.19",
     "typescript": "3.7.5"
   },
   "private": true

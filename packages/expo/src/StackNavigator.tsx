@@ -8,12 +8,15 @@ import React from 'react'
 import { AsyncStorage, Image } from 'react-native'
 import { Appbar } from 'react-native-paper'
 import { AuthContext } from './contexts/AuthContext'
-import LoginScreen from './screens/Login'
+import AuthFetcher from './fetchers/AuthFetcher'
+import LoginScreen from './screens/LoginScreen'
+import PostList from './screens/PostListScreen'
 import ScreenList, { screens } from './screens/ScreenList'
-
 const MainStack = createStackNavigator()
+const PostStack = createStackNavigator()
 const AuthStack = createStackNavigator()
 const RootStack = createStackNavigator()
+const authFetcher = new AuthFetcher()
 
 const cacheImages = (images: any[]) =>
 	images.map((image) => {
@@ -47,6 +50,30 @@ export const AuthStackScreen = () => {
 				options={{ title: 'Login' }}
 			/>
 		</AuthStack.Navigator>
+	)
+}
+
+export const PostStackNavigator = () => {
+	return (
+		<PostStack.Navigator
+	  		headerMode='screen'
+			screenOptions={{
+			header: ({ navigation, scene, previous }) => (
+				<Appbar.Header>
+				{previous ? (
+					<Appbar.BackAction onPress={() => navigation.goBack()} />
+				) : null}
+				<Appbar.Content title={scene.descriptor.options.title} />
+				</Appbar.Header>
+				)
+			}}
+	  	>
+			<PostStack.Screen
+				name='PostList'
+				component={PostList}
+				options={{ title: 'PostList' }}
+			/>
+		</PostStack.Navigator>
 	)
 }
 
@@ -159,16 +186,9 @@ export const RootStackNavigator = () => {
 	  const authContext = React.useMemo(
 		() => ({
 			signIn: async (data: {email: string, password: string}) => {
-				console.log(data)
-				const response = await axios.post('http://localhost/auths/login', data)
-				console.log(response.status)
-				console.log(response.data)
-				// fetch login
-				// success
-				await AsyncStorage.setItem('userToken', response.data.accessToken)
-				dispatch({ type: 'SIGN_IN', token: response.data.accessToken })
-				// AsyncStorage save
-
+				const accessToken = await authFetcher.login({ email: data.email, password: data.password })
+				await AsyncStorage.setItem('userToken', accessToken)
+				dispatch({ type: 'SIGN_IN', token: accessToken })
 				// fail
 				// alert
 			},
@@ -193,9 +213,9 @@ export const RootStackNavigator = () => {
 			<AuthContext.Provider value={authContext}>
 			<RootStack.Navigator>
 				{state.userToken == null ? (
-					<RootStack.Screen name='SignIn' component={AuthStackScreen} options={{ headerShown: false }}/>
+					<RootStack.Screen name='Auth' component={AuthStackScreen} options={{ headerShown: false }}/>
 				) : (
-					<RootStack.Screen name='Home' component={MainStackScreen} options={{ headerShown: false }} />
+					<RootStack.Screen name='Main' component={MainStackScreen} options={{ headerShown: false }} />
 				)}
 			</RootStack.Navigator>
 		</AuthContext.Provider>

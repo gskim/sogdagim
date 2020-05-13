@@ -5,16 +5,18 @@ import { useTheme, Divider, List } from 'react-native-paper'
 import { useSafeArea } from 'react-native-safe-area-context'
 
 import AppBarExample from './AppBarExample'
-import BottomNavigationExample from './BottomNavigationExample'
-import LoginScreen from './Login'
+import BottomNavigationScreen from './BottomNavigationScreen'
+import LoginScreen from './LoginScreen'
+import PostListScreen from './PostListScreen'
 
 export const screens: Record<
   string,
   React.ComponentType<any> & { title: string }
 > = {
   appbar: AppBarExample,
-  bottomNavigation: BottomNavigationExample,
-  login: LoginScreen
+  bottomNavigation: BottomNavigationScreen,
+  login: LoginScreen,
+  postList: PostListScreen
 
 }
 

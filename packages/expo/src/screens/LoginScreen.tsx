@@ -41,9 +41,6 @@ const LoginScreen = ({ navigation }: Props) => {
   navigation.setOptions({
 	header: () => (
 		<Appbar.Header
-		theme={{
-			mode: 'exact'
-		}}
 		>
 		<Appbar.Content
 			title='Login'
@@ -84,7 +81,7 @@ const LoginScreen = ({ navigation }: Props) => {
 				placeholder='Type something'
 				onChangeText={(text) => setPassword(text)}
 			/>
-			<Button icon='camera' mode='contained' onPress={loginBtnClick} style={{ marginTop: 20 }}>
+			<Button mode='contained' onPress={loginBtnClick} style={{ marginTop: 20 }}>
 				Press me
   			</Button>
 		</View>

@@ -1,3 +1,4 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import * as React from 'react'
 import {
   Dimensions,
@@ -7,7 +8,8 @@ import {
   StyleSheet,
   View
 } from 'react-native'
-import { BottomNavigation } from 'react-native-paper'
+import { Appbar, BottomNavigation } from 'react-native-paper'
+import { PostStackNavigator } from '../StackNavigator'
 
 type RoutesState = {
   key: string;
@@ -18,6 +20,10 @@ type RoutesState = {
   getAccessibilityLabel?: string;
   getTestID?: string;
 }[]
+
+interface Props {
+	navigation: StackNavigationProp<{}>
+  }
 
 interface Route { route: { key: string } }
 
@@ -37,7 +43,7 @@ const PhotoGallery = ({ route }: Route) => {
   )
 }
 
-const BottomNavigationExample = () => {
+const BottomNavigationScreen = ({ navigation }: Props) => {
   const [index, setIndex] = React.useState<number>(0)
   const [routes] = React.useState<RoutesState>([
 	{ key: 'album', title: 'Album', icon: 'image-album', color: '#6200ee' },
@@ -62,12 +68,18 @@ const BottomNavigationExample = () => {
 	}
   ])
 
+  navigation.setOptions({
+	header: () => (
+		null
+	)
+  })
+
   return (
 	<BottomNavigation
 		navigationState={{ index, routes }}
 		onIndexChange={(index) => setIndex(index)}
 		renderScene={BottomNavigation.SceneMap({
-		album: PhotoGallery,
+		album: PostStackNavigator,
 		library: PhotoGallery,
 		favorites: PhotoGallery,
 		purchased: PhotoGallery
@@ -77,9 +89,9 @@ const BottomNavigationExample = () => {
   )
 }
 
-BottomNavigationExample.title = 'Bottom Navigation'
+BottomNavigationScreen.title = 'Bottom Navigation'
 
-export default BottomNavigationExample
+export default BottomNavigationScreen
 
 const styles = StyleSheet.create({
   ...Platform.select({

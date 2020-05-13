@@ -5,9 +5,8 @@ import { Text, YellowBox } from 'react-native'
 import 'react-native-gesture-handler'
 import { DefaultTheme as PaperDefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-// import '../assets/styles/fonts.css';
+import { screens } from './screens/ScreenList'
 import LinkingPrefixes from './LinkingPrefixes'
-import { screens } from './ScreenList'
 import { RootStackNavigator } from './StackNavigator'
 YellowBox.ignoreWarnings(['Require cycle:'])
 

@@ -9,7 +9,7 @@ import { AsyncStorage, Image } from 'react-native'
 import { Appbar } from 'react-native-paper'
 import { AuthContext } from './contexts/AuthContext'
 import LoginScreen from './screens/Login'
-import ScreenList, { screens } from './ScreenList'
+import ScreenList, { screens } from './screens/ScreenList'
 
 const MainStack = createStackNavigator()
 const AuthStack = createStackNavigator()
@@ -138,7 +138,6 @@ export const RootStackNavigator = () => {
 			try {
 				await loadAssets()
 				userToken = await AsyncStorage.getItem('userToken')
-
 
 				console.log('++++++++')
 				console.log(userToken)

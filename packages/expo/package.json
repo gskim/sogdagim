@@ -6,9 +6,13 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "ios:build": "expo build:ios --release-channel prod",
+    "android:build" : "expo build:android --release-channel prod",
+    "publish": "expo publish --release-channel prod"
   },
   "dependencies": {
+    "@sogdagim/model": "^1.0.0",
     "@expo/vector-icons": "^10.0.0",
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/bottom-tabs": "^5.3.3",

@@ -7,16 +7,18 @@ import { useSafeArea } from 'react-native-safe-area-context'
 import AppBarExample from './AppBarExample'
 import BottomNavigationScreen from './BottomNavigationScreen'
 import LoginScreen from './LoginScreen'
+import PostDetailScreen from './PostDetailScreen'
 import PostListScreen from './PostListScreen'
 
 export const screens: Record<
   string,
   React.ComponentType<any> & { title: string }
 > = {
-  appbar: AppBarExample,
-  bottomNavigation: BottomNavigationScreen,
-  login: LoginScreen,
-  postList: PostListScreen
+  Appbar: AppBarExample,
+  BottomNavigation: BottomNavigationScreen,
+  Login: LoginScreen,
+  PostList: PostListScreen,
+  PostDetail: PostDetailScreen
 
 }
 

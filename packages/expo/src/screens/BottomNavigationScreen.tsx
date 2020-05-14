@@ -8,7 +8,7 @@ import {
   StyleSheet,
   View
 } from 'react-native'
-import { Appbar, BottomNavigation } from 'react-native-paper'
+import { BottomNavigation } from 'react-native-paper'
 import { PostStackNavigator } from '../StackNavigator'
 
 type RoutesState = {

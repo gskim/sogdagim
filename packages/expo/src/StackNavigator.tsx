@@ -1,6 +1,5 @@
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack'
-import axios from 'axios'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'

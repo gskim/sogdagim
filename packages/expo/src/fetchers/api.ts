@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { AsyncStorage } from 'react-native'
-import getEnvVars from '../../environment'
-const apiUrl = getEnvVars()?.apiUrl
+import getEnvVars from '../environment'
+const { apiUrl } = getEnvVars()
 
 export default class Api {
 	private readonly axiosInstance: AxiosInstance
@@ -12,7 +12,7 @@ export default class Api {
 		})
 	}
 
-	protected async get<T>(url: string, params: T, isPublic: boolean = false) {
+	protected async get<T, I>(url: string, params: T, isPublic: boolean = false): Promise<I> {
 		const config: any = {
 			url,
 			method: 'get',
@@ -42,7 +42,7 @@ export default class Api {
 		return await this.request(config, isPublic)
 	}
 
-	protected async delete<T>(url: string, isPublic: boolean = false) {
+	protected async delete(url: string, isPublic: boolean = false) {
 		const config: any = {
 			url,
 			method: 'delete'

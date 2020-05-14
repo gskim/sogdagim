@@ -1,4 +1,6 @@
-import * as React from 'react'
+import { StackNavigationProp } from '@react-navigation/stack/lib/typescript/src/types'
+import { PostItem } from '@sogdagim/model'
+import React, { useEffect, useState } from 'react'
 import { Alert, ScrollView, StyleSheet } from 'react-native'
 import {
   useTheme,
@@ -8,17 +10,54 @@ import {
   IconButton,
   Paragraph
 } from 'react-native-paper'
-
-const PostListScreen = () => {
+import PostFetcher from '../fetchers/PostFetcher'
+const postFetcher = new PostFetcher()
+interface Props {
+	navigation: StackNavigationProp<{ [key: string]: undefined }>
+  }
+const PostListScreen = ({ navigation }: Props) => {
   const {
 	colors: { background }
   } = useTheme()
+
+  const [posts, setPosts] = useState<PostItem[]>([])
+
+  useEffect(() => {
+	const getPosts = async () => {
+		const res = await postFetcher.posts()
+		setPosts(res.posts)
+	}
+	getPosts()
+  }, [])
 
   return (
 	<ScrollView
 		style={[styles.container, { backgroundColor: background }]}
 		contentContainerStyle={styles.content}
 	>
+		{
+			posts.map((post) => {
+				return (
+				<Card
+					key={post.id}
+					style={styles.card}
+					onPress={() => {
+						console.log('=====')
+						navigation.navigate('PostDetail', { id: post.id })
+					}}
+				>
+					<Card.Cover source={require('../../assets/images/chameleon.jpg')} />
+					<Card.Title title={post.title} />
+					<Card.Content>
+						<Paragraph>
+						{post.text}
+						</Paragraph>
+					</Card.Content>
+				</Card>
+				)
+
+			})
+		}
 		<Card style={styles.card}>
 		<Card.Cover source={require('../../assets/images/wrecked-ship.jpg')} />
 		<Card.Title title='Abandoned Ship' />

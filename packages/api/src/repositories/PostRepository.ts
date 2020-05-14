@@ -3,7 +3,11 @@ import { EntityRepository, Post, Repository } from '@sogdagim/orm'
 @EntityRepository(Post)
 export class PostRepository extends Repository<Post> {
 	async getPosts() {
-		return this.find()
+		return this.find({
+			where: {
+				parent: null
+			}
+		})
 	}
 
 	async getReplies(postId: number) {

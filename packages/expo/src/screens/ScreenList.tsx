@@ -1,8 +1,8 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import * as React from 'react'
 import { FlatList } from 'react-native'
 import { useTheme, Divider, List } from 'react-native-paper'
 import { useSafeArea } from 'react-native-safe-area-context'
+import { CommonProps } from '../CommonProps'
 
 import AppBarExample from './AppBarExample'
 import BottomNavigationScreen from './BottomNavigationScreen'
@@ -22,10 +22,6 @@ export const screens: Record<
 
 }
 
-interface Props {
-  navigation: StackNavigationProp<{ [key: string]: undefined }>
-}
-
 interface Item {
   id: string
   data: typeof screens[string]
@@ -35,7 +31,7 @@ const data = Object.keys(screens).map(
   (id): Item => ({ id, data: screens[id] })
 )
 
-export default function ScreenList({ navigation }: Props) {
+export default function ScreenList({ navigation }: CommonProps) {
   const renderItem = ({ item }: { item: Item }) => (
 	<List.Item
 		title={item.data.title}

@@ -1,4 +1,3 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import * as React from 'react'
 import { Platform, StyleSheet, View } from 'react-native'
 import {
@@ -9,14 +8,11 @@ import {
   Paragraph,
   Switch
 } from 'react-native-paper'
-
-interface Props {
-  navigation: StackNavigationProp<{}>
-}
+import { CommonProps } from '../CommonProps'
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'
 
-const AppbarExample = ({ navigation }: Props) => {
+const AppbarExample = ({ navigation }: CommonProps) => {
   const { colors } = useTheme()
 
   const [showLeftIcon, setShowLeftIcon] = React.useState(true)

@@ -1,10 +1,6 @@
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack'
-import { AppLoading } from 'expo'
-import { Asset } from 'expo-asset'
-import * as Font from 'expo-font'
 import React from 'react'
-import { AsyncStorage, Image } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import { Appbar } from 'react-native-paper'
 import { AuthContext } from './contexts/AuthContext'
 import AuthFetcher from './fetchers/AuthFetcher'
@@ -16,17 +12,6 @@ const PostStack = createStackNavigator()
 const AuthStack = createStackNavigator()
 const RootStack = createStackNavigator()
 const authFetcher = new AuthFetcher()
-
-const cacheImages = (images: any[]) =>
-	images.map((image) => {
-	if (typeof image === 'string') {
-		return Image.prefetch(image)
-	} else {
-		return Asset.fromModule(image).downloadAsync()
-	}
-})
-
-const cacheFonts = (fonts: any[]) => fonts.map((font) => Font.loadAsync(font))
 
 export const AuthStackScreen = () => {
 	return (
@@ -109,14 +94,6 @@ export const MainStackScreen = () => {
 }
 
 export const RootStackNavigator = () => {
-	const loadAssets = async () => {
-		const images = cacheImages([
-			require('../assets/splash.png')
-		])
-		const fonts = cacheFonts([Ionicons.font, FontAwesome.font])
-		return await Promise.all([...images, ...fonts])
-	  }
-
 	  const [state, dispatch] = React.useReducer(
 		(prevState: any, action: any) => {
 			console.log('========')
@@ -127,7 +104,6 @@ export const RootStackNavigator = () => {
 				return {
 				...prevState,
 				userToken: action.token,
-				isLoading: false
 				}
 			case 'SIGN_IN':
 				return {
@@ -150,37 +126,10 @@ export const RootStackNavigator = () => {
 			}
 		},
 		{
-			isLoading: true,
 			isSignout: false,
 			userToken: null
 		}
 	  )
-
-	  React.useEffect(() => {
-		// Fetch the token from storage then navigate to our appropriate place
-		const bootstrapAsync = async () => {
-			let userToken
-
-			try {
-				await loadAssets()
-				userToken = await AsyncStorage.getItem('userToken')
-
-				console.log('++++++++')
-				console.log(userToken)
-			} catch (e) {
-			// Restoring token failed
-			} finally {
-				dispatch({ type: 'RESTORE_TOKEN', token: userToken })
-			}
-			// After restoring token, we may need to validate it in production apps
-
-			// This will switch to the App screen or Auth screen and this loading
-			// screen will be unmounted and thrown away.
-
-		}
-
-		bootstrapAsync()
-	  }, [])
 
 	  const authContext = React.useMemo(
 		() => ({
@@ -207,22 +156,44 @@ export const RootStackNavigator = () => {
 		}),
 		[]
 	  )
-	  if (!state.isLoading) {
-		return (
-			<AuthContext.Provider value={authContext}>
-			<RootStack.Navigator>
-				{state.userToken == null ? (
-					<RootStack.Screen name='Auth' component={AuthStackScreen} options={{ headerShown: false }}/>
-				) : (
-					<RootStack.Screen name='Main' component={MainStackScreen} options={{ headerShown: false }} />
-				)}
-			</RootStack.Navigator>
-		</AuthContext.Provider>
-		  )
-	  } else {
-		return <AppLoading
-		onError={console.error}
-		 />
-	}
 
+	  React.useEffect(() => {
+		// Fetch the token from storage then navigate to our appropriate place
+		const bootstrapAsync = async () => {
+			let userToken
+
+			try {
+				userToken = await AsyncStorage.getItem('userToken')
+
+				console.log('++++++++')
+				console.log(userToken)
+			} catch (e) {
+			// Restoring token failed
+			} finally {
+				dispatch({ type: 'RESTORE_TOKEN', token: undefined })
+			}
+			// After restoring token, we may need to validate it in production apps
+
+			// This will switch to the App screen or Auth screen and this loading
+			// screen will be unmounted and thrown away.
+
+		}
+
+		bootstrapAsync()
+	}, [])
+	  return (
+		<AuthContext.Provider value={authContext}>
+		<RootStack.Navigator>
+			{state.userToken == null ? (
+				<RootStack.Screen
+					name='Auth'
+					component={AuthStackScreen}
+					options={{ headerShown: false, animationTypeForReplace: state.isSignout ? 'pop' : 'push' }}
+				/>
+			) : (
+				<RootStack.Screen name='Main' component={MainStackScreen} options={{ headerShown: false }} />
+			)}
+		</RootStack.Navigator>
+	</AuthContext.Provider>
+	  )
 }

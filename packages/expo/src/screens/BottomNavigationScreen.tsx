@@ -1,4 +1,3 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import * as React from 'react'
 import {
   Dimensions,
@@ -9,6 +8,7 @@ import {
   View
 } from 'react-native'
 import { BottomNavigation } from 'react-native-paper'
+import { CommonProps } from '../CommonProps'
 import { PostStackNavigator } from '../StackNavigator'
 
 type RoutesState = {
@@ -20,10 +20,6 @@ type RoutesState = {
   getAccessibilityLabel?: string;
   getTestID?: string;
 }[]
-
-interface Props {
-	navigation: StackNavigationProp<{}>
-  }
 
 interface Route { route: { key: string } }
 
@@ -43,7 +39,7 @@ const PhotoGallery = ({ route }: Route) => {
   )
 }
 
-const BottomNavigationScreen = ({ navigation }: Props) => {
+const BottomNavigationScreen = ({ navigation }: CommonProps) => {
   const [index, setIndex] = React.useState<number>(0)
   const [routes] = React.useState<RoutesState>([
 	{ key: 'album', title: 'Album', icon: 'image-album', color: '#6200ee' },

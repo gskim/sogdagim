@@ -1,2 +1,2 @@
-import { Linking } from 'expo';
-export default [Linking.makeUrl('/')];
+import { Linking } from 'expo'
+export default [Linking.makeUrl('/')]

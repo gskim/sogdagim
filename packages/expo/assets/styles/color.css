@@ -1,0 +1,20 @@
+/* Color Theme Swatches in Hex */
+.OVER-THE-RAINBOW-en-Hautepunchmag-1-hex { color: #07668C; }
+.OVER-THE-RAINBOW-en-Hautepunchmag-2-hex { color: #F2F2F0; }
+.OVER-THE-RAINBOW-en-Hautepunchmag-3-hex { color: #F2B705; }
+.OVER-THE-RAINBOW-en-Hautepunchmag-4-hex { color: #F29F05; }
+.OVER-THE-RAINBOW-en-Hautepunchmag-5-hex { color: #D90404; }
+
+/* Color Theme Swatches in RGBA */
+.OVER-THE-RAINBOW-en-Hautepunchmag-1-rgba { color: rgba(7, 102, 140, 1); }
+.OVER-THE-RAINBOW-en-Hautepunchmag-2-rgba { color: rgba(241, 242, 239, 1); }
+.OVER-THE-RAINBOW-en-Hautepunchmag-3-rgba { color: rgba(242, 182, 4, 1); }
+.OVER-THE-RAINBOW-en-Hautepunchmag-4-rgba { color: rgba(242, 159, 4, 1); }
+.OVER-THE-RAINBOW-en-Hautepunchmag-5-rgba { color: rgba(216, 4, 4, 1); }
+
+/* Color Theme Swatches in HSLA */
+.OVER-THE-RAINBOW-en-Hautepunchmag-1-hsla { color: hsla(196, 90, 28, 1); }
+.OVER-THE-RAINBOW-en-Hautepunchmag-2-hsla { color: hsla(67, 8, 94, 1); }
+.OVER-THE-RAINBOW-en-Hautepunchmag-3-hsla { color: hsla(45, 96, 48, 1); }
+.OVER-THE-RAINBOW-en-Hautepunchmag-4-hsla { color: hsla(39, 96, 48, 1); }
+.OVER-THE-RAINBOW-en-Hautepunchmag-5-hsla { color: hsla(0, 96, 43, 1); }

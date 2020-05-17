@@ -1,4 +1,3 @@
-import { StackNavigationProp } from '@react-navigation/stack/lib/typescript/src/types'
 import { PostItem } from '@sogdagim/model'
 import React, { useEffect, useState } from 'react'
 import { Alert, ScrollView, StyleSheet } from 'react-native'
@@ -11,11 +10,10 @@ import {
   Paragraph
 } from 'react-native-paper'
 import PostFetcher from '../fetchers/PostFetcher'
+import { CommonProps } from '../CommonProps'
 const postFetcher = new PostFetcher()
-interface Props {
-	navigation: StackNavigationProp<{ [key: string]: undefined }>
-  }
-const PostListScreen = ({ navigation }: Props) => {
+
+const PostListScreen = ({ navigation }: CommonProps) => {
   const {
 	colors: { background }
   } = useTheme()

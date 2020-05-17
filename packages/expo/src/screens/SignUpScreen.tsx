@@ -1,12 +1,12 @@
+import { HeaderBackButton } from '@react-navigation/stack'
+import { Gender } from '@sogdagim/model'
 import React, { useState } from 'react'
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native'
 import {
   useTheme,
   Button,
-  Divider,
   TextInput
 } from 'react-native-paper'
-import { AuthContext } from '../contexts/AuthContext'
 import { CommonProps } from '../CommonProps'
 
 interface AvoidingViewProps {
@@ -27,16 +27,20 @@ const TextInputAvoidingView = ({ children }: AvoidingViewProps) => {
 	)
   }
 
-const LoginScreen = ({ navigation }: CommonProps) => {
-
-	const { signIn } = React.useContext(AuthContext)
+const SignUpScreen = ({ navigation }: CommonProps) => {
 
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
+	const [confirmPassword, setConfirmPassword] = useState<string>('')
+	const [nickname, setNickname] = useState<string>('')
+	const [birthYear, setBirthYear] = useState<string>('')
+	const [birthMomth, setBirthMonth] = useState<string>('')
+	const [birthday, setBirthday] = useState<string>('')
+	const [gender, setGender] = useState<Gender>()
 
   navigation.setOptions({
 	header: () => (
-		null
+		<HeaderBackButton onPress={() => navigation.goBack()} />
 	)
   })
 
@@ -44,8 +48,8 @@ const LoginScreen = ({ navigation }: CommonProps) => {
 	colors: { background }
   } = useTheme()
 
-	const loginBtnClick = async () => {
-		await signIn({ email, password })
+	const signUpBtnClick = async () => {
+
 	}
 
   return (
@@ -55,7 +59,6 @@ const LoginScreen = ({ navigation }: CommonProps) => {
 		keyboardShouldPersistTaps={'always'}
 		removeClippedSubviews={false}
 		>
-
 		<View style={styles.formContainer}>
 			<TextInput
 				mode='outlined'
@@ -74,11 +77,24 @@ const LoginScreen = ({ navigation }: CommonProps) => {
 				onChangeText={(text) => setPassword(text)}
 				style={{ height: 40 }}
 			/>
-			<Button mode='contained' onPress={loginBtnClick} style={{ marginTop: 20 }}>
-				로그인
-  			</Button>
-			  <Divider />
-			  <Button mode='contained' onPress={loginBtnClick} style={{ marginTop: 20 }}>
+			<TextInput
+				mode='outlined'
+				label='Confirm Password'
+				value={confirmPassword}
+				secureTextEntry={true}
+				placeholder='같은 비밀번호를 한번더 입력해주세요.'
+				onChangeText={(text) => setConfirmPassword(text)}
+				style={{ height: 40 }}
+			/>
+			<TextInput
+				mode='outlined'
+				label='닉네임'
+				value={nickname}
+				placeholder='닉네임을 입력해주세요.'
+				onChangeText={(text) => setNickname(text)}
+				style={{ height: 40 }}
+			/>
+			<Button mode='contained' onPress={signUpBtnClick} style={{ marginTop: 20 }}>
 				회원가입
   			</Button>
 		</View>
@@ -87,19 +103,21 @@ const LoginScreen = ({ navigation }: CommonProps) => {
   )
 }
 
-LoginScreen.title = 'Login'
+SignUpScreen.title = 'SignUp'
 
-export default LoginScreen
+export default SignUpScreen
 
 const styles = StyleSheet.create({
 	container: {
-		display: 'flex'
+		flex: 1
 	},
 	wrapper: {
 		flex: 1
 	},
 	formContainer: {
 		flex: 1,
-		margin: 'auto'
+		alignItems: 'center',
+		padding: 16,
+		justifyContent: 'center'
 	}
 })

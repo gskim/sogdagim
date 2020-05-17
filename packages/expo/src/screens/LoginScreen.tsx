@@ -3,8 +3,10 @@ import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } fr
 import {
   useTheme,
   Button,
-  Divider,
-  TextInput
+  Caption,
+  Subheading,
+  TextInput,
+  Title
 } from 'react-native-paper'
 import { AuthContext } from '../contexts/AuthContext'
 import { CommonProps } from '../CommonProps'
@@ -25,11 +27,14 @@ const TextInputAvoidingView = ({ children }: AvoidingViewProps) => {
 	) : (
 	  <>{children}</>
 	)
-  }
+}
 
 const LoginScreen = ({ navigation }: CommonProps) => {
 
 	const { signIn } = React.useContext(AuthContext)
+	const {
+		colors: { background, primary }
+	} = useTheme()
 
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
@@ -40,28 +45,39 @@ const LoginScreen = ({ navigation }: CommonProps) => {
 	)
   })
 
-  const {
-	colors: { background }
-  } = useTheme()
-
-	const loginBtnClick = async () => {
+	const onLoginButtonPress = async () => {
 		await signIn({ email, password })
+	}
+	const onSignUpButtonPress = (): void => {
+		navigation && navigation.navigate('SignUp')
+	  }
+	const onForgotPasswordButtonPress = (): void => {
+		navigation && navigation.navigate('ForgotPassword')
 	}
 
   return (
 	<TextInputAvoidingView>
-		<ScrollView
+		{/* <ScrollView
 		style={[styles.container, { backgroundColor: background }]}
 		keyboardShouldPersistTaps={'always'}
 		removeClippedSubviews={false}
-		>
+		> */}
+		<View style={[styles.headerContainer, { backgroundColor: primary }]}>
+		<Title style={{ color: 'white' }}>
+			Hello
+		</Title>
+		<Subheading
+			style={[styles.signInLabel, { color: 'white' }]}
+		  >
+			Log in to your account
+		</Subheading>
+			</View>
 
 		<View style={styles.formContainer}>
 			<TextInput
 				mode='outlined'
 				label='Email'
 				value={email}
-				placeholder='이메일을 입력해주세요.'
 				onChangeText={(text) => setEmail(text)}
 				style={{ height: 40 }}
 			/>
@@ -70,19 +86,26 @@ const LoginScreen = ({ navigation }: CommonProps) => {
 				label='Password'
 				value={password}
 				secureTextEntry={true}
-				placeholder='비밀번호를 입력해주세요.'
 				onChangeText={(text) => setPassword(text)}
-				style={{ height: 40 }}
+				style={[styles.passwordInput, { height: 40 }]}
 			/>
-			<Button mode='contained' onPress={loginBtnClick} style={{ marginTop: 20 }}>
-				로그인
-  			</Button>
-			  <Divider />
-			  <Button mode='contained' onPress={loginBtnClick} style={{ marginTop: 20 }}>
-				회원가입
-  			</Button>
+			<View style={styles.forgotPasswordContainer}>
+			<Caption
+			style={styles.forgotPasswordButton}
+			onPress={onForgotPasswordButtonPress}>
+			Forgot your password?
+			</Caption>
 		</View>
-		</ScrollView>
+		</View>
+		<Button mode='contained' onPress={onLoginButtonPress} style={styles.signInButton} >
+			로그인
+		</Button>
+		<View style={styles.SignUpContainer}>
+			<Caption onPress={onSignUpButtonPress} style={styles.signUpButton} >
+				Don't have an account? Create
+			</Caption>
+		</View>
+		{/* </ScrollView> */}
 	</TextInputAvoidingView>
   )
 }
@@ -93,13 +116,43 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
 	container: {
-		display: 'flex'
 	},
+	headerContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		minHeight: 216
+	  },
+	  signInLabel: {
+		marginTop: 16
+	  },
 	wrapper: {
 		flex: 1
 	},
 	formContainer: {
 		flex: 1,
-		margin: 'auto'
+		paddingTop: 32,
+		paddingHorizontal: 16
+	},
+	forgotPasswordContainer: {
+		flexDirection: 'row',
+		justifyContent: 'flex-end'
+	},
+	SignUpContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center'
+	},
+	passwordInput: {
+	marginTop: 16
+	},
+	forgotPasswordButton: {
+		paddingHorizontal: 0,
+		marginVertical: 12
+	},
+	signInButton: {
+	marginHorizontal: 16
+	},
+	signUpButton: {
+	marginVertical: 12,
+	marginHorizontal: 16
 	}
 })

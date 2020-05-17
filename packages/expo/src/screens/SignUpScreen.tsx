@@ -1,31 +1,14 @@
 import { HeaderBackButton } from '@react-navigation/stack'
 import { Gender } from '@sogdagim/model'
 import React, { useState } from 'react'
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native'
+import { Platform, ScrollView, StyleSheet, View } from 'react-native'
 import {
   useTheme,
   Button,
   TextInput
 } from 'react-native-paper'
+import { KeyboardAvoidingView } from '../components/KeyboardAvoidingView'
 import { CommonProps } from '../CommonProps'
-
-interface AvoidingViewProps {
-	children: React.ReactNode
-  }
-
-const TextInputAvoidingView = ({ children }: AvoidingViewProps) => {
-	return Platform.OS === 'ios' ? (
-	  <KeyboardAvoidingView
-		style={styles.wrapper}
-		behavior='padding'
-		keyboardVerticalOffset={80}
-	  >
-		{children}
-	  </KeyboardAvoidingView>
-	) : (
-	  <>{children}</>
-	)
-  }
 
 const SignUpScreen = ({ navigation }: CommonProps) => {
 
@@ -53,12 +36,15 @@ const SignUpScreen = ({ navigation }: CommonProps) => {
 	}
 
   return (
-	<TextInputAvoidingView>
-		<ScrollView
-		style={[styles.container, { backgroundColor: background }]}
-		keyboardShouldPersistTaps={'always'}
-		removeClippedSubviews={false}
-		>
+	<KeyboardAvoidingView style={styles.container}>
+		<View style={styles.headerContainer}>
+		<ProfileAvatar
+			style={styles.profileAvatar}
+			resizeMode='center'
+			source={require('./assets/image-person.png')}
+			editButton={renderEditAvatarButton}
+		/>
+		</View>
 		<View style={styles.formContainer}>
 			<TextInput
 				mode='outlined'
@@ -98,8 +84,7 @@ const SignUpScreen = ({ navigation }: CommonProps) => {
 				회원가입
   			</Button>
 		</View>
-		</ScrollView>
-	</TextInputAvoidingView>
+	</KeyboardAvoidingView>
   )
 }
 
@@ -109,15 +94,49 @@ export default SignUpScreen
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1
-	},
-	wrapper: {
-		flex: 1
-	},
-	formContainer: {
-		flex: 1,
+		backgroundColor: 'background-basic-color-1'
+	  },
+	  headerContainer: {
+		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 16,
-		justifyContent: 'center'
-	}
+		minHeight: 216,
+		backgroundColor: 'color-primary-default'
+	  },
+	  profileAvatar: {
+		width: 116,
+		height: 116,
+		borderRadius: 58,
+		alignSelf: 'center',
+		backgroundColor: 'background-basic-color-1',
+		tintColor: 'color-primary-default'
+	  },
+	  editAvatarButton: {
+		width: 40,
+		height: 40,
+		borderRadius: 20
+	  },
+	  formContainer: {
+		flex: 1,
+		paddingTop: 32,
+		paddingHorizontal: 16
+	  },
+	  emailInput: {
+		marginTop: 16
+	  },
+	  passwordInput: {
+		marginTop: 16
+	  },
+	  termsCheckBox: {
+		marginTop: 24
+	  },
+	  termsCheckBoxText: {
+		color: 'text-hint-color'
+	  },
+	  signUpButton: {
+		marginHorizontal: 16
+	  },
+	  signInButton: {
+		marginVertical: 12,
+		marginHorizontal: 16
+	  }
 })

@@ -7,6 +7,7 @@ import AuthFetcher from './fetchers/AuthFetcher'
 import LoginScreen from './screens/LoginScreen'
 import PostList from './screens/PostListScreen'
 import ScreenList, { screens } from './screens/ScreenList'
+import SignUpScreen from './screens/SignUpScreen'
 const MainStack = createStackNavigator()
 const PostStack = createStackNavigator()
 const AuthStack = createStackNavigator()
@@ -32,6 +33,11 @@ export const AuthStackScreen = () => {
 				name='Login'
 				component={LoginScreen}
 				options={{ title: 'Login' }}
+			/>
+			<AuthStack.Screen
+				name='SignUp'
+				component={SignUpScreen}
+				options={{ title: 'SignUp' }}
 			/>
 		</AuthStack.Navigator>
 	)
@@ -103,7 +109,7 @@ export const RootStackNavigator = () => {
 			case 'RESTORE_TOKEN':
 				return {
 				...prevState,
-				userToken: action.token,
+				userToken: action.token
 				}
 			case 'SIGN_IN':
 				return {

@@ -20,11 +20,12 @@ import '@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Material
 const paperTheme = {
 	...PaperDefaultTheme,
 	colors: {
-		...PaperDefaultTheme.colors,
 		...DefaultTheme.colors,
+		...PaperDefaultTheme.colors,
 		primary: '#07668C',
+		// text: '#F2F2F0',
 		surface: DefaultTheme.colors.card,
-		accent: 'rgb(255, 45, 85)'
+		accent: '#F2B705'
 	}
 }
 const NAVIGATION_PERSISTENCE_KEY = 'NAVIGATION_STATE'
@@ -50,12 +51,11 @@ export default function Index() {
 			require('../assets/splash.png')
 		])
 		const fonts = cacheFonts([Ionicons.font, FontAwesome.font, MaterialCommunityIcons.font])
-		return await Promise.all([...images, ...fonts])
+		await Promise.all([...images, ...fonts])
 	}
 	React.useEffect(() => {
 		const restoreState = async () => {
-			try {
-			  const initialUrl = await Linking.getInitialURL()
+			const initialUrl = await Linking.getInitialURL()
 			  console.log(initialUrl)
 
 			  if (Platform.OS !== 'web' || initialUrl === null) {
@@ -69,23 +69,13 @@ export default function Index() {
 				  setInitialState(state)
 				}
 			}
-			} finally {
-				setIsReady(true)
-			}
 		  }
 		// Fetch the token from storage then navigate to our appropriate place
-		const bootstrapAsync = async () => {
-			try {
-				await loadAssets()
-			} catch (e) {
-				console.log('error', e)
-			}
-		}
-
-		bootstrapAsync()
 		restoreState()
 	}, [])
-	if (!isReady) return <AppLoading />
+	const onFinish = () => setIsReady(true)
+	if (!isReady) { return <AppLoading startAsync={loadAssets} onFinish={onFinish} onError={console.error}/>
+	}
 	return (
 	<PaperProvider theme={paperTheme}>
 		<SafeAreaProvider>

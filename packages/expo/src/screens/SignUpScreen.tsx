@@ -1,17 +1,20 @@
 import { HeaderBackButton } from '@react-navigation/stack'
 import { Gender } from '@sogdagim/model'
+import { useStyleSheet, Button as KittenButton, Icon, Input, Layout, StyleService } from '@ui-kitten/components'
 import React, { useState } from 'react'
-import { Platform, ScrollView, StyleSheet, View } from 'react-native'
+import { Platform, ScrollView, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import {
   useTheme,
   Button,
   TextInput
 } from 'react-native-paper'
+import { EmailIcon, EyeIcon, EyeOffIcon, PersonIcon, PlusIcon } from '../components/Icons'
 import { KeyboardAvoidingView } from '../components/KeyboardAvoidingView'
+import { ProfileAvatar } from '../components/ProfileAvatar'
 import { CommonProps } from '../CommonProps'
 
 const SignUpScreen = ({ navigation }: CommonProps) => {
-
+	const styles = useStyleSheet(themedStyles)
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [confirmPassword, setConfirmPassword] = useState<string>('')
@@ -21,69 +24,89 @@ const SignUpScreen = ({ navigation }: CommonProps) => {
 	const [birthday, setBirthday] = useState<string>('')
 	const [gender, setGender] = useState<Gender>()
 
+	const [userName, setUserName] = React.useState<string>()
+  const [termsAccepted, setTermsAccepted] = React.useState<boolean>(false)
+  const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false)
+
   navigation.setOptions({
 	header: () => (
 		<HeaderBackButton onPress={() => navigation.goBack()} />
 	)
   })
 
-  const {
-	colors: { background }
-  } = useTheme()
+  const { colors: { background, primary } } = useTheme()
 
 	const signUpBtnClick = async () => {
 
 	}
 
+	const onSignUpButtonPress = (): void => {
+		navigation && navigation.goBack()
+	  }
+
+	  const onSignInButtonPress = (): void => {
+		navigation && navigation.navigate('SignIn2')
+	  }
+
+	  const onPasswordIconPress = (): void => {
+		setPasswordVisible(!passwordVisible)
+	  }
+	const renderEditAvatarButton = (): React.ReactElement => (
+		<KittenButton
+		style={styles.editAvatarButton}
+	  status='basic'
+	  appearance='ghost'
+	  accessoryLeft={PlusIcon}
+	/>
+	  )
+
+	  const renderIcon = (props: any) => (
+		<TouchableWithoutFeedback onPress={onPasswordIconPress}>
+		  <Icon {...props} name={passwordVisible ? 'eye-off' : 'eye'}/>
+		</TouchableWithoutFeedback>
+	  )
+
   return (
 	<KeyboardAvoidingView style={styles.container}>
-		<View style={styles.headerContainer}>
+		<View style={[styles.headerContainer, { backgroundColor: primary }]}>
 		<ProfileAvatar
-			style={styles.profileAvatar}
+			style={[styles.profileAvatar, { tintColor: primary, backgroundColor: background }]}
 			resizeMode='center'
-			source={require('./assets/image-person.png')}
+			source={require('../../assets/images/image-person.png')}
 			editButton={renderEditAvatarButton}
 		/>
 		</View>
-		<View style={styles.formContainer}>
-			<TextInput
-				mode='outlined'
-				label='Email'
-				value={email}
-				placeholder='이메일을 입력해주세요.'
-				onChangeText={(text) => setEmail(text)}
-				style={{ height: 40 }}
-			/>
-			<TextInput
-				mode='outlined'
-				label='Password'
-				value={password}
-				secureTextEntry={true}
-				placeholder='비밀번호를 입력해주세요.'
-				onChangeText={(text) => setPassword(text)}
-				style={{ height: 40 }}
-			/>
-			<TextInput
-				mode='outlined'
-				label='Confirm Password'
-				value={confirmPassword}
-				secureTextEntry={true}
-				placeholder='같은 비밀번호를 한번더 입력해주세요.'
-				onChangeText={(text) => setConfirmPassword(text)}
-				style={{ height: 40 }}
-			/>
-			<TextInput
-				mode='outlined'
-				label='닉네임'
-				value={nickname}
-				placeholder='닉네임을 입력해주세요.'
-				onChangeText={(text) => setNickname(text)}
-				style={{ height: 40 }}
-			/>
+		<Layout
+		style={styles.formContainer}
+		level='1'>
+		<Input
+			autoCapitalize='none'
+			placeholder='User Name'
+			accessoryRight={PersonIcon}
+			value={userName}
+			onChangeText={setUserName}
+		/>
+		<Input
+			style={styles.emailInput}
+			autoCapitalize='none'
+			placeholder='Email'
+			accessoryRight={EmailIcon}
+			value={email}
+			onChangeText={setEmail}
+		/>
+		<Input
+			style={styles.passwordInput}
+			autoCapitalize='none'
+			secureTextEntry={!passwordVisible}
+			placeholder='Password'
+			accessoryRight={renderIcon}
+			value={password}
+			onChangeText={setPassword}
+		/>
 			<Button mode='contained' onPress={signUpBtnClick} style={{ marginTop: 20 }}>
 				회원가입
   			</Button>
-		</View>
+		</Layout>
 	</KeyboardAvoidingView>
   )
 }
@@ -92,28 +115,25 @@ SignUpScreen.title = 'SignUp'
 
 export default SignUpScreen
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
 	container: {
-		backgroundColor: 'background-basic-color-1'
 	  },
 	  headerContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		minHeight: 216,
-		backgroundColor: 'color-primary-default'
+		minHeight: 216
 	  },
 	  profileAvatar: {
 		width: 116,
 		height: 116,
 		borderRadius: 58,
-		alignSelf: 'center',
-		backgroundColor: 'background-basic-color-1',
-		tintColor: 'color-primary-default'
+		alignSelf: 'center'
 	  },
 	  editAvatarButton: {
 		width: 40,
 		height: 40,
-		borderRadius: 20
+		borderRadius: 20,
+		backgroundColor: 'gainsboro'
 	  },
 	  formContainer: {
 		flex: 1,

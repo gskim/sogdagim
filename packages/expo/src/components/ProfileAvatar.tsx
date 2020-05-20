@@ -1,7 +1,6 @@
+import { Avatar, AvatarProps, ButtonElement, ButtonProps } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet, View, ViewProps } from 'react-native'
-import { Avatar } from 'react-native-paper'
-// import { Avatar, AvatarProps, ButtonElement, ButtonProps } from '@ui-kitten/components';
 
 export interface ProfileAvatarProps extends AvatarProps {
   editButton?: () => ButtonElement
@@ -10,7 +9,7 @@ export interface ProfileAvatarProps extends AvatarProps {
 export const ProfileAvatar = (props: ProfileAvatarProps): React.ReactElement<ViewProps> => {
 
   const renderEditButtonElement = (): ButtonElement => {
-	const buttonElement: React.ReactElement<ButtonProps> = props.editButton()
+	const buttonElement: React.ReactElement<ButtonProps> = props.editButton!()
 
 	return React.cloneElement(buttonElement, {
 		style: [buttonElement.props.style, styles.editButton]
@@ -21,10 +20,8 @@ export const ProfileAvatar = (props: ProfileAvatarProps): React.ReactElement<Vie
 
   return (
 	<View style={style}>
-		<Avatar.Image
+		<Avatar
 		style={[style, styles.avatar]}
-		size={20}
-		source={props.source}
 		{...restProps}
 		/>
 		{editButton && renderEditButtonElement()}
@@ -42,4 +39,3 @@ const styles = StyleSheet.create({
 	bottom: 0
   }
 })
-

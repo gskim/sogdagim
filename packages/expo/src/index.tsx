@@ -10,13 +10,14 @@ import * as Font from 'expo-font'
 import { useKeepAwake } from 'expo-keep-awake'
 import * as React from 'react'
 import { AsyncStorage, Image, Platform, YellowBox } from 'react-native'
-import { AppearanceProvider } from 'react-native-appearance';
+import { AppearanceProvider } from 'react-native-appearance'
 import 'react-native-gesture-handler'
 import { DefaultTheme as PaperDefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import '../assets/styles/fonts.css'
 import { AppLoading } from './components/AppLoading'
 import { SplashImage } from './components/SplashImage'
+import theme from './theme.json'
 import { RootStackNavigator } from './StackNavigator'
 
 YellowBox.ignoreWarnings(['Require cycle:'])
@@ -83,7 +84,7 @@ const App = () => {
 		<React.Fragment>
 			<IconRegistry icons={[EvaIconsPack]}/>
 			<AppearanceProvider>
-		<ApplicationProvider {...eva} theme={eva.light}>
+		<ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
 		<PaperProvider theme={paperTheme}>
 		<SafeAreaProvider>
 			<React.Fragment>

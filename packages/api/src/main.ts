@@ -6,6 +6,7 @@ import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { ExpressAdapter } from '@nestjs/platform-express'
 import express from 'express'
+import { RedisIoAdapter } from './adapters/RedisIoAdapter'
 import { AppModule } from './AppModule'
 
 export const app = express()
@@ -16,6 +17,7 @@ app.disable('x-powered-by')
 
 async function bootstrap() {
   const nestApp = await NestFactory.create(AppModule, new ExpressAdapter(app))
+  nestApp.useWebSocketAdapter(new RedisIoAdapter(nestApp))
   nestApp.enableCors()
   nestApp.useGlobalPipes(new ValidationPipe({
 	transform: true,

@@ -1,13 +1,14 @@
 import { LayoutType } from '@src/@types'
+import { SocketContext } from '@src/contexts/SocketContext'
 import AuthFetcher, { LoginParams } from '@src/fetchers/auth'
 import { Button, Form, Input } from 'antd'
-import { useCallback, useState } from 'react'
+import { useContext } from 'react'
 import styled from 'styled-components'
 
 const authFetcher = new AuthFetcher()
 
 const Login = (props) => {
-
+	const socket = useContext(SocketContext)
 	const formItemLayout = {
 		labelCol: { span: 6 },
 		wrapperCol: { span: 12 }
@@ -20,7 +21,6 @@ const Login = (props) => {
 	}
 	const [form] = Form.useForm()
 	const onFinish = async (values: LoginParams) => {
-		console.log(values)
 		await authFetcher.login(values)
 	  }
 

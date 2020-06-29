@@ -1,6 +1,10 @@
-import { Expose, Type } from 'class-transformer'
 import { IsDefined, IsEmail, IsString } from 'class-validator'
-export class PostAuthsLoginRequest {
+
+export class PostAuthsLoginResponse {
+	accessToken: string
+}
+
+export class PostAuthsSignupRequest {
 	@IsEmail()
 	@IsDefined()
 	email: string
@@ -8,8 +12,4 @@ export class PostAuthsLoginRequest {
 	@IsString()
 	@IsDefined()
 	password: string
-}
-
-export class PostAuthsLoginResponse {
-	accessToken: string
 }

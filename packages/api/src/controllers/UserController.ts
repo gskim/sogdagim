@@ -1,7 +1,8 @@
 import { Body, ClassSerializerInterceptor, Controller, Get, Inject, Param, Post, Put, SerializeOptions, UseInterceptors } from '@nestjs/common'
 import { UserService } from '@services/UserService'
 import { plainToClass } from '@sogdagim/model'
-import { CommonUser, GetUsersDetailResponse, GetUsersResponse, PostUsersRequest, PostUsersResponse, PutUsersDetailRequest, PutUsersDetailResponse } from '@sogdagim/model/models'
+import { GetUsersDetailResponse, GetUsersResponse, PostUsersRequest, PostUsersResponse, PutUsersDetailRequest,
+	PutUsersDetailResponse } from '@sogdagim/model/models'
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

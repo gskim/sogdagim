@@ -1,12 +1,19 @@
 import { Body, Controller, Get, Inject, Post, Req, UseGuards } from '@nestjs/common'
 import { AuthService } from '@services/AuthService'
 import { UserService } from '@services/UserService'
+import { PostAuthsSignupRequest } from '@sogdagim/model'
 import { User } from '@sogdagim/orm'
 import { CurrentUser, EmailAuthGuard, JwtAuthGuard } from '../CustomDecorator'
 @Controller()
 export class AuthController {
 	@Inject() private readonly authService: AuthService
 	@Inject() private readonly userService: UserService
+
+	@Post('/auths/signup')
+	async postAuthsSignup(@Body() params: PostAuthsSignupRequest) {
+		const user = await this.userService.signUpByEmail(params.email, params.password)
+		return { success: true }
+	}
 
 	@UseGuards(EmailAuthGuard)
 	@Post('/auths/login')

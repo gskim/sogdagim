@@ -5,7 +5,7 @@ import { GetPostsDetailRepliesResponse, GetPostsDetailResponse, GetPostsResponse
 	PostPostsDetailReplyResponse, PostPostsRequest, PostPostsResponse, PutPostsDetailRequest, PutPostsDetailResponse
  } from '@sogdagim/model/models'
 import { User } from '@sogdagim/orm'
-import { CurrentUser, JwtAuthGuard } from 'src/CustomDecorator'
+import { CurrentUser, JwtAuthGuard } from '../CustomDecorator'
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

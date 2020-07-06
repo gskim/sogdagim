@@ -6,6 +6,7 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
 import { Linking } from 'expo'
 import { Asset } from 'expo-asset'
+import * as Device from 'expo-device'
 import * as Font from 'expo-font'
 import { useKeepAwake } from 'expo-keep-awake'
 import * as React from 'react'
@@ -14,7 +15,6 @@ import { AppearanceProvider } from 'react-native-appearance'
 import 'react-native-gesture-handler'
 import { DefaultTheme as PaperDefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import '../assets/styles/fonts.css'
 import { AppLoading } from './components/AppLoading'
 import { SplashImage } from './components/SplashImage'
 import theme from './theme.json'
@@ -22,9 +22,11 @@ import { RootStackNavigator } from './StackNavigator'
 
 YellowBox.ignoreWarnings(['Require cycle:'])
 Asset.loadAsync(StackAssets)
-
+const deviceFetcher = new DeviceFetcher()
 import '@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf'
 import '@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf'
+import { ExpoDevice } from '@sogdagim/model'
+import DeviceFetcher from './fetchers/DeviceFetcher'
 const paperTheme = {
 	...PaperDefaultTheme,
 	colors: {
@@ -62,8 +64,10 @@ const App = () => {
 	React.useEffect(() => {
 		const restoreState = async () => {
 			const initialUrl = await Linking.getInitialURL()
-			  console.log(initialUrl)
-
+			  console.log('initalUrl', initialUrl)
+				console.log('device')
+				console.log(Device)
+				await deviceFetcher.postDevice(Device as ExpoDevice)
 			  if (Platform.OS !== 'web' || initialUrl === null) {
 				const savedState = await AsyncStorage.getItem(
 				  NAVIGATION_PERSISTENCE_KEY

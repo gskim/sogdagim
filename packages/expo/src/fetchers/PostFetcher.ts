@@ -4,7 +4,7 @@ import Api from './api'
 export default class PostFetcher extends Api {
 	async posts(): Promise<GetPostsResponse> {
 		const url = `/posts`
-		const data = await this.get<{}, GetPostsResponse>(url, {}) || {}
+		const data = await this.get<{}, GetPostsResponse>(url, {})
 		return data
 	}
 

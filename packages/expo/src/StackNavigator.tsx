@@ -109,7 +109,7 @@ export const RootStackNavigator = () => {
 			case 'RESTORE_TOKEN':
 				return {
 				...prevState,
-				userToken: action.token
+				userToken: action.token || null
 				}
 			case 'SIGN_IN':
 				return {
@@ -189,17 +189,17 @@ export const RootStackNavigator = () => {
 	}, [])
 	  return (
 		<AuthContext.Provider value={authContext}>
-		<RootStack.Navigator>
-			{state.userToken == null ? (
-				<RootStack.Screen
-					name='Auth'
-					component={AuthStackScreen}
-					options={{ headerShown: false, animationTypeForReplace: state.isSignout ? 'pop' : 'push' }}
-				/>
-			) : (
-				<RootStack.Screen name='Main' component={MainStackScreen} options={{ headerShown: false }} />
-			)}
-		</RootStack.Navigator>
-	</AuthContext.Provider>
+			<RootStack.Navigator>
+				{state.userToken === null ? (
+					<RootStack.Screen
+						name='Auth'
+						component={AuthStackScreen}
+						options={{ headerShown: false, animationTypeForReplace: state.isSignout ? 'pop' : 'push' }}
+					/>
+				) : (
+					<RootStack.Screen name='Main' component={MainStackScreen} options={{ headerShown: false }} />
+				)}
+			</RootStack.Navigator>
+		</AuthContext.Provider>
 	  )
 }

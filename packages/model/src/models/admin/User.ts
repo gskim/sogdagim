@@ -2,7 +2,7 @@ import { Expose, Type } from 'class-transformer'
 import { IsDefined, IsEmail, IsEnum, IsString, Length } from 'class-validator'
 import { Gender } from '../Common'
 
-export class CommonUser {
+export class CommonAdminUser {
 	@Expose()
 	id: number
 	@Expose()
@@ -23,13 +23,13 @@ export class CommonUser {
 	updatedAt: Date
 }
 
-export class GetUsersResponse {
+export class GetAdminUsersResponse {
 	@Expose()
-	@Type(() => CommonUser)
-	users: CommonUser[]
+	@Type(() => CommonAdminUser)
+	users: CommonAdminUser[]
 }
 
-export class PostUsersRequest {
+export class PostAdminUsersRequest {
 	@IsString()
 	@IsDefined()
 	email: string
@@ -58,17 +58,17 @@ export class PostUsersRequest {
 	birthDay: string
 }
 
-export class PostUsersResponse {
+export class PostAdminUsersResponse {
 	id: number
 }
 
-export class GetUsersDetailResponse {
+export class GetAdminUsersDetailResponse {
 	@Expose()
-	@Type(() => CommonUser)
-	data: CommonUser
+	@Type(() => CommonAdminUser)
+	data: CommonAdminUser
 }
 
-export class PutUsersDetailRequest {
+export class PutAdminUsersDetailRequest {
 	@IsString()
 	@IsDefined()
 	nickname: string
@@ -93,8 +93,8 @@ export class PutUsersDetailRequest {
 	birthDay: string
 }
 
-export class PutUsersDetailResponse {
+export class PutAdminUsersDetailResponse {
 	@Expose()
-	@Type(() => CommonUser)
-	data: CommonUser
+	@Type(() => CommonAdminUser)
+	data: CommonAdminUser
 }

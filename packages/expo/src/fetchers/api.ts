@@ -22,7 +22,7 @@ export default class Api {
 		return await this.request(config, isPublic)
 	}
 
-	protected async post<T>(url: string, data: T, isPublic: boolean = false) {
+	protected async post<T, I>(url: string, data: T, isPublic: boolean = false): Promise<I> {
 		const config: any = {
 			url,
 			method: 'post',
@@ -32,7 +32,7 @@ export default class Api {
 		return await this.request(config, isPublic)
 	}
 
-	protected async put<T>(url: string, data: T, isPublic: boolean = false) {
+	protected async put<T, I>(url: string, data: T, isPublic: boolean = false): Promise<I> {
 		const config: any = {
 			url,
 			method: 'put',
@@ -42,10 +42,11 @@ export default class Api {
 		return await this.request(config, isPublic)
 	}
 
-	protected async delete(url: string, isPublic: boolean = false) {
+	protected async delete<T, I>(url: string, params: T, isPublic: boolean = false): Promise<I> {
 		const config: any = {
 			url,
-			method: 'delete'
+			method: 'delete',
+			params
 		}
 
 		return await this.request(config, isPublic)

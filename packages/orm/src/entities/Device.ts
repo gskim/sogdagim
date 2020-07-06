@@ -13,6 +13,12 @@ import { User } from './User'
 export class Device extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
+	@Column({ type: 'varchar' })
+	fcmToken: string
+
+	@Column({ type: 'varchar' })
+	uuid: string
+
 	@Column({ type: 'boolean' })
 	isDevice: boolean
 

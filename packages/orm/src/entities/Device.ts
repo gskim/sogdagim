@@ -16,11 +16,11 @@ import { User } from './User'
 export class Device extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
-	@Column({ type: 'varchar' })
-	fcmToken: string
+	@Column({ type: 'varchar', length: 255, nullable: true })
+	fcmToken: string | null
 
 	@Index()
-	@Column({ type: 'varchar' })
+	@Column({ type: 'varchar', length: 36, nullable: false })
 	uuid: string
 
 	@Column({ type: 'boolean' })

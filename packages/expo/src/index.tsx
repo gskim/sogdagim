@@ -15,6 +15,7 @@ import { AppearanceProvider } from 'react-native-appearance'
 import 'react-native-gesture-handler'
 import { DefaultTheme as PaperDefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { v4 } from 'react-native-uuid'
 import { AppLoading } from './components/AppLoading'
 import { SplashImage } from './components/SplashImage'
 import theme from './theme.json'
@@ -39,6 +40,7 @@ const paperTheme = {
 	}
 }
 const NAVIGATION_PERSISTENCE_KEY = 'NAVIGATION_STATE'
+const DEVICE_UUID = 'DEVICE_UUID'
 const cacheImages = (images: any[]) =>
 	images.map((image) => {
 	if (typeof image === 'string') {
@@ -64,22 +66,20 @@ const App = () => {
 	React.useEffect(() => {
 		const restoreState = async () => {
 			const initialUrl = await Linking.getInitialURL()
-			  console.log('initalUrl', initialUrl)
-				console.log('device')
-				console.log(Device)
-				await deviceFetcher.postDevice(Device as ExpoDevice)
-			  if (Platform.OS !== 'web' || initialUrl === null) {
-				const savedState = await AsyncStorage.getItem(
-				  NAVIGATION_PERSISTENCE_KEY
-				)
-
+			if (Platform.OS !== 'web' || initialUrl === null) {
+				let uuid = await AsyncStorage.getItem(DEVICE_UUID)
+				if (!uuid) {
+					uuid = v4()
+					await AsyncStorage.setItem(DEVICE_UUID, uuid)
+				}
+				await deviceFetcher.postDevice(Device as ExpoDevice, uuid)
+				const savedState = await AsyncStorage.getItem(NAVIGATION_PERSISTENCE_KEY)
 				const state = savedState ? JSON.parse(savedState) : undefined
-
 				if (state !== undefined) {
-				  setInitialState(state)
+					setInitialState(state)
 				}
 			}
-		  }
+		}
 		// Fetch the token from storage then navigate to our appropriate place
 		restoreState()
 	}, [])
@@ -95,10 +95,7 @@ const App = () => {
 				<NavigationContainer
 					initialState={initialState}
 					onStateChange={(state) =>
-					AsyncStorage.setItem(
-						NAVIGATION_PERSISTENCE_KEY,
-						JSON.stringify(state)
-					)
+					AsyncStorage.setItem(NAVIGATION_PERSISTENCE_KEY, JSON.stringify(state))
 					}
 					theme={DefaultTheme}
 				>

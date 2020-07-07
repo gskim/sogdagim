@@ -102,9 +102,6 @@ export const MainStackScreen = () => {
 export const RootStackNavigator = () => {
 	  const [state, dispatch] = React.useReducer(
 		(prevState: any, action: any) => {
-			console.log('========')
-			console.log(prevState)
-			console.log(action)
 			switch (action.type) {
 			case 'RESTORE_TOKEN':
 				return {
@@ -167,12 +164,8 @@ export const RootStackNavigator = () => {
 		// Fetch the token from storage then navigate to our appropriate place
 		const bootstrapAsync = async () => {
 			let userToken
-
 			try {
 				userToken = await AsyncStorage.getItem('userToken')
-
-				console.log('++++++++')
-				console.log(userToken)
 			} catch (e) {
 			// Restoring token failed
 			} finally {

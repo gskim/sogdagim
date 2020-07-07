@@ -8,6 +8,7 @@ import { User } from '@sogdagim/orm'
 import { CurrentUser, JwtAuthGuard } from '../CustomDecorator'
 
 @Controller()
+@UseGuards(JwtAuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 @SerializeOptions({ excludeExtraneousValues: true })
 export class PostController {
@@ -21,7 +22,6 @@ export class PostController {
 		return plainToClass(GetPostsResponse, { posts: posts })
 	}
 
-	@UseGuards(JwtAuthGuard)
 	@Post('/posts')
 	async addPost(@Body() params: PostPostsRequest, @CurrentUser() currentUser: User): Promise<PostPostsResponse> {
 		const post = await this.postService.addPost(params.title, params.text, params.status, currentUser)
@@ -34,7 +34,6 @@ export class PostController {
 		return plainToClass(GetPostsDetailResponse, { data: post })
 	}
 
-	@UseGuards(JwtAuthGuard)
 	@Put('/posts/:id')
 	async modifyPost(@Param('id') id: number, @Body() params: PutPostsDetailRequest, @CurrentUser() currentUser: User): Promise<PutPostsDetailResponse> {
 		const post = await this.postService.modifyPost(id, params.title, params.text, params.status, currentUser)
@@ -44,11 +43,9 @@ export class PostController {
 	@Get('/posts/:id/replies')
 	async getReplies(@Param('id') id: number): Promise<GetPostsDetailRepliesResponse> {
 		const replies = await this.postService.getReplies(id)
-		console.log(replies)
 		return plainToClass(GetPostsDetailRepliesResponse, { replies: replies })
 	}
 
-	@UseGuards(JwtAuthGuard)
 	@Post('/posts/:id/replies')
 	async addReply(
 	@Param('id') id: number,

@@ -7,8 +7,10 @@ import { Device } from '@sogdagim/orm'
 @UseInterceptors(ClassSerializerInterceptor)
 @SerializeOptions({ excludeExtraneousValues: true })
 export class DeviceController {
+
 	@Inject()
 	private readonly deviceService: DeviceService
+
 	@Post('/devices')
 	async addDevice(@Body() params: PostDevicesRequest): Promise<PostDevicesResponse> {
 		const device = await this.deviceService.findDevice(params.uuid)

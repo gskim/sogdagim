@@ -1,4 +1,4 @@
-import { GetPostsDetailRepliesResponse, GetPostsResponse } from '@sogdagim/model/models/admin'
+import { GetAdminPostsDetailRepliesResponse, GetAdminPostsResponse } from '@sogdagim/model'
 import { LayoutType, PageComponent } from '@src/@types'
 import Reply from '@src/components/Reply'
 import ReplyEditor from '@src/components/ReplyEditor'
@@ -11,7 +11,7 @@ const postFetcher = new PostFetcher()
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-const Replies: PageComponent<GetPostsDetailRepliesResponse & { id: number }> = (props) => {
+const Replies: PageComponent<GetAdminPostsDetailRepliesResponse & { id: number }> = (props) => {
 
 	const router = useRouter()
 	const [value, setValue] = useState('')

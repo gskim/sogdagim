@@ -3,7 +3,7 @@ import { LayoutType, PageComponent } from '@src/@types'
 import PostFetcher from '@src/fetchers/post'
 import { Button, Col, Divider, Form, Input, Row, Select, Table, Tooltip, Typography } from 'antd'
 
-import { PostStatus } from '@sogdagim/model/models'
+import { PostStatus } from '@sogdagim/model'
 import { NextPageContext } from 'next'
 import React from 'react'
 import styled from 'styled-components'

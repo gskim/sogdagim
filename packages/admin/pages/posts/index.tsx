@@ -1,4 +1,4 @@
-import { GetPostsResponse } from '@sogdagim/model/models/admin'
+import { GetAdminPostsResponse } from '@sogdagim/model'
 import { LayoutType, PageComponent } from '@src/@types'
 import PostFetcher from '@src/fetchers/post'
 import { Button, Col, Divider, Row, Table } from 'antd'
@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-const Posts: PageComponent<GetPostsResponse> = ({ posts }) => {
+const Posts: PageComponent<GetAdminPostsResponse> = ({ posts }) => {
 
 	const columns = [
 		{ title: 'Id', dataIndex: 'id', key: 'id', render: (id) => <Link href='posts/[id]' as={`posts/${id}`} ><a>{id}</a></Link> },

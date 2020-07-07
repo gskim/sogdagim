@@ -3,19 +3,23 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	Index,
 	ManyToOne,
 	PrimaryGeneratedColumn,
+	Unique,
 	UpdateDateColumn
 } from 'typeorm'
 import { User } from './User'
 
 @Entity()
+@Unique('uuid', ['uuid'])
 export class Device extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
 	@Column({ type: 'varchar' })
 	fcmToken: string
 
+	@Index()
 	@Column({ type: 'varchar' })
 	uuid: string
 

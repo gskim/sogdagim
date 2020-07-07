@@ -1,4 +1,4 @@
-import { CommonUser } from '@sogdagim/model/models/admin'
+import { AdminCommonUser } from '@sogdagim/model'
 import { LayoutType, PageComponent } from '@src/@types'
 import UserFetcher from '@src/fetchers/user'
 import { Button, Col, Divider, Row, Table, Typography } from 'antd'
@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
+const Users: PageComponent<{users: AdminCommonUser[]}> = ({ users }) => {
 
 	const columns = [
 		{ title: 'Id', dataIndex: 'id', key: 'id', render: (id) => <Link href='users/[id]' as={`users/${id}`} ><a>{id}</a></Link> },
@@ -54,7 +54,7 @@ const Users: PageComponent<{users: CommonUser[]}> = ({ users }) => {
 
 Users.getInitialProps = async (context: NextPageContext) => {
 	userFetcher.setContext(context)
-	const users: CommonUser[] = await userFetcher.getUsers()
+	const users: AdminCommonUser[] = await userFetcher.getUsers()
 	return { users }
 }
 

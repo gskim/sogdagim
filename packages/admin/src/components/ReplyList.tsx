@@ -1,8 +1,8 @@
-import { ReplyItem } from '@sogdagim/model/models'
+import { AdminReplyItem } from '@sogdagim/model'
 import { List } from 'antd'
 import { FC } from 'react'
 import Reply from './Reply'
-const ReplyList: FC<{ replies: ReplyItem[], visibleHeader: boolean }> = ({ replies, visibleHeader }) => (
+const ReplyList: FC<{ replies: AdminReplyItem[], visibleHeader: boolean }> = ({ replies, visibleHeader }) => (
 	<List
 	  dataSource={replies}
 	  header={visibleHeader ? `${replies.length} ${replies.length > 1 ? 'replies' : 'reply'}`: undefined}

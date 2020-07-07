@@ -1,5 +1,5 @@
 import { QuestionCircleOutlined } from '@ant-design/icons'
-import { Gender } from '@sogdagim/model/models'
+import { Gender } from '@sogdagim/model'
 import { LayoutType, PageComponent } from '@src/@types'
 import UserFetcher from '@src/fetchers/user'
 import { Button, Checkbox, Col, Divider, Form, Input, Row, Select, Table, Tooltip, Typography } from 'antd'

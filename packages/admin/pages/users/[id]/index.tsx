@@ -1,5 +1,5 @@
 import { QuestionCircleOutlined } from '@ant-design/icons'
-import { Gender, GetUsersDetailResponse } from '@sogdagim/model/models'
+import { Gender, GetAdminUsersDetailResponse } from '@sogdagim/model'
 import { LayoutType, PageComponent } from '@src/@types'
 import UserFetcher from '@src/fetchers/user'
 import { Button, Col, Divider, Form, Input, Row, Select, Table, Tooltip, Typography } from 'antd'
@@ -12,7 +12,7 @@ import styled from 'styled-components'
 const userFetcher = new UserFetcher()
 const { Option } = Select
 
-const UserEdit: PageComponent<GetUsersDetailResponse> = (props) => {
+const UserEdit: PageComponent<GetAdminUsersDetailResponse> = (props) => {
 
 	const formItemLayout = {
 		labelCol: { span: 6 },

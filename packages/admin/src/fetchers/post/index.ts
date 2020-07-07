@@ -1,42 +1,44 @@
-import { GetPostsDetailRepliesResponse, GetPostsDetailResponse, GetPostsResponse, PostPostsDetailReplyRequest, PostPostsDetailReplyResponse, PostPostsRequest,
-	PostPostsResponse, PutPostsDetailRequest, PutPostsDetailResponse
- } from '@sogdagim/model/models'
+import { GetAdminPostsDetailRepliesResponse, GetAdminPostsDetailResponse, GetAdminPostsResponse,
+	PostAdminPostsDetailReplyRequest, PostAdminPostsDetailReplyResponse,
+	PostAdminPostsRequest,
+	PostAdminPostsResponse, PutAdminPostsDetailRequest, PutAdminPostsDetailResponse
+ } from '@sogdagim/model'
 import Api from '../api'
 
 export default class PostFetcher extends Api {
-	async getPosts(): Promise<GetPostsResponse> {
+	async getPosts(): Promise<GetAdminPostsResponse> {
 		const url = `/posts`
-		const res: GetPostsResponse = await this.get(url, {})
+		const res: GetAdminPostsResponse = await this.get(url, {})
 		return res
 	}
 
-	async addPost(params: PostPostsRequest): Promise<PostPostsResponse> {
+	async addPost(params: PostAdminPostsRequest): Promise<PostAdminPostsResponse> {
 		const url = `/posts`
-		const res: PostPostsResponse = await this.post(url, params)
+		const res: PostAdminPostsResponse = await this.post(url, params)
 		return res
 	}
 
-	async getPost(id: number): Promise<GetPostsDetailResponse> {
+	async getPost(id: number): Promise<GetAdminPostsDetailResponse> {
 		const url = `/posts/${id}`
-		const res: GetPostsDetailResponse = await this.get(url, {})
+		const res: GetAdminPostsDetailResponse = await this.get(url, {})
 		return res
 	}
 
-	async modifyPost(id: number, params: PutPostsDetailRequest): Promise<PutPostsDetailResponse> {
+	async modifyPost(id: number, params: PutAdminPostsDetailRequest): Promise<PutAdminPostsDetailResponse> {
 		const url = `/posts/${id}`
-		const res: PutPostsDetailResponse = await this.put(url, params)
+		const res: PutAdminPostsDetailResponse = await this.put(url, params)
 		return res
 	}
 
-	async addReply(id: number, params: PostPostsDetailReplyRequest): Promise<PostPostsDetailReplyResponse> {
+	async addReply(id: number, params: PostAdminPostsDetailReplyRequest): Promise<PostAdminPostsDetailReplyResponse> {
 		const url = `/posts/${id}/replies`
-		const res: PostPostsDetailReplyResponse = await this.post(url, params)
+		const res: PostAdminPostsDetailReplyResponse = await this.post(url, params)
 		return res
 	}
 
-	async getReplies(id: number): Promise<GetPostsDetailRepliesResponse> {
+	async getReplies(id: number): Promise<GetAdminPostsDetailRepliesResponse> {
 		const url = `/posts/${id}/replies`
-		const res: GetPostsDetailRepliesResponse = await this.get(url, {})
+		const res: GetAdminPostsDetailRepliesResponse = await this.get(url, {})
 		return res
 	}
 }

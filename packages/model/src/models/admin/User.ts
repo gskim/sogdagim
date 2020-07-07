@@ -2,7 +2,7 @@ import { Expose, Type } from 'class-transformer'
 import { IsDefined, IsEmail, IsEnum, IsString, Length } from 'class-validator'
 import { Gender } from '../Common'
 
-export class CommonAdminUser {
+export class AdminCommonUser {
 	@Expose()
 	id: number
 	@Expose()
@@ -25,8 +25,8 @@ export class CommonAdminUser {
 
 export class GetAdminUsersResponse {
 	@Expose()
-	@Type(() => CommonAdminUser)
-	users: CommonAdminUser[]
+	@Type(() => AdminCommonUser)
+	users: AdminCommonUser[]
 }
 
 export class PostAdminUsersRequest {
@@ -64,8 +64,8 @@ export class PostAdminUsersResponse {
 
 export class GetAdminUsersDetailResponse {
 	@Expose()
-	@Type(() => CommonAdminUser)
-	data: CommonAdminUser
+	@Type(() => AdminCommonUser)
+	data: AdminCommonUser
 }
 
 export class PutAdminUsersDetailRequest {
@@ -95,6 +95,6 @@ export class PutAdminUsersDetailRequest {
 
 export class PutAdminUsersDetailResponse {
 	@Expose()
-	@Type(() => CommonAdminUser)
-	data: CommonAdminUser
+	@Type(() => AdminCommonUser)
+	data: AdminCommonUser
 }

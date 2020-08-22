@@ -29,9 +29,6 @@ export class Message extends BaseEntity {
 	@Column({ type: 'boolean', default: false })
 	isRead: boolean
 
-	@Column({ type: 'boolean', default: false })
-	sendSuccess: boolean
-
 	@Index({ unique: true })
 	@Column()
 	orderId: number

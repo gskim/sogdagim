@@ -61,7 +61,7 @@
     "tslint": "6.1.1",
     "tslint-eslint-rules": "5.4.0",
     "@expo/webpack-config": "^0.11.19",
-    "typescript": "3.7.5"
+    "typescript": "4.0.2"
   },
   "private": true
 }

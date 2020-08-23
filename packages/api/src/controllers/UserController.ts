@@ -37,4 +37,9 @@ export class UserController {
 			id: addedUser.id
 		}
 	}
+
+	@Get('/users/chats')
+	async myChats() {
+
+	}
 }

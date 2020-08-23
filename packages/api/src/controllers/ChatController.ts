@@ -12,10 +12,9 @@ import { CurrentUser, JwtAuthGuard } from '../CustomDecorator'
 export class ChatController {
 	@Inject() private readonly chatService: ChatService
 
-	@Get()
+	@Get('/chats')
 	async getAllChat() {
 		const chats = await this.chatService.getOpenChats()
 		return plainToClass(GetChatsResponse, { chats: chats })
-
 	}
 }

@@ -1,8 +1,8 @@
 import { Expose, Type } from 'class-transformer'
-import { IsDefined, IsEnum, IsNumber, IsString } from 'class-validator'
-import { PostStatus } from '../Common'
+import { IsDefined, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
+import { ChatType, PostStatus } from '../Common'
 
-export class OpenChatItem {
+export class SimpleChatItem {
 	@Expose()
 	id: number
 
@@ -10,18 +10,52 @@ export class OpenChatItem {
 	name: string
 
 	@Expose()
+	description: string
+
+	@Expose()
+	type: string
+
+	@Expose()
 	userCnt: number
 
 	@Expose()
-	maxUserCnt: number
+	maxPersons: number
 }
 
 export class GetChatsResponse {
 	@Expose()
-	@Type(() => OpenChatItem)
-	chats: OpenChatItem[]
+	@Type(() => SimpleChatItem)
+	chats: SimpleChatItem[]
 }
 
 export class GetChatsRequest {
 
+}
+
+export class PostChatsRequest {
+	@IsDefined()
+	@IsString()
+	name: string
+
+	@IsDefined()
+	@IsString()
+	description: string
+
+	@IsDefined()
+	@IsEnum(ChatType)
+	type: ChatType
+
+	@IsDefined()
+	@IsNumber()
+	maxPersons: number
+
+	@IsOptional()
+	@IsString()
+	password?: string
+}
+
+export class PostChatsResponse {
+	@Expose()
+	@Type(() => SimpleChatItem)
+	data: SimpleChatItem
 }

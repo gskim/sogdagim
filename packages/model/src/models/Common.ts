@@ -1,3 +1,5 @@
+import { Expose } from 'class-transformer'
+
 // tslint:disable:variable-name
 export class BaseModel<T, I> {
 	success: boolean

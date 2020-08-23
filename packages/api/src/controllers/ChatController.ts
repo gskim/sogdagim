@@ -1,7 +1,7 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Inject, Param, Post, Req, SerializeOptions,
+import { Body, ClassSerializerInterceptor, Controller, Get, Inject, Param, Post, Put, Req, SerializeOptions,
 	UseGuards, UseInterceptors } from '@nestjs/common'
 import { ChatService } from '@services/ChatService'
-import { plainToClass, GetChatsResponse } from '@sogdagim/model'
+import { plainToClass, GetChatsResponse, PostChatsRequest, PostChatsResponse } from '@sogdagim/model'
 import { User } from '@sogdagim/orm'
 import { CurrentUser, JwtAuthGuard } from '../CustomDecorator'
 
@@ -13,8 +13,15 @@ export class ChatController {
 	@Inject() private readonly chatService: ChatService
 
 	@Get('/chats')
-	async getAllChat() {
+	async getAllChats() {
 		const chats = await this.chatService.getOpenChats()
 		return plainToClass(GetChatsResponse, { chats: chats })
 	}
+
+	@Post('/chats')
+	async createChat(@Body() body: PostChatsRequest, @CurrentUser() currentUser: User) {
+		const chat = await this.chatService.createChat(body.name, body.description, currentUser, body.type, body.maxPersons, body.password)
+		return plainToClass(PostChatsResponse, { data: chat })
+	}
+
 }

@@ -1,4 +1,5 @@
 import {
+	ConnectedSocket,
 	MessageBody,
 	OnGatewayConnection,
 	OnGatewayDisconnect,
@@ -26,10 +27,21 @@ import {
 		console.log('con')
 	}
 
+	@SubscribeMessage('createChat')
+	createChat(@MessageBody() data: any, client: Socket) {
+		client.join(data, (err) => {
+			if (err) console.error(err)
+		})
+	}
+
 	@SubscribeMessage('aa')
-	findAll(@MessageBody() data: any): Observable<WsResponse<number>> {
+	findAll(@MessageBody() data: any, @ConnectedSocket() client: Socket): Observable<WsResponse<number>> {
+		client.join('', (err) => {
+
+		})
+		client.to('aRoom').emit('roomCreated', { room: 'aRoom' })
 		console.log(data)
-		return from([1, 2, 3]).pipe(map((item) => ({ event: 'aa', data: item })))
+		return from([1, 2, 3]).pipe(map((item) => ({ event: 'cc', data: item })))
 	}
 
 	@SubscribeMessage('bb')
@@ -37,5 +49,12 @@ import {
 		console.log('bb')
 		console.log(data)
 		return data
+	}
+
+	@SubscribeMessage('cc')
+	cc(@MessageBody() data: number): WsResponse {
+		console.log('cc')
+		console.log(data)
+		return { event: '', data: '' }
 	}
 }

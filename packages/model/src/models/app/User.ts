@@ -1,6 +1,7 @@
 import { Expose, Type } from 'class-transformer'
 import { IsDefined, IsEmail, IsEnum, IsString, Length } from 'class-validator'
 import { Gender } from '../Common'
+import { SimpleChatItem } from './Chat'
 
 export class CommonUser {
 	@Expose()
@@ -27,6 +28,12 @@ export class GetUsersResponse {
 	@Expose()
 	@Type(() => CommonUser)
 	users: CommonUser[]
+}
+
+export class GetUsersChatsResponse {
+	@Expose()
+	@Type(() => SimpleChatItem)
+	chats: SimpleChatItem[]
 }
 
 export class PostUsersRequest {

@@ -39,7 +39,8 @@
     "passport-jwt": "4.0.0",
     "passport-local": "1.0.0",
     "crypto": "1.0.1",
-    "crypto-js": "4.0.0"
+    "crypto-js": "4.0.0",
+    "typeorm-transactional-cls-hooked": "0.1.12"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",

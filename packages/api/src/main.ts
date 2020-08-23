@@ -6,6 +6,7 @@ import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { ExpressAdapter } from '@nestjs/platform-express'
 import express from 'express'
+import { initializeTransactionalContext, patchTypeORMRepositoryWithBaseRepository } from 'typeorm-transactional-cls-hooked'
 import { RedisIoAdapter } from './adapters/RedisIoAdapter'
 import { AppModule } from './AppModule'
 
@@ -16,6 +17,8 @@ app.use(express.urlencoded({ extended: true, limit: '30mb' }))
 app.disable('x-powered-by')
 
 async function bootstrap() {
+  initializeTransactionalContext()
+	patchTypeORMRepositoryWithBaseRepository()
   const nestApp = await NestFactory.create(AppModule, new ExpressAdapter(app))
   nestApp.useWebSocketAdapter(new RedisIoAdapter(nestApp))
   nestApp.enableCors()

@@ -40,4 +40,9 @@ export class ChatController {
 		}
 	}
 
+	@Get('/chats/:id(\\d+)/messages')
+	async getMessages(@Param('id') id: number, @CurrentUser() currentUser: User) {
+
+	}
+
 }

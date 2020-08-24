@@ -1,15 +1,15 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { ChatRepository } from '@repositories/ChatRepository'
+import { MessageRepository } from '@repositories/MessageRepository'
 import { UserRepository } from '@repositories/UserRepository'
-
-import { Chat, ChatType, In, Like, Not, Post, Unlike, User } from '@sogdagim/orm'
+import { Chat, ChatType, In, Message, Not, User } from '@sogdagim/orm'
 
 @Injectable()
 export class ChatService {
 
 	@InjectRepository(Chat) private readonly chatRepository: ChatRepository
+	@InjectRepository(Message) private readonly messageRepository: MessageRepository
 	@InjectRepository(User) private readonly userRepository: UserRepository
 
 	async createChat(name: string, description: string, user: User, type: ChatType, maxPersons: number,
@@ -69,6 +69,10 @@ export class ChatService {
 			return user.chats
 		}
 		return []
+	}
+
+	async getMessages(chatId: number, currentUser: User) {
+		this.messageRepository.createQueryBuilder()
 	}
 
 }

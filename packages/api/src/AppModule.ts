@@ -10,6 +10,7 @@ import { PassportModule } from '@nestjs/passport'
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { ChatRepository } from '@repositories/ChatRepository'
 import { DeviceRepository } from '@repositories/DeviceRepository'
+import { MessageRepository } from '@repositories/MessageRepository'
 import { PostOrderSequenceRepository } from '@repositories/PostOrderSequenceRepository'
 import { PostRepository } from '@repositories/PostRepository'
 import { UserRepository } from '@repositories/UserRepository'
@@ -42,7 +43,7 @@ import { jwtConstants } from './Constants'
 		,Notification, NotificationOrderSequence, Post, PostMapping
 		, PostOrderSequence, Unlike, User, Verification,
 		UserRepository, PostRepository, PostOrderSequenceRepository,
-		DeviceRepository, ChatRepository
+		DeviceRepository, ChatRepository, MessageRepository
 		])
 	],
 	controllers: [

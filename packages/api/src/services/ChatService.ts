@@ -24,8 +24,36 @@ export class ChatService {
 		return await this.chatRepository.save(chat)
 	}
 
+	async entranceChat(chatId: number, user: User, password?: string) {
+		try {
+			const type = password ? ChatType.PRIVATE : ChatType.PUBLIC
+			const chat = await this.chatRepository.findOne(chatId,
+				{ relations: ['users'] })
+			if (!chat) throw new NotFoundException('존재하지않는 채팅방 입니다')
+			if (chat.users.length === chat.maxPersons) throw new NotFoundException('인원이 가득 찾습니다.')
+			await this.chatRepository.save(chat)
+			return true
+		} catch (error) {
+			return false
+		}
+	}
+
+	async exitChat(chatId: number, currentUser: User) {
+		try {
+			const chat = await this.chatRepository.findOne(chatId,
+				{ relations: ['users'] })
+			if (!chat) throw new NotFoundException('존재하지않는 채팅방 입니다')
+			chat.users = chat.users.filter((user) => user.id !== currentUser.id)
+			await this.chatRepository.save(chat)
+			return true
+		} catch (error) {
+			return false
+		}
+	}
+
 	async getOpenChats() {
 		return await this.chatRepository.find({
+			loadRelationIds: { relations: ['users'] },
 			where: {
 				type: Not(In([ChatType.RANDOM, ChatType.CLOSE]))
 			}

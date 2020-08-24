@@ -27,9 +27,9 @@ import {
 		console.log('con')
 	}
 
-	@SubscribeMessage('createChat')
-	createChat(@MessageBody() data: any, client: Socket) {
-		client.join(data, (err) => {
+	@SubscribeMessage('joinChat')
+	joinChat(@MessageBody() data: any, @ConnectedSocket() client: Socket) {
+		client.join(data.chatId, (err) => {
 			if (err) console.error(err)
 		})
 	}

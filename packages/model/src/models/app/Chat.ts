@@ -59,3 +59,15 @@ export class PostChatsResponse {
 	@Type(() => SimpleChatItem)
 	data: SimpleChatItem
 }
+
+export class PutChatsEntranceRequest {
+	@IsOptional()
+	@IsString()
+	password?: string
+}
+
+export class PutChatsEntranceResponse {
+	data: {
+		success: boolean
+	}
+}

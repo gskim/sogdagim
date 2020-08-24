@@ -28,7 +28,7 @@ import { Chat, Device, Image, Like, Message, MessageOrderSequence
 import connectionOptions from '@sogdagim/orm/ormConfig'
 import 'module-alias/register'
 import path from 'path'
-import { IndexGateway } from './gateways/IndexGateway'
+import { ChatGateway } from './gateways/ChatGateway'
 import { jwtConstants } from './Constants'
 
 @Module({
@@ -52,7 +52,7 @@ import { jwtConstants } from './Constants'
 	],
 	providers: [
 	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy, PostService,
-	IndexGateway, DeviceService, ChatService
+	ChatGateway, DeviceService, ChatService
 	]
 })
 class AllModule {

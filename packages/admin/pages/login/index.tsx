@@ -8,7 +8,19 @@ import styled from 'styled-components'
 const authFetcher = new AuthFetcher()
 
 const Login = (props) => {
+
 	const socket = useContext(SocketContext)
+
+	socket.on('sendMessage', (data) => {
+		console.log('sendMessage')
+		console.log(data)
+	})
+
+	socket.on('receiveMessage', (data) => {
+		console.log('receiveMessage')
+		console.log(data)
+	})
+
 	const formItemLayout = {
 		labelCol: { span: 6 },
 		wrapperCol: { span: 12 }
@@ -22,7 +34,7 @@ const Login = (props) => {
 	const [form] = Form.useForm()
 	const onFinish = async (values: LoginParams) => {
 		await authFetcher.login(values)
-	  }
+	}
 
 	return (
 		<LoginWrap>
@@ -36,7 +48,7 @@ const Login = (props) => {
 			initialValues={{}}
 			scrollToFirstError
 			>
-<Form.Item
+			<Form.Item
 				name='email'
 				label='E-mail'
 				rules={[
@@ -70,6 +82,18 @@ const Login = (props) => {
 				<Button type='primary' htmlType='submit'>
 					Login
 				</Button>
+				<Button type='primary' onClick={() => {
+				const a = socket.emit('joinChat', { chatId: 1, userId: 2,
+						headers: {
+						authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjZXNzVG9rZW4iOiJhMGRmNTZjMzEwZDE2YjY2YTE4NWUyMzU5YzZjMmMzYWNiOTNhZWFjIiwiaWF0IjoxNTk4MjU0MTk0fQ.6RJ41n00bDl2lAK-hERvVpW03RWxCePbfogZpKkpr6E'} })
+					console.log(a)
+				}}>
+					JoinChat
+				</Button>
+				<Button type='primary' onClick={() => {socket.emit('sendMessage', { chatId: 1 })}}>
+					SendMessage
+				</Button>
+
 				</Form.Item>
 			</Form>
 		</LoginWrap>

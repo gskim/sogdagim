@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { ChatRepository } from '@repositories/ChatRepository'
 import { MessageRepository } from '@repositories/MessageRepository'
 import { UserRepository } from '@repositories/UserRepository'
-import { Chat, ChatType, In, Message, Not, User } from '@sogdagim/orm'
+import { plainToClass, Chat, ChatType, In, Message, MoreThan, Not, User } from '@sogdagim/orm'
 
 @Injectable()
 export class ChatService {
@@ -11,6 +11,14 @@ export class ChatService {
 	@InjectRepository(Chat) private readonly chatRepository: ChatRepository
 	@InjectRepository(Message) private readonly messageRepository: MessageRepository
 	@InjectRepository(User) private readonly userRepository: UserRepository
+
+	async getChatInfo(chatId: number) {
+		const chat = await this.chatRepository.findOne(chatId, {
+			relations: ['users']
+		})
+		if (!chat) throw new NotFoundException('존재하지않는 채팅방 입니다')
+		return chat
+	}
 
 	async createChat(name: string, description: string, user: User, type: ChatType, maxPersons: number,
 		password?: string) {
@@ -26,15 +34,19 @@ export class ChatService {
 
 	async entranceChat(chatId: number, user: User, password?: string) {
 		try {
-			const type = password ? ChatType.PRIVATE : ChatType.PUBLIC
 			const chat = await this.chatRepository.findOne(chatId,
 				{ relations: ['users'] })
 			if (!chat) throw new NotFoundException('존재하지않는 채팅방 입니다')
-			if (chat.users.length === chat.maxPersons) throw new NotFoundException('인원이 가득 찾습니다.')
+			if (chat.users.length === chat.maxPersons) throw new NotFoundException('인원이 가득 찾습니다')
+			if (chat.type === ChatType.PRIVATE) {
+				if (!password) throw new BadRequestException('비밀번호를 입력해주세요')
+				if (chat.password !== password) throw new BadRequestException('비밀번호가 일치하지 않습니다')
+			}
+			chat.users.push(user)
 			await this.chatRepository.save(chat)
 			return true
 		} catch (error) {
-			return false
+			throw error
 		}
 	}
 
@@ -47,16 +59,19 @@ export class ChatService {
 			await this.chatRepository.save(chat)
 			return true
 		} catch (error) {
-			return false
+			throw error
 		}
 	}
 
-	async getOpenChats() {
+	async getOpenChats(lastId: number = 0) {
 		return await this.chatRepository.find({
 			loadRelationIds: { relations: ['users'] },
 			where: {
-				type: Not(In([ChatType.RANDOM, ChatType.CLOSE]))
-			}
+				type: Not(In([ChatType.RANDOM, ChatType.CLOSE])),
+				id: MoreThan(lastId)
+			},
+			order: { id: 'ASC' },
+			take: 30
 		})
 	}
 
@@ -71,8 +86,20 @@ export class ChatService {
 		return []
 	}
 
-	async getMessages(chatId: number, currentUser: User) {
-		this.messageRepository.createQueryBuilder()
+	async getMessages(chatId: number, currentUser: User, lastId?: number) {
+		const query = this.messageRepository.createQueryBuilder('message')
+		.addSelect('message.id', 'id')
+		.addSelect('message.text', 'text')
+		.addSelect('message.isRead', 'isRead')
+		.addSelect('message.isImage', 'isImage')
+		.addSelect('message.createdAt', 'createdAt')
+		.addSelect('user.nickname', 'nickname')
+		.addSelect('user.profilePhoto', 'profilePhoto')
+		.innerJoin('message.user', 'user')
+		.andWhere(`chat_id = ${chatId}`)
+		.limit(30)
+		if (lastId) query.andWhere(`message.id < ${lastId}`)
+		return await query.getRawMany()
+		// return await this.messageRepository.find({ where: { chat: plainToClass(Chat, { id: chatId }) } })
 	}
-
 }

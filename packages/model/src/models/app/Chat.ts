@@ -1,5 +1,7 @@
-import { Expose, Type } from 'class-transformer'
+import { Expose, Transform, Type } from 'class-transformer'
 import { IsDefined, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
+import moment from 'moment'
+import 'moment/locale/ko'
 import { ChatType, PostStatus } from '../Common'
 
 export class SimpleChatItem {
@@ -13,10 +15,10 @@ export class SimpleChatItem {
 	description: string
 
 	@Expose()
-	type: string
+	type: ChatType
 
 	@Expose()
-	userCnt: number
+	users: number[]
 
 	@Expose()
 	maxPersons: number
@@ -29,7 +31,9 @@ export class GetChatsResponse {
 }
 
 export class GetChatsRequest {
-
+	@IsOptional()
+	@IsNumber()
+	lastId?: number
 }
 
 export class PostChatsRequest {
@@ -70,4 +74,74 @@ export class PutChatsEntranceResponse {
 	data: {
 		success: boolean
 	}
+}
+
+export class ChatUser {
+	@Expose()
+	id: number
+	@Expose()
+	nickname: string
+	@Expose()
+	profilePhoto?: string
+}
+
+export class ChatDetail {
+	@Expose()
+	name: string
+
+	@Expose()
+	description: string
+
+	@Expose()
+	maxPersons: number
+
+	@Expose()
+	type: ChatType
+
+	@Expose()
+	@Type(() => ChatUser)
+	users: ChatUser[]
+}
+
+export class GetChatsDetailResponse {
+	@Expose()
+	@Type(() => ChatDetail)
+	data: ChatDetail
+}
+
+export class SimpleMessage {
+
+	@Expose()
+	id: number
+
+	@Expose()
+	text: string
+
+	@Expose()
+	isImage: boolean
+
+	@Expose()
+	isRead: boolean
+
+	@Expose()
+	@Transform((v: Date) => moment(v).fromNow(), { toClassOnly: true })
+	createdAt: string
+
+	@Expose()
+	nickname: string
+
+	@Expose()
+	profilePhoto: string | null
+}
+
+export class GetChatsMessagesRequest {
+	@IsOptional()
+	@IsNumber()
+	lastId?: number
+}
+
+export class GetChatsMessagesResponse {
+	@Expose()
+	@Type(() => SimpleMessage)
+	messages: SimpleMessage[]
 }

@@ -21,7 +21,6 @@ function MyApp ({ Component, pageProps, layoutType, myInfo, router }: AppProps &
 	}, [])
 
 	return (
-
 		<>
 			<NextHead>
 				<title>속닥임 어드민</title>

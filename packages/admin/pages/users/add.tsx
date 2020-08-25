@@ -4,6 +4,7 @@ import { LayoutType, PageComponent } from '@src/@types'
 import UserFetcher from '@src/fetchers/user'
 import { Button, Checkbox, Col, Divider, Form, Input, Row, Select, Table, Tooltip, Typography } from 'antd'
 import { NextPageContext } from 'next'
+import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -11,6 +12,7 @@ const userFetcher = new UserFetcher()
 const { Option } = Select
 
 const UserAdd: PageComponent = (props) => {
+	const router = useRouter()
 	const formItemLayout = {
 		labelCol: { span: 6 },
 		wrapperCol: { span: 12 }
@@ -23,8 +25,9 @@ const UserAdd: PageComponent = (props) => {
 	}
 	const [form] = Form.useForm()
 	const onFinish = async (values) => {
-		await userFetcher.addUser(values)
-	  }
+		const { id } = await userFetcher.addUser(values)
+		router.push(`/users/${id}`)
+	}
 	return (
 		<>
 		<Divider orientation='left' style={{ color: '#333', fontWeight: 'normal' }}>

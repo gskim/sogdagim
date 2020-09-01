@@ -74,6 +74,10 @@ export class AdminChatUser {
 }
 
 export class AdminChatDetail {
+
+	@Expose()
+	id: number
+
 	@Expose()
 	name: string
 
@@ -95,4 +99,56 @@ export class GetAdminChatsDetailResponse {
 	@Expose()
 	@Type(() => AdminChatDetail)
 	data: AdminChatDetail
+}
+
+export class PostAdminChatsUserRequest {
+	@IsDefined()
+	@IsNumber()
+	userId: number
+}
+
+export class PostAdminChatsUserResponse {
+	@Expose()
+	@Type(() => AdminChatUser)
+	users: AdminChatUser[]
+}
+
+export class AdminSimpleMessage {
+
+	@Expose()
+	id: number
+
+	@Expose()
+	text: string
+
+	@Expose()
+	isImage: boolean
+
+	@Expose()
+	isRead: boolean
+
+	@Expose()
+	@Transform((v: Date) => moment(v).fromNow(), { toClassOnly: true })
+	createdAt: string
+
+	@Expose()
+	userId: number
+
+	@Expose()
+	nickname: string
+
+	@Expose()
+	profilePhoto: string | null
+}
+
+export class GetAdminChatsMessagesRequest {
+	@IsOptional()
+	@IsNumber()
+	lastId?: number
+}
+
+export class GetAdminChatsMessagesResponse {
+	@Expose()
+	@Type(() => AdminSimpleMessage)
+	messages: AdminSimpleMessage[]
 }

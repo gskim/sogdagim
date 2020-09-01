@@ -40,6 +40,15 @@ import { CurrentUser, JwtAuthGuard, WsGuard } from '../CustomDecorator'
 		// console.log(socket)
 	}
 
+	@SubscribeMessage('entranceChat')
+	async entranceChat(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
+		console.log('entranceChat', data)
+		socket.join(data.chatId.toString(), async (err) => {
+			if (err) console.error(err)
+			return true
+		})
+	}
+
 	@UseGuards(WsGuard)
 	@SubscribeMessage('joinChat')
 	async joinChat(@MessageBody() data: any, @ConnectedSocket() socket: Socket, @CurrentUser() currentUser: User) {
@@ -62,13 +71,13 @@ import { CurrentUser, JwtAuthGuard, WsGuard } from '../CustomDecorator'
 		return true
 	}
 
+	@UseGuards(WsGuard)
 	@SubscribeMessage('sendMessage')
 	sendMessage(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
 		console.log(data)
-		socket.to(data.chatId.toString()).emit('sendMessage', { room: 'aRoom' })
-		socket.to(data.chatId.toString()).emit('receiveMessage', { room: 'aRoom' })
-
-		// socket.emit('receiveMessage', { a: 1 })
+		// socket.to(data.chatId.toString()).emit('sendMessage', { room: 'aRoom' })
+		socket.to(data.chatId.toString()).emit('receiveMessage', data)
+		return { event: 'sendSuccess', data: data }
 		// return from([1, 2, 3]).pipe(map((item) => ({ event: 'cc', data: item })))
 	}
 

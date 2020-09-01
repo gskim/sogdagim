@@ -6,7 +6,8 @@ import PostFetcher from '@src/fetchers/post'
 import { Avatar, Button, Col, Divider, Form, Input, List, Row, Select, Skeleton, Table, Tooltip, Typography } from 'antd'
 import moment from 'moment'
 import { NextPageContext } from 'next'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 import 'reflect-metadata'
 import styled from 'styled-components'
 
@@ -14,12 +15,14 @@ const chatFetcher = new ChatFetcher()
 const { Option } = Select
 
 const ChatEdit: PageComponent<GetAdminChatsDetailResponse> = (props) => {
-
+	const router = useRouter()
 	const formItemLayout = {
 		labelCol: { span: 6 },
 		wrapperCol: { span: 12 }
 	}
 	const [form] = Form.useForm()
+	const [addUserForm] = Form.useForm()
+	const [users, setUsers] = useState(props.data.users)
 
 	const onFinish = async (values) => {
 		// const res = await postFetcher.modifyPost(props.data.id, values)
@@ -27,6 +30,11 @@ const ChatEdit: PageComponent<GetAdminChatsDetailResponse> = (props) => {
 		// 	...res.data, createdAt: moment(res.data.createdAt).format('YYYY-MM-DD HH:mm:ss') , updatedAt: moment(res.data.updatedAt).format('YYYY-MM-DD HH:mm:ss')
 		// }
 		// form.setFieldsValue(formData)
+	}
+
+	const addUser = async (values) => {
+		const reloadUsers = await chatFetcher.addUser(props.data.id, Number(values.userId))
+		setUsers(reloadUsers.users)
 	}
 
 	return (
@@ -110,16 +118,48 @@ const ChatEdit: PageComponent<GetAdminChatsDetailResponse> = (props) => {
 				</Form.Item>
 			</Form>
 			</Col>
+			<Col span={20}>
+				<Form
+					{...formItemLayout}
+					size='large'
+					form={addUserForm}
+					name='chatUserAdd'
+					onFinish={addUser}
+					scrollToFirstError
+				>
+					<Form.Item
+					name='userId'
+					label='User ID'
+					rules={[
+						{
+						type: 'number',
+						transform: ((v) => Number(v)),
+						required: true,
+						message: 'User ID 는 필수입니다.'
+						}
+					]}
+					hasFeedback
+					>
+					<Input />
+					</Form.Item>
+					<Form.Item label=' ' colon={false}>
+					<Button type='primary' htmlType='submit'>
+						등록
+					</Button>
+				</Form.Item>
+
+				</Form>
+			</Col>
 			<Col span={20} >
 			<List
 				className='chat-user-list'
 				// loading={initLoading}
 				itemLayout='horizontal'
 				// loadMore={loadMore}
-				dataSource={props.data.users}
+				dataSource={users}
 				renderItem={(user) => (
 				<List.Item
-					actions={[<a key='chat-user-entrance'>Entrance</a>, <a key='chat-user-exit'>Exit</a>]}
+					actions={[<a href={`/chats/${props.data.id}/room/${user.id}`} key='chat-user-entrance'>Entrance</a>, <a key='chat-user-exit'>Exit</a>]}
 				>
 					<Skeleton avatar title={false} loading={false} active>
 					<List.Item.Meta

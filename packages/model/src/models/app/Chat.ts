@@ -128,6 +128,9 @@ export class SimpleMessage {
 	createdAt: string
 
 	@Expose()
+	userId: number
+
+	@Expose()
 	nickname: string
 
 	@Expose()

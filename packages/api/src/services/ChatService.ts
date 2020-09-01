@@ -50,6 +50,19 @@ export class ChatService {
 		}
 	}
 
+	async addUser(userId: number, chatId: number) {
+		const chat = await this.chatRepository.findOne(chatId, { relations: ['users'] })
+		if (!chat) throw new NotFoundException('존재하지않는 채팅방 입니다')
+		if (chat.users.length === chat.maxPersons) throw new NotFoundException('인원이 가득 찾습니다')
+		const existUser = chat.users.some((user) => user.id === userId)
+		if (existUser) throw new BadRequestException('이미 추가되어있는 유저입니다.')
+		const user = await this.userRepository.findOne(userId)
+		if (!user) throw new NotFoundException('존재하지않는 유저입니다.')
+		chat.users.push(user)
+		const result = await this.chatRepository.save(chat)
+		return result.users
+	}
+
 	async exitChat(chatId: number, currentUser: User) {
 		try {
 			const chat = await this.chatRepository.findOne(chatId,
@@ -86,13 +99,14 @@ export class ChatService {
 		return []
 	}
 
-	async getMessages(chatId: number, currentUser: User, lastId?: number) {
+	async getMessages(chatId: number, lastId?: number) {
 		const query = this.messageRepository.createQueryBuilder('message')
 		.addSelect('message.id', 'id')
 		.addSelect('message.text', 'text')
 		.addSelect('message.isRead', 'isRead')
 		.addSelect('message.isImage', 'isImage')
 		.addSelect('message.createdAt', 'createdAt')
+		.addSelect('user.id', 'userId')
 		.addSelect('user.nickname', 'nickname')
 		.addSelect('user.profilePhoto', 'profilePhoto')
 		.innerJoin('message.user', 'user')

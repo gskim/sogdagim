@@ -13,7 +13,6 @@ const postFetcher = new PostFetcher()
 const { Option } = Select
 
 const PostEdit: PageComponent<GetPostsDetailResponse> = (props) => {
-
 	const formItemLayout = {
 		labelCol: { span: 6 },
 		wrapperCol: { span: 12 }

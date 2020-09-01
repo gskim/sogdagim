@@ -1,3 +1,4 @@
+import { AdminChatController } from '@controllers/AdminChatController'
 import { AuthController } from '@controllers/AuthController'
 import { ChatController } from '@controllers/ChatController'
 import { DeviceController } from '@controllers/DeviceController'
@@ -48,7 +49,7 @@ import { jwtConstants } from './Constants'
 	],
 	controllers: [
 		IndexController, UserController, AuthController, PostController, DeviceController,
-		ChatController
+		ChatController, AdminChatController
 	],
 	providers: [
 	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy, PostService,

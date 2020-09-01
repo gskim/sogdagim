@@ -48,7 +48,7 @@ export class ChatController {
 
 	@Get('/chats/:id(\\d+)/messages')
 	async getMessages(@Param('id') id: number, @CurrentUser() currentUser: User, @Query() query: GetChatsMessagesRequest) {
-		const messages = await this.chatService.getMessages(id, currentUser, query.lastId)
+		const messages = await this.chatService.getMessages(id, query.lastId)
 		return plainToClass(GetChatsMessagesResponse, { messages: messages })
 	}
 

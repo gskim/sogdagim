@@ -63,7 +63,7 @@ export default class Api {
 
 	private async request(config: RequestConfig, isPublic: boolean = false): Promise<Response> {
 		const isServer = (typeof window === 'undefined')
-		console.log('isServier', isServer)
+		console.log('isServer', isServer)
 		try {
 			if (!isPublic) {
 				config.headers = {

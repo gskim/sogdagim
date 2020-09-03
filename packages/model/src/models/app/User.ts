@@ -11,14 +11,6 @@ export class CommonUser {
 	@Expose()
 	email: string
 	@Expose()
-	gender?: Gender
-	@Expose()
-	birthYear?: number
-	@Expose()
-	birthMonth?: number
-	@Expose()
-	birthDay?: number
-	@Expose()
 	createdAt: Date
 	@Expose()
 	updatedAt: Date
@@ -37,32 +29,9 @@ export class GetUsersChatsResponse {
 }
 
 export class PostUsersRequest {
-	@IsString()
+	@IsEmail()
 	@IsDefined()
 	email: string
-
-	@IsString()
-	@IsDefined()
-	nickname: string
-
-	@IsEnum(Gender)
-	@IsDefined()
-	gender: Gender
-
-	@IsString()
-	@IsDefined()
-	@Length(4, 4)
-	birthYear: string
-
-	@IsString()
-	@IsDefined()
-	@Length(2, 2)
-	birthMonth: string
-
-	@IsString()
-	@IsDefined()
-	@Length(2, 2)
-	birthDay: string
 }
 
 export class PostUsersResponse {

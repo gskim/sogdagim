@@ -30,13 +30,13 @@ export class UserController {
 
 	@Put('/users/:id(\\d+)')
 	async modifyUser(@Param('id') id: number, @Body() params: PutUsersDetailRequest): Promise<PutUsersDetailResponse> {
-		const user = await this.userService.modifyUser(id, params.nickname, params.gender, params.birthYear, params.birthMonth, params.birthDay)
+		const user = await this.userService.modifyUser(id, params.nickname)
 		return plainToClass(PutUsersDetailResponse, { data: user })
 	}
 
 	@Post('/users')
 	async addUser(@Body() params: PostUsersRequest): Promise<PostUsersResponse> {
-		const addedUser = await this.userService.addUser(params.email, params.nickname, params.birthYear, params.birthMonth, params.birthDay, params.gender)
+		const addedUser = await this.userService.addUser(params.email)
 		return {
 			id: addedUser.id
 		}

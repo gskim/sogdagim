@@ -16,6 +16,7 @@ export class UserService {
 		if (existUser) throw new BadRequestException('동일한 이메일이 존재합니다.')
 		const user = this.userRepository.create()
 		user.email = email
+		user.nickname = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)
 		user.password = Crypto.SHA256(password)
 		return await user.save()
 	}
@@ -28,13 +29,9 @@ export class UserService {
 		return await this.userRepository.findOneOrFail(id)
 	}
 
-	async modifyUser(id: number, nickname: string, gender: Gender, birthYear: string, birthMonth: string, birthDay: string) {
+	async modifyUser(id: number, nickname: string) {
 		const user = await this.getUser(id)
 		user.nickname = nickname
-		user.gender = gender
-		user.birthYear = birthYear
-		user.birthMonth = birthMonth
-		user.birthDay = birthDay
 		return await user.save()
 	}
 
@@ -42,16 +39,12 @@ export class UserService {
 		return await this.userRepository.findOneOrFail({ where: { email: email } })
 	}
 
-	async addUser(email: string, nickname: string, birthYear: string, birthMonth: string, birthDay: string, gender: Gender) {
+	async addUser(email: string) {
 		const existUser = await this.userRepository.findOne({ email: email })
 		if (existUser) throw new BadRequestException('동일한 이메일이 존재합니다.')
 		const user = this.userRepository.create()
 		user.email = email
-		user.nickname = nickname
-		user.birthYear = birthYear
-		user.birthMonth = birthMonth
-		user.birthDay = birthDay
-		user.gender = gender
+		user.nickname = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)
 		user.password = Crypto.SHA256(this.PASSWORD)
 		return await this.userRepository.save(user)
 	}

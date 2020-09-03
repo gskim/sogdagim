@@ -46,75 +46,36 @@ const UserEdit: PageComponent<GetAdminUsersDetailResponse> = (props) => {
 				scrollToFirstError
 			>
 				<Form.Item
-				name='email'
-				label='E-mail'
-				rules={[
-					{
-					type: 'email',
-					message: '이메일 형식이 아닙니다.'
-					},
-					{
-					required: true,
-					message: '이메일 입력은 필수입니다.'
-					}
-				]}
-				hasFeedback
+					name='email'
+					label='E-mail'
+					rules={[
+						{
+						type: 'email',
+						message: '이메일 형식이 아닙니다.'
+						},
+						{
+						required: true,
+						message: '이메일 입력은 필수입니다.'
+						}
+					]}
+					hasFeedback
 				>
-				<Input />
+					<Input />
 				</Form.Item>
 
 				<Form.Item
-				name='nickname'
-				label={
-					<span>
-					Nickname&nbsp;
-					<Tooltip title='닉네임을 입력해주세요'>
-						<QuestionCircleOutlined />
-					</Tooltip>
-					</span>
-				}
-				rules={[{ required: true, message: '닉네임 입력은 필수입니다.' }]}
+					name='nickname'
+					label={
+						<span>
+						Nickname&nbsp;
+						<Tooltip title='닉네임을 입력해주세요'>
+							<QuestionCircleOutlined />
+						</Tooltip>
+						</span>
+					}
+					rules={[{ required: true, message: '닉네임 입력은 필수입니다.' }]}
 				>
-				<Input />
-				</Form.Item>
-				<Form.Item
-					label='성별'
-					name='gender'
-					rules={[{ required: true, message: '성별 입력을 필수입니다.' }]}
-				>
-					<Select style={{ width: '100%' }}>
-						<Option value={Gender.Man}>남</Option>
-						<Option value={Gender.Woman}>여</Option>
-					</Select>
-				</Form.Item>
-				<Form.Item label='생년월일' required={true} style={{ marginBottom: 0 }}>
-					<BirthYearInput
-						name='birthYear'
-						rules={[{ required: true, message: '생년을 입력해주세요.' },
-						{ len: 4, message: '4자리로 입력해주세요.' },
-						{ pattern: new RegExp(/^[0-9]*$/), message: '숫자가 아닙니다.' }
-						]}
-					>
-						<Input placeholder='Input birth year' />
-					</BirthYearInput>
-					<BirthMonthInput
-						name='birthMonth'
-						rules={[{ required: true, message: '생월을 입력해주세요.' },
-						{ len: 2, message: '2자리로 입력해주세요.' },
-						{ pattern: new RegExp(/^[0-9]*$/), message: '숫자가 아닙니다.' }
-						]}
-					>
-						<Input placeholder='Input birth month' />
-					</BirthMonthInput>
-					<BirthDayInput
-						name='birthDay'
-						rules={[{ required: true, message: '생일을 입력해주세요' },
-						{ len: 2, message: '2자리로 입력해주세요.' },
-						{ pattern: new RegExp(/^[0-9]*$/), message: '숫자가 아닙니다.' }
-						]}
-					>
-						<Input placeholder='Input birth day' />
-					</BirthDayInput>
+					<Input />
 				</Form.Item>
 				<Form.Item
 					label='등록일'
@@ -150,19 +111,3 @@ UserEdit.getInitialProps = async (context: NextPageContext) => {
 }
 
 export default UserEdit
-
-const BirthYearInput = styled(Form.Item)`
-	display: inline-block;
-	width: calc(31% - 4px);
-`
-
-const BirthMonthInput = styled(Form.Item)`
-	display: inline-block;
-	width: calc(31% - 4px);
-	margin: 0 8px;
-`
-
-const BirthDayInput = styled(Form.Item)`
-	display: inline-block;
-	width: calc(31% - 4px);
-`

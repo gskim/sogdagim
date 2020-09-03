@@ -16,9 +16,8 @@ const Users: PageComponent<{users: AdminCommonUser[]}> = ({ users }) => {
 		{ title: 'Nickname', dataIndex: 'nickname', key: 'nickname' },
 		{ title: 'Email', dataIndex: 'email', key: 'email' },
 		{ title: 'Gender', dataIndex: 'gender', key: 'gender' },
-		{ title: 'BirthYear', dataIndex: 'birthYear', key: 'birthYear' },
-		{ title: 'BirthMonth', dataIndex: 'birthMonth', key: 'birthMonth' },
-		{ title: 'BirthDay', dataIndex: 'birthDay', key: 'birthDay' }
+		{ title: 'CreatedAt', dataIndex: 'createdAt', key: 'createdAt' },
+		{ title: 'UpdatedAt', dataIndex: 'updatedAt', key: 'updatedAt' }
 	]
 	const router = useRouter()
 

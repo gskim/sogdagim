@@ -22,14 +22,7 @@ export class ChatService {
 
 	async createChat(name: string, description: string, user: User, type: ChatType, maxPersons: number,
 		password?: string) {
-		const chat = this.chatRepository.create()
-		chat.name = name
-		chat.description = description
-		chat.type = type
-		chat.maxPersons = maxPersons
-		chat.password = password
-		chat.users = [user]
-		return await this.chatRepository.save(chat)
+		return await this.chatRepository.addChat([user], type, maxPersons, password, name, description)
 	}
 
 	async entranceChat(chatId: number, user: User, password?: string) {

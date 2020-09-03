@@ -9,6 +9,7 @@ import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
+import { ChatQueueRepository } from '@repositories/ChatQueueRepository'
 import { ChatRepository } from '@repositories/ChatRepository'
 import { DeviceRepository } from '@repositories/DeviceRepository'
 import { MessageRepository } from '@repositories/MessageRepository'
@@ -23,7 +24,7 @@ import { IndexService } from '@services/IndexService'
 import { JwtStrategy } from '@services/JWTStrategy'
 import { PostService } from '@services/PostService'
 import { UserService } from '@services/UserService'
-import { Chat, Device, Image, Like, Message, MessageOrderSequence
+import { Chat, ChatQueue, Device, Image, Like, Message, MessageOrderSequence
   ,Notification, NotificationOrderSequence, Post, PostMapping
 , PostOrderSequence, Unlike, User, Verification } from '@sogdagim/orm'
 import connectionOptions from '@sogdagim/orm/ormConfig'
@@ -42,9 +43,9 @@ import { jwtConstants } from './Constants'
 		TypeOrmModule.forFeature([
 		Chat, Device, Image, Like, Message, MessageOrderSequence
 		,Notification, NotificationOrderSequence, Post, PostMapping
-		, PostOrderSequence, Unlike, User, Verification,
+		, PostOrderSequence, Unlike, User, Verification, ChatQueue,
 		UserRepository, PostRepository, PostOrderSequenceRepository,
-		DeviceRepository, ChatRepository, MessageRepository
+		DeviceRepository, ChatRepository, MessageRepository, ChatQueueRepository
 		])
 	],
 	controllers: [

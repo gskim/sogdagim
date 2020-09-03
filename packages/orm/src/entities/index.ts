@@ -1,5 +1,6 @@
 export * from './Device'
 export * from './Chat'
+export * from './ChatQueue'
 export * from './Image'
 export * from './Like'
 export * from './Message'

@@ -25,8 +25,8 @@ export class ChatQueue extends BaseEntity {
 	@Column({ type: 'int', nullable: false })
 	userId: number
 
-	@Column('json')
-	data: ChatQueueData
+	@Column({ type: 'varchar', nullable: false })
+	socketId: string
 
 	@CreateDateColumn() createdAt: Date
 	@UpdateDateColumn() updatedAt: Date

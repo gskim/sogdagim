@@ -39,6 +39,16 @@ export enum ChatType {
 	CLOSE = 'close'
 }
 
+export enum ChatQueueType {
+	MATCH = 'match',
+	READY = 'ready',
+	OUT = 'out'
+}
+
+export class ChatQueueData {
+	socket: Object
+}
+
 export class SimpleUser {
 	id: number
 	nickname: string

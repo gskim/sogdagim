@@ -43,7 +43,6 @@ const Room: PageComponent<GetAdminChatsMessagesResponse & {userId: number, chatI
 		console.log(data)
 	})
 
-
 	const sendMessage = async (values) => {
 		socket.emit('sendMessage', { chatId: props.chatId, data: values.message })
 	}

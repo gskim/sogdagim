@@ -29,23 +29,20 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', length: 200 })
 	email: string
 
-	@Column({ type: 'boolean', default: false })
-	verified: boolean
-
 	@Column('varchar', { length: 100, nullable: true, comment: '로그인시 업데이트되는 토큰' })
 	accessToken: string | null
 
 	@Column({ type: 'enum', enum: Gender, default: Gender.Man })
 	gender: Gender
 
-	@Column({ type: 'varchar', length: 4 })
-	birthYear: string
+	@Column({ type: 'varchar', nullable: true, length: 4 })
+	birthYear?: string
 
-	@Column({ type: 'varchar', length: 2 })
-	birthMonth: string
+	@Column({ type: 'varchar', nullable: true, length: 2 })
+	birthMonth?: string
 
-	@Column({ type: 'varchar', length: 2 })
-	birthDay: string
+	@Column({ type: 'varchar', nullable: true, length: 2 })
+	birthDay?: string
 
 	@Column({ type: 'varchar', length: 300 })
 	password: string
@@ -70,13 +67,6 @@ export class User extends BaseEntity {
 
 	@ManyToMany((type) => Chat, (chat) => chat.users)
 	chats: Chat[]
-
-	@ManyToMany((type) => User, (user) => user.following, { cascade: ['insert', 'update'] })
-	@JoinTable()
-	followers: User[]
-
-	@ManyToMany((type) => User, (user) => user.followers, { cascade: ['insert', 'update'] })
-	following: User[]
 
 	@OneToMany((type) => Like, (like) => like.user)
 	likes: Like[]

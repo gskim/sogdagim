@@ -1,14 +1,10 @@
-import { ChatQueueData, ChatQueueType } from '@sogdagim/model/models'
+import { ChatQueueType } from '@sogdagim/model/models'
 import {
 	BaseEntity,
-	BeforeInsert,
 	Column,
 	CreateDateColumn,
 	Entity,
 	Index,
-	JoinTable,
-	ManyToMany,
-	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'

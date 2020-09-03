@@ -35,6 +35,7 @@ export enum NotificationType {
 export enum ChatType {
 	PUBLIC = 'public',
 	PRIVATE = 'private',
+	FRIEND = 'friend',
 	RANDOM = 'random',
 	CLOSE = 'close'
 }
@@ -43,10 +44,6 @@ export enum ChatQueueType {
 	MATCH = 'match',
 	READY = 'ready',
 	OUT = 'out'
-}
-
-export class ChatQueueData {
-	socket: Object
 }
 
 export class SimpleUser {

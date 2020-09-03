@@ -124,6 +124,22 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 		// return from([1, 2, 3]).pipe(map((item) => ({ event: 'cc', data: item })))
 	}
 
+	@UseGuards(WsGuard)
+	@SubscribeMessage('sendInviteChat')
+	sendInviteChat(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
+		console.log(data)
+		socket.to(data.chatId.toString()).emit('receiveInviteChat', {})
+		return { event: 'sendInviteChatSuccess', data: data }
+	}
+
+	@UseGuards(WsGuard)
+	@SubscribeMessage('approveInviteChat')
+	approveInviteChat(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
+		console.log(data)
+		socket.to(data.chatId.toString()).emit('receiveApproveInviteChat', {})
+		return { event: 'approveInviteChatSuccess', data: data }
+	}
+
 	private matchFail(socket: Socket) {
 		this.server.to(socket.id).emit('matchFail', {})
 	}

@@ -73,7 +73,7 @@ export class ChatService {
 		return await this.chatRepository.find({
 			loadRelationIds: { relations: ['users'] },
 			where: {
-				type: Not(In([ChatType.RANDOM, ChatType.CLOSE])),
+				type: Not(In([ChatType.RANDOM, ChatType.CLOSE, ChatType.FRIEND])),
 				id: MoreThan(lastId)
 			},
 			order: { id: 'ASC' },
@@ -83,7 +83,7 @@ export class ChatService {
 
 	async getMyChats(currentUser: User) {
 		const user = await this.userRepository.createQueryBuilder('user')
-		.innerJoinAndSelect('user.chats', 'chats')
+		.innerJoinAndSelect('user.chats', 'chats', `chats.type NOT IN (${ChatType.CLOSE}, ${ChatType.RANDOM})`)
 		.andWhere(`user.id = :userId`, { userId: currentUser.id })
 		.getOne()
 		if (user) {

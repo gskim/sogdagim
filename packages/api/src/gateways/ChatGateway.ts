@@ -10,8 +10,9 @@ import {
   } from '@nestjs/websockets'
 import { ChatQueueRepository } from '@repositories/ChatQueueRepository'
 import { ChatRepository } from '@repositories/ChatRepository'
+import { MessageRepository } from '@repositories/MessageRepository'
 import { UserRepository } from '@repositories/UserRepository'
-import { plainToClass, Chat, ChatQueue, ChatQueueType, ChatType, User } from '@sogdagim/orm'
+import { plainToClass, Chat, ChatQueue, ChatQueueType, ChatType, Message, User } from '@sogdagim/orm'
 import { from, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Server, Socket } from 'socket.io'
@@ -27,6 +28,7 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 	@InjectRepository(Chat) private readonly chatRepository: ChatRepository
 	@InjectRepository(ChatQueue) private readonly chatQueueRepository: ChatQueueRepository
 	@InjectRepository(User) private readonly userRepository: UserRepository
+	@InjectRepository(Message) private readonly messageRepository: MessageRepository
 
 	afterInit(server: Server) {
 		console.log('afterinit')
@@ -107,7 +109,7 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 	}
 
 	@SubscribeMessage('entranceChat')
-	async entranceChat(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
+	entranceChat(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
 		console.log('entranceChat', data)
 		socket.join(data.chatId.toString(), (err) => {
 			if (err) throw new BadRequestException('failed join')
@@ -117,9 +119,19 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 
 	@UseGuards(WsGuard)
 	@SubscribeMessage('sendMessage')
-	sendMessage(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
+	async sendMessage(@MessageBody() data: { message: string, chatId: number, isImage: boolean },
+	@ConnectedSocket() socket: Socket,
+	@CurrentUser() currentUser: User) {
 		console.log(data)
-		socket.to(data.chatId.toString()).emit('receiveMessage', data)
+		const message = this.messageRepository.create()
+		const chat = await this.chatRepository.findOne(data.chatId)
+		if (!chat) throw new BadRequestException('not found chat')
+		message.chat = chat
+		message.user = currentUser
+		message.text = data.message
+		await this.messageRepository.save(message)
+		socket.to(data.chatId.toString()).emit('receiveMessage',
+		{ ...data, user: { id: currentUser.id, nickname: currentUser.nickname, profilePhoto: currentUser.profilePhoto } })
 		return { event: 'sendSuccess', data: data }
 		// return from([1, 2, 3]).pipe(map((item) => ({ event: 'cc', data: item })))
 	}
@@ -134,8 +146,12 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 
 	@UseGuards(WsGuard)
 	@SubscribeMessage('approveInviteChat')
-	approveInviteChat(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
+	async approveInviteChat(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
 		console.log(data)
+		const chat = await this.chatRepository.findOne(data.chatId)
+		if (!chat) throw new NotFoundException('not found chat')
+		chat.type = ChatType.FRIEND
+		await this.chatRepository.save(chat)
 		socket.to(data.chatId.toString()).emit('receiveApproveInviteChat', {})
 		return { event: 'approveInviteChatSuccess', data: data }
 	}

@@ -10,6 +10,7 @@ module.exports = {
 	"database": process.env.DB_SCHEMA,
     "entities": ["./dist/entities/*.js"],
     "migrations": ["./src/migrations/*.ts"],
+    "timezone": process.env.TZ,
     "namingStrategy": snake,
 	"dateStrings": ['DATE'],
     "cli": {

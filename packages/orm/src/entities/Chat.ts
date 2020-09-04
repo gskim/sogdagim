@@ -35,6 +35,9 @@ export class Chat extends BaseEntity {
 	@Column({ type: 'enum', enum: ChatType, default: ChatType.RANDOM })
 	type: ChatType
 
+	@Column({ type: 'datetime', nullable: true })
+	expirationDate: Date
+
 	@ManyToMany((type) => User, (user) => user.chats)
 	@JoinTable()
 	users: User[]

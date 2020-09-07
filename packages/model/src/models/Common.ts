@@ -16,6 +16,12 @@ export enum PostStatus {
 	DELETE = 'delete'
 }
 
+export enum SignUpType {
+	Email = 'email',
+	Google = 'google',
+	Apple = 'apple'
+}
+
 export enum Gender {
 	Man = 'm',
 	Woman = 'w'

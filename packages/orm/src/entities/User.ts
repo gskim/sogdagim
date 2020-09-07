@@ -1,5 +1,5 @@
 // import * as bcrypt from 'bcrypt'
-import { Gender } from '@sogdagim/model/models'
+import { Gender, SignUpType } from '@sogdagim/model/models'
 import * as passwordHash from 'password-hash'
 import {
 	BaseEntity,
@@ -29,6 +29,9 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', length: 200 })
 	email: string
 
+	@Column({ type: 'enum', enum: SignUpType, default: SignUpType.Email })
+	signUpType: SignUpType
+
 	@Column('varchar', { length: 100, nullable: true, comment: '로그인시 업데이트되는 토큰' })
 	accessToken: string | null
 
@@ -44,8 +47,8 @@ export class User extends BaseEntity {
 	@Column({ type: 'varchar', nullable: true, length: 2 })
 	birthDay?: string
 
-	@Column({ type: 'varchar', length: 300 })
-	password: string
+	@Column({ type: 'varchar', nullable: true, length: 300 })
+	password?: string
 
 	@Column({ type: 'text', nullable: true })
 	profilePhoto?: string
@@ -58,6 +61,9 @@ export class User extends BaseEntity {
 
 	@Column({ type: 'int', default: 0 })
 	point: number
+
+	@Column({ type: 'int', nullable: true })
+	oauthId?: number
 
 	@CreateDateColumn()
 	createdAt: Date

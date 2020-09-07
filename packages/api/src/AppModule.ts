@@ -20,6 +20,7 @@ import { AuthService } from '@services/AuthService'
 import { ChatService } from '@services/ChatService'
 import { DeviceService } from '@services/DeviceService'
 import { EmailStrategy } from '@services/EmailStrategy'
+import { GoogleStrategy } from '@services/GoogleStrategy'
 import { IndexService } from '@services/IndexService'
 import { JwtStrategy } from '@services/JWTStrategy'
 import { PostService } from '@services/PostService'
@@ -53,7 +54,7 @@ import { jwtConstants } from './Constants'
 		ChatController, AdminChatController
 	],
 	providers: [
-	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy, PostService,
+	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy, PostService, GoogleStrategy,
 	ChatGateway, DeviceService, ChatService
 	]
 })

@@ -1,25 +1,16 @@
 import { LayoutType } from '@src/@types'
-import { SocketContext } from '@src/contexts/SocketContext'
 import AuthFetcher, { LoginParams } from '@src/fetchers/auth'
 import { Button, Form, Input } from 'antd'
-import { useContext } from 'react'
+import { GoogleLogin } from 'react-google-login'
 import styled from 'styled-components'
-
 const authFetcher = new AuthFetcher()
 
 const Login = (props) => {
 
-	// const socket = useContext(SocketContext)
-
-	// socket.on('sendMessage', (data) => {
-	// 	console.log('sendMessage')
-	// 	console.log(data)
-	// })
-
-	// socket.on('receiveMessage', (data) => {
-	// 	console.log('receiveMessage')
-	// 	console.log(data)
-	// })
+	const responseGoogle = async (response) => {
+		console.log(response)
+		await authFetcher.googleLogin(response)
+	}
 
 	const formItemLayout = {
 		labelCol: { span: 6 },
@@ -84,6 +75,14 @@ const Login = (props) => {
 				</Button>
 				</Form.Item>
 			</Form>
+			<GoogleLogin
+				clientId='329972956746-upskjt0aue8p7u1tp9bi24h9s05pvo6l.apps.googleusercontent.com'
+				buttonText='Login'
+				scope={'https://www.googleapis.com/auth/userinfo.email'}
+				onSuccess={responseGoogle}
+				onFailure={() => {}}
+				responseType={'code'}
+			/>
 		</LoginWrap>
 	)
 }

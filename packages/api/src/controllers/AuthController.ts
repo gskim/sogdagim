@@ -3,7 +3,7 @@ import { AuthService } from '@services/AuthService'
 import { UserService } from '@services/UserService'
 import { PostAuthsSignupRequest } from '@sogdagim/model'
 import { User } from '@sogdagim/orm'
-import { CurrentUser, EmailAuthGuard, JwtAuthGuard } from '../CustomDecorator'
+import { CurrentUser, EmailAuthGuard, GoogleAuthGuard, JwtAuthGuard } from '../CustomDecorator'
 @Controller()
 export class AuthController {
 	@Inject() private readonly authService: AuthService
@@ -40,6 +40,16 @@ export class AuthController {
 			id: currentUser.id,
 			email: currentUser.email,
 			nickname: currentUser.nickname
+		}
+	}
+
+	@UseGuards(GoogleAuthGuard)
+	@Get('/auths/google')
+	async getAuthsLogin(@CurrentUser() currentUser: User) {
+		console.log('============================')
+		const user = await this.userService.updateLoginDateAndToken(currentUser)
+		return {
+			accessToken: this.authService.getJWT(user)
 		}
 	}
 }

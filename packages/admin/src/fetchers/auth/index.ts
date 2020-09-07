@@ -19,6 +19,15 @@ export default class AuthFetcher extends Api {
 		Router.push('/login')
 	}
 
+	async googleLogin(data: any) {
+		const url = `/auths/google`
+		const { accessToken = '' } = await this.get(url, data, true) || {}
+		if (accessToken) {
+			cookie.set('token', accessToken)
+			Router.push('/')
+		}
+	}
+
 	isAuth(ctx) {
 		const { token } = nextCookie(ctx)
 		return !!token

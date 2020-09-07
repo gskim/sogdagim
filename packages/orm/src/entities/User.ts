@@ -62,8 +62,8 @@ export class User extends BaseEntity {
 	@Column({ type: 'int', default: 0 })
 	point: number
 
-	@Column({ type: 'int', nullable: true })
-	oauthId?: number
+	@Column({ type: 'varchar', nullable: true, length: 100 })
+	oauthId?: string
 
 	@CreateDateColumn()
 	createdAt: Date

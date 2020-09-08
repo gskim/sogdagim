@@ -46,7 +46,6 @@ export class AuthController {
 	@UseGuards(GoogleAuthGuard)
 	@Get('/auths/google')
 	async getAuthsLogin(@CurrentUser() currentUser: User) {
-		console.log('============================')
 		const user = await this.userService.updateLoginDateAndToken(currentUser)
 		return {
 			accessToken: this.authService.getJWT(user)

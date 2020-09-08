@@ -76,7 +76,7 @@ const Login = (props) => {
 				</Form.Item>
 			</Form>
 			<GoogleLogin
-				clientId='329972956746-upskjt0aue8p7u1tp9bi24h9s05pvo6l.apps.googleusercontent.com'
+				clientId={`${process.env.GOOGLE_CLIENT_ID}`}
 				buttonText='Login'
 				scope={'https://www.googleapis.com/auth/userinfo.email'}
 				onSuccess={responseGoogle}

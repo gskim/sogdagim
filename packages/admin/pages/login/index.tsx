@@ -1,6 +1,7 @@
 import { LayoutType } from '@src/@types'
 import AuthFetcher, { LoginParams } from '@src/fetchers/auth'
 import { Button, Form, Input } from 'antd'
+import AppleLogin from 'react-apple-login'
 import { GoogleLogin } from 'react-google-login'
 import styled from 'styled-components'
 const authFetcher = new AuthFetcher()
@@ -10,6 +11,11 @@ const Login = (props) => {
 	const responseGoogle = async (response) => {
 		console.log(response)
 		await authFetcher.googleLogin(response)
+	}
+
+	const responseApple = async (response) => {
+		console.log(response)
+		// await authFetcher.googleLogin(response)
 	}
 
 	const formItemLayout = {
@@ -83,6 +89,7 @@ const Login = (props) => {
 				onFailure={() => {}}
 				responseType={'code'}
 			/>
+			<AppleLogin clientId='im.sogdag' redirectURI='/' callback={responseApple} />
 		</LoginWrap>
 	)
 }

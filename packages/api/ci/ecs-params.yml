@@ -1,0 +1,20 @@
+version: 1
+task_definition:
+  task_execution_role: role-ecs
+  task_role_arn: role-ecs
+  ecs_network_mode: awsvpc
+  task_size:
+    mem_limit: 0.5GB
+    cpu_limit: 256
+run_params:
+  network_configuration:
+    awsvpc_configuration:
+      subnets:
+        - subnet-41e53f2a
+        - subnet-6da93e16
+      security_groups:
+        - sg-dd3e67ba
+      assign_public_ip: ENABLED
+  service_discovery:
+      container_name: sogdagim-api
+      container_port: 80

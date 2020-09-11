@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "api-deploy": "/bin/bash ./packages/api/ci/deploy.sh",
+    "admin-deploy": "/bin/bash ./packages/admin/ci/deploy.sh"
+  },
   "devDependencies": {
     "lerna": "^3.20.2",
     "tslint": "6.1.1",

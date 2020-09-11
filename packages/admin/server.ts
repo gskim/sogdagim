@@ -12,7 +12,7 @@ server.disable('x-powered-by')
 server.use(cookieParser())
 
 app.prepare().then(() => {
-	server.get('/healthcheck', (req: Request, res: Response) => {
+	server.get('/health', (req: Request, res: Response) => {
 		return res.send('ok')
 	})
 	server.get('*', (req: any, res) => {

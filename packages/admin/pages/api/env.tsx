@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json({ result: 'ok' })
+  res.status(200).json(process.env)
 }

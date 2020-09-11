@@ -74,28 +74,30 @@ export default class Api {
 			const response = await this.axiosInstance.request(config)
 			return response.data
 		} catch (e) {
+			console.log('==========================================================')
 			console.log(e)
 			if (e.response.status === 401) {
 				if (isServer) {
+					console.log('==================================1========================')
 					this.context.res!.writeHead(302, { Location: '/login' })
 					this.context.res!.end()
 				} else if (window) {
+					console.log('==================================2========================')
 					cookie.remove('token')
 					window.location.href = '/login'
 				} else {
+					console.log('==================================3========================')
 					console.error('http status 401 && window is undefined')
 				}
 			} else {
 				if (isServer) {
+					console.log('==================================4========================')
 					const message = (e.response.data && e.response.data.message) || `알수없는 오류입니다. \n ErrorCode: ${JSON.stringify(e)}`
 					const url = require('url')
-					// redirect error page로
-					// @ts-ignore
-					this.context.res!.redirect(url.format({
-						pathname:'/error',
-						query: { message }
-					}))
+					this.context.res!.writeHead(500, { Location: '/error' })
+					this.context.res!.end()
 				} else {
+					console.log('==================================5========================')
 					if (e.response.data && e.response.data.message) {
 						console.error(e.response.data.message)
 						// toast띄우기

@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  sogdagim-admin:
+    image: 423231573443.dkr.ecr.ap-northeast-2.amazonaws.com/sogdagim-admin
+    build:
+      context: ../../..
+      dockerfile: ./packages/admin/ci/Dockerfile
+    env_file: ./../.env.production
+    ports:
+      - 80:80
+    command: ["npm", "run", "prod"]
+    ulimits:
+      nproc: 99999
+      nofile:
+        soft: 20000
+        hard: 40000
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: /ecs/sogdagim-admin
+        awslogs-region: ap-northeast-2
+        awslogs-stream-prefix: ecs

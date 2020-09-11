@@ -1,0 +1,61 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "jsx": "preserve",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "removeComments": false,
+    "noImplicitAny": false,
+    "rootDirs": [
+      "./src",
+      "./test"
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "paths": {
+      "react-native": [
+        "node_modules/react-native-web"
+      ],
+      "@src/*": [
+        "src/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "class-transformer": [
+        "./node_modules/@sogdagim/model/node_modules/class-transformer"
+      ],
+      "class-validator": [
+        "./node_modules/@sogdagim/model/node_modules/class-validator"
+      ],
+      "@sogdagim/model/*": [
+        "./node_modules/@sogdagim/model/dist/*"
+      ],
+      "@sogdagim/model": [
+        "./node_modules/@sogdagim/model/dist"
+      ]
+    },
+    "isolatedModules": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "moduleResolution": "node",
+    "lib": [
+      "es2015",
+      "es2017",
+      "dom",
+      "es2017.object"
+    ],
+    "allowJs": true,
+    "noEmit": false
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "src/*",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

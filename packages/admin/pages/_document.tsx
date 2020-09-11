@@ -35,11 +35,11 @@ class MyDocument extends Document {
 			styles: (
 				<>
 					{React.Children.toArray(styles)}
-					<link
+					{/* <link
 						rel='stylesheet'
 						type='text/css'
 						href='static/css/reset.css'
-					/>
+					/> */}
 					{initialProps.styles}
 					{sheet.getStyleElement()}
 				</>

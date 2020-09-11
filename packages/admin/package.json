@@ -1,5 +1,5 @@
 {
-	"name": "@sogdagin/admin",
+	"name": "@sogdagim/admin",
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
@@ -7,6 +7,7 @@
 		"lint-check": "npx tslint --project .",
 		"dev": "rimraf .next && next",
 		"start": "rimraf .next && next build && next start",
+		"prod": "next start --port 80",
 		"build": "rimraf .next && next build"
 	},
 	"private": true,

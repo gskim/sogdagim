@@ -44,11 +44,9 @@ MyApp.getInitialProps = async ({ Component, ctx, router }: AppContext) => {
 	const isPublicPage = Component.isPublicPage
 
 	let pageProps = {}
-
 	if (!isPublicPage) {
 		authFetcher.auth(ctx)
 		userFetcher.setContext(ctx)
-
 		if (ctx.req || !MyApp.myInfo) {
 			const user = await userFetcher.getUserMe()
 			MyApp.myInfo = user

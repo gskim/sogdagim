@@ -5,7 +5,7 @@ import { Button, Col, Divider, Form, Input, Row, Select, Table, Tooltip, Typogra
 
 import { PostStatus } from '@sogdagim/model'
 import { NextPageContext } from 'next'
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -13,7 +13,6 @@ const postFetcher = new PostFetcher()
 const { Option } = Select
 
 const PostAdd: PageComponent = (props) => {
-	const router = useRouter()
 	const formItemLayout = {
 		labelCol: { span: 6 },
 		wrapperCol: { span: 12 }
@@ -22,7 +21,7 @@ const PostAdd: PageComponent = (props) => {
 	const [form] = Form.useForm()
 	const onFinish = async (values) => {
 		const { id } = await postFetcher.addPost(values)
-		router.push(`/posts/${id}`)
+		Router.push(`/posts/${id}`)
 	}
 	return (
 		<>

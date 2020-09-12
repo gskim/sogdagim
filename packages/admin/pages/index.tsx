@@ -1,5 +1,14 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-
-export default (req: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json({ result: 'ok' })
+import { AppProps } from 'next/app'
+import React from 'react'
+const IndexPage = ({ Component, pageProps }: AppProps) => {
+	return (
+		<>
+		</>
+	)
 }
+
+IndexPage.getInitialProps = () => {
+	return {}
+}
+
+export default IndexPage

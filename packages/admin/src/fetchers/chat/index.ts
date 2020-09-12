@@ -4,6 +4,11 @@ import { GetAdminChatsDetailResponse, GetAdminChatsMessagesRequest, GetAdminChat
 import Api from '../api'
 
 export default class ChatFetcher extends Api {
+
+	async addChat() {
+
+	}
+
 	async getAllChats(params: GetAdminChatsRequest): Promise<GetAdminChatsResponse> {
 		const url = `admin/chats`
 		const res: GetAdminChatsResponse = await this.get<GetAdminChatsRequest>(url, params, false)

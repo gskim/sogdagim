@@ -50,6 +50,7 @@ const Posts: PageComponent<GetAdminPostsResponse> = ({ posts }) => {
 }
 
 Posts.getInitialProps = async (context: NextPageContext) => {
+	console.log(context)
 	postFetcher.setContext(context)
 	const res = await postFetcher.getPosts()
 	return res

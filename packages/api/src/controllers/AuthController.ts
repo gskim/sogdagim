@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Inject, Post, Req, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Inject, Post, Req, Res, UseGuards } from '@nestjs/common'
 import { AuthService } from '@services/AuthService'
 import { UserService } from '@services/UserService'
 import { PostAuthsSignupRequest } from '@sogdagim/model'
 import { User } from '@sogdagim/orm'
-import { CurrentUser, EmailAuthGuard, GoogleAuthGuard, JwtAuthGuard } from '../CustomDecorator'
+import { Response } from 'express'
+import { AppleAuthGuard, CurrentUser, EmailAuthGuard, GoogleAuthGuard, JwtAuthGuard } from '../CustomDecorator'
 @Controller()
 export class AuthController {
 	@Inject() private readonly authService: AuthService
@@ -45,10 +46,30 @@ export class AuthController {
 
 	@UseGuards(GoogleAuthGuard)
 	@Get('/auths/google')
-	async getAuthsLogin(@CurrentUser() currentUser: User) {
+	async getGoogleLogin(@CurrentUser() currentUser: User) {
 		const user = await this.userService.updateLoginDateAndToken(currentUser)
 		return {
 			accessToken: this.authService.getJWT(user)
+		}
+	}
+
+	@UseGuards(AppleAuthGuard)
+	@Post('/auths/apple')
+	async postAppleLogin(@CurrentUser() currentUser: User) {
+		const user = await this.userService.updateLoginDateAndToken(currentUser)
+		const accessToken = this.authService.getJWT(user)
+		return {
+			accessToken: accessToken
+		}
+	}
+
+	@UseGuards(AppleAuthGuard)
+	@Get('/auths/apple')
+	async getAppleLogin(@CurrentUser() currentUser: User) {
+		const user = await this.userService.updateLoginDateAndToken(currentUser)
+		const accessToken = this.authService.getJWT(user)
+		return {
+			accessToken: accessToken
 		}
 	}
 }

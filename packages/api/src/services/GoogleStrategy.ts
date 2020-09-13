@@ -36,10 +36,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
 		} catch(e) {
 			throw new NotFoundException(`존재하지 않는 이메일입니다.`)
 		}
-
-		const email = profileResponse.data.email
-		console.log(email)
-		console.log(profileResponse.data)
 		// {
 		// 	id: '109782026187960972183',
 		// 	email: 'kiseon1987@gmail.com',

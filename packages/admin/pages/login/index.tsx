@@ -12,12 +12,6 @@ const Login = (props) => {
 		console.log(response)
 		await authFetcher.googleLogin(response)
 	}
-
-	const responseApple = async (response) => {
-		console.log(response)
-		// await authFetcher.googleLogin(response)
-	}
-
 	const formItemLayout = {
 		labelCol: { span: 6 },
 		wrapperCol: { span: 12 }
@@ -89,7 +83,13 @@ const Login = (props) => {
 				onFailure={() => {}}
 				responseType={'code'}
 			/>
-			<AppleLogin clientId='im.sogdag' redirectURI='/' callback={responseApple} />
+			<AppleLogin
+				scope='email name'
+				clientId='im.sogdag.admin'
+				redirectURI='https://admin.sogdag.im/api/apple'
+				responseMode='form_post'
+				responseType='code id_token'
+			/>
 		</LoginWrap>
 	)
 }

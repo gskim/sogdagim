@@ -8,7 +8,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "start": "nest start",
-    "ecs-start": "set UV_THREADPOOL_SIZE=64 & yarn prod",
+    "ecs-start": "yarn prod",
     "dev": "nest start --watch",
     "debug": "nest start --debug --watch",
     "prod": "node dist/main",
@@ -41,7 +41,9 @@
     "passport-local": "1.0.0",
     "crypto": "1.0.1",
     "crypto-js": "4.0.0",
-    "typeorm-transactional-cls-hooked": "0.1.12"
+    "typeorm-transactional-cls-hooked": "0.1.12",
+    "apple-auth": "1.0.6",
+    "moment-timezone": "0.5.31"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",

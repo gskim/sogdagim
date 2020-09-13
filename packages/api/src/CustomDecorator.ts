@@ -58,3 +58,6 @@ export class WsGuard implements CanActivate {
 
 @Injectable()
 export class GoogleAuthGuard extends AuthGuard('google') {}
+
+@Injectable()
+export class AppleAuthGuard extends AuthGuard('apple') {}

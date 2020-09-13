@@ -40,7 +40,11 @@ export class UserService {
 	}
 
 	async findSnsUser(email: string, oauthId: string, signUpType: SignUpType) {
-		return await this.userRepository.findOne({ where: { email: email, oauthId: oauthId, signUpType: signUpType } })
+		if (signUpType === SignUpType.Apple) {
+			return await this.userRepository.findOne({ where: { oauthId: oauthId, signUpType: signUpType } })
+		} else {
+			return await this.userRepository.findOne({ where: { email: email, oauthId: oauthId, signUpType: signUpType } })
+		}
 	}
 
 	async addUser(email: string) {

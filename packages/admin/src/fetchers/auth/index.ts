@@ -28,6 +28,15 @@ export default class AuthFetcher extends Api {
 		}
 	}
 
+	async appleLogin(data: any) {
+		const url = `/auths/apple`
+		const { accessToken = '' } = await this.post(url, data, true) || {}
+		if (accessToken) {
+			cookie.set('token', accessToken)
+			Router.push('/')
+		}
+	}
+
 	isAuth(ctx) {
 		const { token } = nextCookie(ctx)
 		return !!token

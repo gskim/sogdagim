@@ -16,6 +16,7 @@ import { MessageRepository } from '@repositories/MessageRepository'
 import { PostOrderSequenceRepository } from '@repositories/PostOrderSequenceRepository'
 import { PostRepository } from '@repositories/PostRepository'
 import { UserRepository } from '@repositories/UserRepository'
+import { AppleStrategy } from '@services/AppleStrategy'
 import { AuthService } from '@services/AuthService'
 import { ChatService } from '@services/ChatService'
 import { DeviceService } from '@services/DeviceService'
@@ -55,7 +56,7 @@ import { jwtConstants } from './Constants'
 	],
 	providers: [
 	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy, PostService, GoogleStrategy,
-	ChatGateway, DeviceService, ChatService
+	ChatGateway, DeviceService, ChatService, AppleStrategy
 	]
 })
 class AllModule {

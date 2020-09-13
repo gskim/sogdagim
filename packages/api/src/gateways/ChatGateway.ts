@@ -66,6 +66,11 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 		const queue = await this.chatQueueRepository.findQueue()
 		if (queue) {
 			if (queue.userId === currentUser.id) {
+				if (queue.socketId !== socket.id) {
+					queue.type = ChatQueueType.OUT
+					await this.chatQueueRepository.save(queue)
+					await this.chatQueueRepository.addQueue(currentUser.id, socket.id)
+				}
 				// fail
 				console.log('fail1')
 				this.matchFail(socket)
@@ -133,7 +138,6 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 		socket.to(data.chatId.toString()).emit('receiveMessage',
 		{ ...data, user: { id: currentUser.id, nickname: currentUser.nickname, profilePhoto: currentUser.profilePhoto } })
 		return { event: 'sendSuccess', data: data }
-		// return from([1, 2, 3]).pipe(map((item) => ({ event: 'cc', data: item })))
 	}
 
 	@UseGuards(WsGuard)

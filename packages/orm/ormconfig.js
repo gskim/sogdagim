@@ -11,6 +11,7 @@ module.exports = {
     "entities": ["./dist/entities/*.js"],
     "migrations": ["./src/migrations/*.ts"],
     "timezone": process.env.TZ,
+    "charset": 'utf8mb4_unicode_ci',
     "namingStrategy": snake,
 	"dateStrings": ['DATE'],
     "cli": {

@@ -59,7 +59,7 @@ export class User extends BaseEntity {
 	@Column({ type: 'float', default: 0, precision: 12 })
 	lon: number
 
-	@Column({ type: 'int', default: 0 })
+	@Column({ type: 'int', default: 50 })
 	point: number
 
 	@Column({ type: 'varchar', nullable: true, length: 100 })

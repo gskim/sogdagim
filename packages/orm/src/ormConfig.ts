@@ -8,7 +8,7 @@ const connectionOptions: MysqlConnectionOptions = {
 	migrations: [__dirname + '/migrations/*.ts', __dirname + '/migrations/*.js'],
 	database: process.env.DB_SCHEMA,
 	namingStrategy: new SnakeNamingStrategy(),
-	charset: 'utf8mb4',
+	charset: 'utf8mb4_unicode_ci',
 	dateStrings: ['DATE'],
 	host: process.env.DB_ENDPOINT,
 	port: 3306,

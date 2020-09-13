@@ -14,6 +14,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { ChatQueueRepository } from '@repositories/ChatQueueRepository'
 import { ChatRepository } from '@repositories/ChatRepository'
 import { DeviceRepository } from '@repositories/DeviceRepository'
+import { MessageOrderSequenceRepository } from '@repositories/MessageOrderSequenceRepository'
 import { MessageRepository } from '@repositories/MessageRepository'
 import { PostOrderSequenceRepository } from '@repositories/PostOrderSequenceRepository'
 import { PostRepository } from '@repositories/PostRepository'
@@ -61,7 +62,8 @@ export class ConfigModule {}
 		,Notification, NotificationOrderSequence, Post, PostMapping
 		, PostOrderSequence, Unlike, User, Verification, ChatQueue,
 		UserRepository, PostRepository, PostOrderSequenceRepository,
-		DeviceRepository, ChatRepository, MessageRepository, ChatQueueRepository
+		DeviceRepository, ChatRepository, MessageRepository, ChatQueueRepository,
+		MessageOrderSequenceRepository
 		])
 	],
 	controllers: [

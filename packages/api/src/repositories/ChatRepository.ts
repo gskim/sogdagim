@@ -1,5 +1,5 @@
 import { Chat, ChatType, EntityRepository, Repository, User } from '@sogdagim/orm'
-
+import moment from 'moment-timezone'
 @EntityRepository(Chat)
 export class ChatRepository extends Repository<Chat> {
 
@@ -12,6 +12,7 @@ export class ChatRepository extends Repository<Chat> {
 			chat.maxPersons = maxPersons
 			chat.password = password
 			chat.users = users
+			chat.expirationDate = moment().add(1, 'days').toDate()
 			return await this.save(chat)
 	}
 

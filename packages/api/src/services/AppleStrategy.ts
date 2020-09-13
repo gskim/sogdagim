@@ -17,8 +17,7 @@ export class AppleStrategy extends PassportStrategy(Strategy, 'apple') {
 		super({ usernameField: 'code',passwordField: 'code' })
 	}
 
-	async validate(code: string, id_token: string): Promise<any> {
-		console.log(code)
+	async validate(code: string): Promise<any> {
 		const config = {
 			client_id: 'im.sogdag.admin',
 			team_id: 'XC98724CDR',
@@ -34,10 +33,7 @@ export class AppleStrategy extends PassportStrategy(Strategy, 'apple') {
 				'text'
 			)
 			const apple = await appleAuth.accessToken(code)
-			console.log(apple)
 			const appleData = jwt.decode(apple.id_token)
-
-			// const appleData = jwt.decode(id_token)
 			console.log(appleData)
 			// @ts-ignore
 			let { sub: appleId, email: email } = appleData

@@ -1,12 +1,17 @@
-import { GetAdminChatsDetailResponse, GetAdminChatsMessagesRequest, GetAdminChatsMessagesResponse, GetAdminChatsRequest, GetAdminChatsResponse,
+import { plainToClass, GetAdminChatsDetailResponse, GetAdminChatsMessagesRequest, GetAdminChatsMessagesResponse, GetAdminChatsRequest,
+	GetAdminChatsResponse,
+	PostAdminChatsRequest,
+	PostAdminChatsResponse,
 	PostAdminChatsUserRequest, PostAdminChatsUserResponse
  } from '@sogdagim/model'
 import Api from '../api'
 
 export default class ChatFetcher extends Api {
 
-	async addChat() {
-
+	async addChat(params: PostAdminChatsRequest): Promise<PostAdminChatsResponse> {
+		const url = `admin/chats`
+		const res: PostAdminChatsResponse = await this.post<PostAdminChatsRequest>(url, params, false)
+		return res
 	}
 
 	async getAllChats(params: GetAdminChatsRequest): Promise<GetAdminChatsResponse> {
@@ -23,8 +28,6 @@ export default class ChatFetcher extends Api {
 
 	async addUser(chatId: number, userId: number): Promise<PostAdminChatsUserResponse> {
 		const url = `admin/chats/${chatId}/users`
-		console.log(typeof chatId)
-		console.log(typeof userId)
 		const res: PostAdminChatsUserResponse = await this.post<PostAdminChatsUserRequest>(url, { userId }, false)
 		return res
 	}

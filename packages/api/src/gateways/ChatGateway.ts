@@ -10,9 +10,10 @@ import {
   } from '@nestjs/websockets'
 import { ChatQueueRepository } from '@repositories/ChatQueueRepository'
 import { ChatRepository } from '@repositories/ChatRepository'
+import { MessageOrderSequenceRepository } from '@repositories/MessageOrderSequenceRepository'
 import { MessageRepository } from '@repositories/MessageRepository'
 import { UserRepository } from '@repositories/UserRepository'
-import { plainToClass, Chat, ChatQueue, ChatQueueType, ChatType, Message, User } from '@sogdagim/orm'
+import { plainToClass, AdminSimpleMessage, Chat, ChatQueue, ChatQueueType, ChatType, Message, MessageOrderSequence, User } from '@sogdagim/orm'
 import { from, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Server, Socket } from 'socket.io'
@@ -29,6 +30,7 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 	@InjectRepository(ChatQueue) private readonly chatQueueRepository: ChatQueueRepository
 	@InjectRepository(User) private readonly userRepository: UserRepository
 	@InjectRepository(Message) private readonly messageRepository: MessageRepository
+	@InjectRepository(MessageOrderSequence) private readonly messageOrderSequenceRepository: MessageOrderSequenceRepository
 
 	afterInit(server: Server) {
 		console.log('afterinit')
@@ -128,16 +130,28 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 	@ConnectedSocket() socket: Socket,
 	@CurrentUser() currentUser: User) {
 		console.log(data)
-		const message = this.messageRepository.create()
 		const chat = await this.chatRepository.findOne(data.chatId)
 		if (!chat) throw new BadRequestException('not found chat')
+		const message = this.messageRepository.create()
 		message.chat = chat
 		message.user = currentUser
 		message.text = data.message
-		await this.messageRepository.save(message)
-		socket.to(data.chatId.toString()).emit('receiveMessage',
-		{ ...data, user: { id: currentUser.id, nickname: currentUser.nickname, profilePhoto: currentUser.profilePhoto } })
-		return { event: 'sendSuccess', data: data }
+		const messageOrder = await this.messageOrderSequenceRepository.save({})
+		message.orderId = messageOrder.id
+		const newMessage = await this.messageRepository.save(message)
+		const result = {
+			id: newMessage.id,
+			text: newMessage.text,
+			createdAt: newMessage.createdAt,
+			isImage: newMessage.isImage,
+			isRead: newMessage.isRead,
+			userId: currentUser.id,
+			nickname: currentUser.nickname,
+			profilePhoto: currentUser.profilePhoto
+		}
+
+		socket.to(data.chatId.toString()).emit('receiveMessage', plainToClass(AdminSimpleMessage, result))
+		return { event: 'sendSuccess', data: plainToClass(AdminSimpleMessage, result) }
 	}
 
 	@UseGuards(WsGuard)

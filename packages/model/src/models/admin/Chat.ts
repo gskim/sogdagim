@@ -56,6 +56,10 @@ export class PostAdminChatsRequest {
 	@IsOptional()
 	@IsString()
 	password?: string
+
+	@IsOptional()
+	@IsNumber()
+	createUserId?: number
 }
 
 export class PostAdminChatsResponse {

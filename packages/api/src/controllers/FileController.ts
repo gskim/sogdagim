@@ -9,7 +9,6 @@ export class FileController {
 	@Post('/files')
 	@UseInterceptors(FilesInterceptor('files'))
 	async uploadFiles(@UploadedFiles() files: Express.MulterS3.File[]): Promise<string[]> {
-		console.log(files)
 		// [
 		// 	{
 		// 	  fieldname: 'files',

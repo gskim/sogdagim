@@ -40,13 +40,6 @@ import path from 'path'
 import { ChatGateway } from './gateways/ChatGateway'
 import { jwtConstants } from './Constants'
 
-@Global()
-@Module({
-	providers: [ConfigService],
-	exports: [ConfigService]
-})
-export class ConfigModule {}
-
 @Module({
 	imports: [
 		PassportModule.register({ defaultStrategy: 'jwt' }),
@@ -72,7 +65,7 @@ export class ConfigModule {}
 	],
 	providers: [
 	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy, PostService, GoogleStrategy,
-	ChatGateway, DeviceService, ChatService, AppleStrategy
+	ChatGateway, DeviceService, ChatService, AppleStrategy, ConfigService, S3Service
 	]
 
 })

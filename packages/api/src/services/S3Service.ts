@@ -14,6 +14,20 @@ export class S3Service implements MulterOptionsFactory {
 		this.s3 = new AWS.S3()
 	}
 
+	async getObject(key: string) {
+		try {
+			const result = await this.s3.getObject({ Bucket: 'sogdagim-keys', Key: key }).promise()
+			if (result.Body) {
+				return result.Body.toString()
+			} else {
+				return undefined
+			}
+		} catch (error) {
+			console.log(error)
+			return undefined
+		}
+	}
+
 	createMulterOptions(): MulterModuleOptions | Promise<MulterModuleOptions> {
 		const bucket = `sogdagim`
 		const acl = 'public-read'

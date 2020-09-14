@@ -15,13 +15,13 @@ export class Image extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
 	@Column({ type: 'text', nullable: false })
+	key: string
+
+	@Column({ type: 'text', nullable: true })
 	originalName: string
 
-	@Column({ type: 'text', nullable: false })
-	name: string
-
 	@Column({ type: 'varchar', length: 10 })
-	ext: string
+	mimetype: string
 
 	@Column({ type: 'int' })
 	size: number

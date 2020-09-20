@@ -1,100 +1,124 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import { Icon, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction } from '@ui-kitten/components'
 import React from 'react'
 import { AsyncStorage } from 'react-native'
-import { Appbar } from 'react-native-paper'
 import { AuthContext } from './contexts/AuthContext'
 import AuthFetcher from './fetchers/AuthFetcher'
-import LoginScreen from './screens/LoginScreen'
-import PostList from './screens/PostListScreen'
-import ScreenList, { screens } from './screens/ScreenList'
-import SignUpScreen from './screens/SignUpScreen'
+import SnsLoginScreen from './screens/SnsLoginScreen'
 const MainStack = createStackNavigator()
-const PostStack = createStackNavigator()
 const AuthStack = createStackNavigator()
 const RootStack = createStackNavigator()
 const authFetcher = new AuthFetcher()
 
+const BackIcon = (props) => (
+	<Icon {...props} name='arrow-back'/>
+)
+const EditIcon = (props) => (
+	<Icon {...props} name='edit'/>
+)
+
+  const MenuIcon = (props) => (
+	<Icon {...props} name='more-vertical'/>
+)
+
+  const InfoIcon = (props) => (
+	<Icon {...props} name='info'/>
+)
+
+  const LogoutIcon = (props) => (
+	<Icon {...props} name='log-out'/>
+)
+
 export const AuthStackScreen = () => {
+
+	const [menuVisible, setMenuVisible] = React.useState(false)
+
+	const toggleMenu = () => {
+		setMenuVisible(!menuVisible)
+	}
+
+	const renderMenuAction = () => (
+		<TopNavigationAction icon={MenuIcon} onPress={toggleMenu}/>
+	)
+	const renderRightActions = () => (
+		<React.Fragment>
+		  <TopNavigationAction icon={EditIcon}/>
+		  <OverflowMenu
+			anchor={renderMenuAction}
+			visible={menuVisible}
+			onBackdropPress={toggleMenu}>
+			<MenuItem accessoryLeft={InfoIcon} title='About'/>
+			<MenuItem accessoryLeft={LogoutIcon} title='Logout'/>
+		  </OverflowMenu>
+		</React.Fragment>
+	)
+
 	return (
 		<AuthStack.Navigator
 		headerMode='screen'
 		screenOptions={{
-			header: ({ navigation, scene, previous }) => (
-				<Appbar.Header>
-				{previous ? (
-					<Appbar.BackAction onPress={() => navigation.goBack()} />
-				) : null}
-				<Appbar.Content title={scene.descriptor.options.title} />
-				</Appbar.Header>
-			)
+			header: ({ navigation, scene, previous }) => {
+				const renderBackAction = () => (
+					<TopNavigationAction icon={BackIcon} onPress={() => navigation.goBack()}/>
+				)
+				return <TopNavigation
+				alignment='center'
+				title={scene.descriptor.options.title}
+				accessoryLeft={previous ? renderBackAction : undefined}
+				accessoryRight={renderRightActions}
+				/>
+			}
 			}}
 		>
 			<AuthStack.Screen
 				name='Login'
-				component={LoginScreen}
+				component={SnsLoginScreen}
 				options={{ title: 'Login' }}
-			/>
-			<AuthStack.Screen
-				name='SignUp'
-				component={SignUpScreen}
-				options={{ title: 'SignUp' }}
 			/>
 		</AuthStack.Navigator>
 	)
 }
 
-export const PostStackNavigator = () => {
-	return (
-		<PostStack.Navigator
-	  		headerMode='screen'
-			screenOptions={{
-			header: ({ navigation, scene, previous }) => (
-				<Appbar.Header>
-				{previous ? (
-					<Appbar.BackAction onPress={() => navigation.goBack()} />
-				) : null}
-				<Appbar.Content title={scene.descriptor.options.title} />
-				</Appbar.Header>
-				)
-			}}
-	  	>
-			<PostStack.Screen
-				name='PostList'
-				component={PostList}
-				options={{ title: 'PostList' }}
-			/>
-		</PostStack.Navigator>
-	)
-}
-
 export const MainStackScreen = () => {
+
+	const [menuVisible, setMenuVisible] = React.useState(false)
+
+	const toggleMenu = () => {
+		setMenuVisible(!menuVisible)
+	}
+
+	const renderMenuAction = () => (
+		<TopNavigationAction icon={MenuIcon} onPress={toggleMenu}/>
+	)
+	const renderRightActions = () => (
+		<React.Fragment>
+		  <TopNavigationAction icon={EditIcon}/>
+		  <OverflowMenu
+			anchor={renderMenuAction}
+			visible={menuVisible}
+			onBackdropPress={toggleMenu}>
+			<MenuItem accessoryLeft={InfoIcon} title='About'/>
+			<MenuItem accessoryLeft={LogoutIcon} title='Logout'/>
+		  </OverflowMenu>
+		</React.Fragment>
+	)
 	return (
 		<MainStack.Navigator
 	  		headerMode='screen'
 			screenOptions={{
-			header: ({ navigation, scene, previous }) => (
-				<Appbar.Header>
-				{previous ? (
-					<Appbar.BackAction onPress={() => navigation.goBack()} />
-				) : null}
-				<Appbar.Content title={scene.descriptor.options.title} />
-				</Appbar.Header>
-				)
+				header: ({ navigation, scene, previous }) => {
+					const renderBackAction = () => (
+						<TopNavigationAction icon={BackIcon} onPress={() => navigation.goBack()}/>
+					)
+					return <TopNavigation
+					alignment='center'
+					title={scene.descriptor.options.title}
+					accessoryLeft={previous ? renderBackAction : undefined}
+					accessoryRight={renderRightActions}
+					/>
+				}
 			}}
 	  	>
-			<MainStack.Screen
-				name='Home'
-				component={ScreenList}
-				options={{ title: 'Screens' }}
-			/>
-			{(Object.keys(screens)).map((id) => (
-				<MainStack.Screen
-					key={id}
-					name={id}
-					component={screens[id]}
-					options={{ title: screens[id].title }}
-				/>
-			))}
 		</MainStack.Navigator>
 	)
 }

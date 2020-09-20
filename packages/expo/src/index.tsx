@@ -13,7 +13,6 @@ import * as React from 'react'
 import { AsyncStorage, Image, Platform, YellowBox } from 'react-native'
 import { AppearanceProvider } from 'react-native-appearance'
 import 'react-native-gesture-handler'
-import { DefaultTheme as PaperDefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { v4 } from 'react-native-uuid'
 import { AppLoading } from './components/AppLoading'
@@ -29,10 +28,8 @@ import '@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Material
 import { ExpoDevice } from '@sogdagim/model'
 import DeviceFetcher from './fetchers/DeviceFetcher'
 const paperTheme = {
-	...PaperDefaultTheme,
 	colors: {
 		...DefaultTheme.colors,
-		...PaperDefaultTheme.colors,
 		primary: '#07668C',
 		// text: '#F2F2F0',
 		surface: DefaultTheme.colors.card,
@@ -88,24 +85,22 @@ const App = () => {
 		<React.Fragment>
 			<IconRegistry icons={[EvaIconsPack]}/>
 			<AppearanceProvider>
-		<ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-		<PaperProvider theme={paperTheme}>
-		<SafeAreaProvider>
-			<React.Fragment>
-				<NavigationContainer
-					initialState={initialState}
-					onStateChange={(state) =>
-					AsyncStorage.setItem(NAVIGATION_PERSISTENCE_KEY, JSON.stringify(state))
-					}
-					theme={DefaultTheme}
-				>
-					<RootStackNavigator />
-				</NavigationContainer>
-			</React.Fragment>
-		</SafeAreaProvider>
-		</PaperProvider>
-		</ApplicationProvider>
-		</AppearanceProvider>
+				<ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+					<SafeAreaProvider>
+						<React.Fragment>
+								<NavigationContainer
+									initialState={initialState}
+									onStateChange={(state) =>
+									AsyncStorage.setItem(NAVIGATION_PERSISTENCE_KEY, JSON.stringify(state))
+									}
+									theme={DefaultTheme}
+								>
+									<RootStackNavigator />
+								</NavigationContainer>
+						</React.Fragment>
+					</SafeAreaProvider>
+				</ApplicationProvider>
+			</AppearanceProvider>
 		</React.Fragment>
 	)
 }

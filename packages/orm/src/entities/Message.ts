@@ -26,12 +26,12 @@ export class Message extends BaseEntity {
 	@Column({ type: 'boolean', default: false })
 	isImage: boolean
 
-	@Column({ type: 'boolean', default: false })
-	isRead: boolean
-
 	@Index({ unique: true })
 	@Column()
 	orderId: number
+
+	@Column()
+	readCount: number
 
 	@ManyToOne((type) => Chat)
 	chat: Chat

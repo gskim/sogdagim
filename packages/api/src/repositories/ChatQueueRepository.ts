@@ -1,5 +1,4 @@
 import { ChatQueue, ChatQueueType, EntityRepository, Repository } from '@sogdagim/orm'
-import { Socket } from 'socket.io'
 
 @EntityRepository(ChatQueue)
 export class ChatQueueRepository extends Repository<ChatQueue> {

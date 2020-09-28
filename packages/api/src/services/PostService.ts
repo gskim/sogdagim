@@ -15,13 +15,12 @@ export class PostService {
 		return await this.postRepository.getPosts()
 	}
 
-	async addPost(title: string, text: string, status: PostStatus, user: User, parent?: Post) {
+	async addPost(title: string, text: string, status: PostStatus, user: User) {
 		const post = this.postRepository.create()
 		post.title = title
 		post.text = text
 		post.status = status
 		post.user = user
-		if (parent) post.parent = parent
 		const postOrderSequence = await this.postOrderSequenceRepository.save(new PostOrderSequence())
 		post.orderId = postOrderSequence.id * -1
 		return await post.save()
@@ -43,16 +42,4 @@ export class PostService {
 		post.user = user
 		return await post.save()
 	}
-
-	async addReply(parentId: number, text: string, user: User) {
-		const parentPost = await this.getPost(parentId)
-		const reply = await this.addPost('', text, PostStatus.PUBLIC, user, parentPost)
-		return reply
-	}
-
-	async getReplies(id: number) {
-		const replies = await this.postRepository.getReplies(id)
-		return replies
-	}
-
 }

@@ -18,6 +18,8 @@ import { MessageOrderSequenceRepository } from '@repositories/MessageOrderSequen
 import { MessageRepository } from '@repositories/MessageRepository'
 import { PostOrderSequenceRepository } from '@repositories/PostOrderSequenceRepository'
 import { PostRepository } from '@repositories/PostRepository'
+import { ReplyOrderSequenceRepository } from '@repositories/ReplyOrderSequenceRepository'
+import { ReplyRepository } from '@repositories/ReplyRepository'
 import { UserRepository } from '@repositories/UserRepository'
 import { AppleStrategy } from '@services/AppleStrategy'
 import { AuthService } from '@services/AuthService'
@@ -29,11 +31,12 @@ import { GoogleStrategy } from '@services/GoogleStrategy'
 import { IndexService } from '@services/IndexService'
 import { JwtStrategy } from '@services/JWTStrategy'
 import { PostService } from '@services/PostService'
+import { ReplyService } from '@services/ReplyService'
 import { S3Service } from '@services/S3Service'
 import { UserService } from '@services/UserService'
 import { Chat, ChatQueue, Device, Image, Like, Message, MessageOrderSequence
-  ,Notification, NotificationOrderSequence, Post, PostMapping
-, PostOrderSequence, Unlike, User, Verification } from '@sogdagim/orm'
+  ,Notification, NotificationOrderSequence, Post, PostOrderSequence, Reply,
+  ReplyOrderSequence, User, Verification } from '@sogdagim/orm'
 import connectionOptions from '@sogdagim/orm/ormConfig'
 import 'module-alias/register'
 import path from 'path'
@@ -52,11 +55,11 @@ import { jwtConstants } from './Constants'
 		}),
 		TypeOrmModule.forFeature([
 		Chat, Device, Image, Like, Message, MessageOrderSequence
-		,Notification, NotificationOrderSequence, Post, PostMapping
-		, PostOrderSequence, Unlike, User, Verification, ChatQueue,
+		,Notification, NotificationOrderSequence, Post, Reply
+		, PostOrderSequence, ReplyOrderSequence, User, Verification, ChatQueue,
 		UserRepository, PostRepository, PostOrderSequenceRepository,
 		DeviceRepository, ChatRepository, MessageRepository, ChatQueueRepository,
-		MessageOrderSequenceRepository
+		MessageOrderSequenceRepository, ReplyRepository, ReplyOrderSequenceRepository
 		])
 	],
 	controllers: [
@@ -65,7 +68,7 @@ import { jwtConstants } from './Constants'
 	],
 	providers: [
 	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy, PostService, GoogleStrategy,
-	ChatGateway, DeviceService, ChatService, AppleStrategy, ConfigService, S3Service
+	ChatGateway, DeviceService, ChatService, AppleStrategy, ConfigService, S3Service, ReplyService
 	]
 
 })

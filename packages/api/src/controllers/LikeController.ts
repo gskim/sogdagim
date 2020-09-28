@@ -16,12 +16,4 @@ export class LikeController {
 			success: result
 		}
 	}
-
-	@Post('/likes/unlike/:postId')
-	async unlike(@CurrentUser() currentUser: User, @Param('postId') postId: number) {
-		const result = await this.likeService.unlike(postId, currentUser)
-		return {
-			success: result
-		}
-	}
 }

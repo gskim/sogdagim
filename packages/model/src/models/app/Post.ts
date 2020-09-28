@@ -83,9 +83,11 @@ export class PutPostsDetailResponse {
 
 export class ReplyItemUser {
 	@Expose()
+	id: number
+	@Expose()
 	nickname: string
 	@Expose()
-	profilePhoto?: string
+	profilePhoto: string | null
 }
 
 export class ReplyItem {
@@ -104,6 +106,10 @@ export class ReplyItem {
 }
 
 export class PostPostsDetailReplyRequest {
+	@IsDefined()
+	@IsNumber()
+	postId: number
+
 	@IsDefined()
 	@IsNumber()
 	parentId: number

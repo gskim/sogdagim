@@ -1,5 +1,6 @@
 import { Body, ClassSerializerInterceptor, Controller, Get, Inject, Param, Post, Put, SerializeOptions, UseGuards, UseInterceptors } from '@nestjs/common'
 import { PostService } from '@services/PostService'
+import { ReplyService } from '@services/ReplyService'
 import { plainToClass } from '@sogdagim/model'
 import { GetPostsDetailRepliesResponse, GetPostsDetailResponse, GetPostsResponse, PostPostsDetailReplyRequest,
 	PostPostsDetailReplyResponse, PostPostsRequest, PostPostsResponse, PutPostsDetailRequest, PutPostsDetailResponse
@@ -15,6 +16,8 @@ export class PostController {
 
 	@Inject()
 	private readonly postService: PostService
+	@Inject()
+	private readonly replyService: ReplyService
 
 	@Get('/posts')
 	async posts() {
@@ -42,7 +45,7 @@ export class PostController {
 
 	@Get('/posts/:id/replies')
 	async getReplies(@Param('id') id: number): Promise<GetPostsDetailRepliesResponse> {
-		const replies = await this.postService.getReplies(id)
+		const replies = await this.replyService.getReplies(id)
 		return plainToClass(GetPostsDetailRepliesResponse, { replies: replies })
 	}
 
@@ -51,7 +54,7 @@ export class PostController {
 	@Param('id') id: number,
 	@Body() params: PostPostsDetailReplyRequest,
 	@CurrentUser() currentUser: User): Promise<PostPostsDetailReplyResponse> {
-		const reply = await this.postService.addReply(params.parentId, params.text, currentUser)
+		const reply = await this.replyService.addReply(params.postId, params.parentId, params.text, currentUser)
 		return plainToClass(PostPostsDetailReplyResponse, { data: reply })
 	}
 }

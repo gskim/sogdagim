@@ -144,7 +144,6 @@ import { CurrentUser, WsGuard } from '../CustomDecorator'
 			text: newMessage.text,
 			createdAt: newMessage.createdAt,
 			isImage: newMessage.isImage,
-			isRead: newMessage.isRead,
 			userId: currentUser.id,
 			nickname: currentUser.nickname,
 			profilePhoto: currentUser.profilePhoto

@@ -129,9 +129,6 @@ export class AdminSimpleMessage {
 	isImage: boolean
 
 	@Expose()
-	isRead: boolean
-
-	@Expose()
 	@Transform((v: Date) => moment(v).fromNow(), { toClassOnly: true })
 	createdAt: string
 

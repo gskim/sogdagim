@@ -25,7 +25,9 @@ export const AppNavigator = (): React.ReactElement => {
 		}
 		restoreState()
 	}, [])
+
 	const [initialState, setInitialState] = React.useState<InitialState | undefined>()
+
 	return (
 		<NavigationContainer
 		initialState={initialState}

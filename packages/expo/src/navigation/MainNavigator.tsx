@@ -5,6 +5,9 @@ import {
 import { RouteProp } from '@react-navigation/core'
 import React from 'react'
 import { HomeBottomNavigation } from './BottomNavigator'
+import { ChatNavigator } from './ChatNavigator'
+import { MyPageNavigator } from './MyPageNavigator'
+import { PostNavigator } from './PostNavigator'
 const BottomTab = createBottomTabNavigator()
 
 const ROOT_ROUTES: string[] = ['Home', 'Layouts', 'Components', 'Themes']
@@ -24,9 +27,9 @@ export const MainNavigator = () => {
 		screenOptions={TabBarVisibleOnRootScreenOptions}
 		// initialRouteName={initialTabRoute}
 		tabBar={(props) => <HomeBottomNavigation {...props} />}>
-		{/* <BottomTab.Screen name='Post' component={}/>
-		<BottomTab.Screen name='Chat' component={ComponentsNavigator}/>
-		<BottomTab.Screen name='MyPage' component={ThemesNavigator}/> */}
+		<BottomTab.Screen name='Post' component={PostNavigator}/>
+		<BottomTab.Screen name='Chat' component={ChatNavigator}/>
+		<BottomTab.Screen name='MyPage' component={MyPageNavigator}/>
 		</BottomTab.Navigator>
 	)
 }

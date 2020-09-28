@@ -93,10 +93,10 @@ const Splash = ({ loading }: {loading: boolean}): React.ReactElement => (
 
 export default (): React.ReactElement => (
 	<AppLoading
-	  tasks={[loadAssets, restoreState]}
-	  initialConfig={defaultConfig}
-	  placeholder={Splash}
+	tasks={[loadAssets, restoreState]}
+	initialConfig={defaultConfig}
+	placeholder={Splash}
 	>
-	  {(props) => <App {...props}/>}
+	{(props) => <App {...props}/>}
 	</AppLoading>
   )

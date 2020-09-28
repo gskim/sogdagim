@@ -45,6 +45,12 @@ export const RootNavigator = () => {
 
 	const authContext = React.useMemo(
 	() => ({
+		apple: async (data: {token: string}) => {
+
+		},
+		google: async (data: {token: string}) => {
+
+		},
 		signIn: async (data: {email: string, password: string}) => {
 			const accessToken = await authFetcher.login({ email: data.email, password: data.password })
 			await AsyncStorage.setItem('userToken', accessToken)

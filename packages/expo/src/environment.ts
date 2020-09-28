@@ -5,10 +5,10 @@ const ENV = {
    apiUrl: 'http://localhost'
  },
  staging: {
-   apiUrl: '[your.staging.api.here]'
+   apiUrl: 'https://api.sogdag.im'
  },
  prod: {
-   apiUrl: '[your.production.api.here]'
+   apiUrl: 'https://api.sogdag.im'
    // Add other keys you want here
  }
 }

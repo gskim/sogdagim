@@ -17,7 +17,7 @@ import { Chat } from './Chat'
 import { Device } from './Device'
 import { Like } from './Like'
 import { Post } from './Post'
-import { Unlike } from './Unlike'
+import { Reply } from './Reply'
 
 @Entity()
 export class User extends BaseEntity {
@@ -77,11 +77,11 @@ export class User extends BaseEntity {
 	@OneToMany((type) => Like, (like) => like.user)
 	likes: Like[]
 
-	@OneToMany((type) => Unlike, (unlike) => unlike.user)
-	unlikes: Unlike[]
-
 	@OneToMany((type) => Post, (post) => post.user)
 	posts: Post[]
+
+	@OneToMany((type) => Reply, (reply) => reply.user)
+	replies: Reply[]
 
 	@OneToMany((type) => Device, (device) => device.user)
 	devices: Device[]

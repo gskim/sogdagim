@@ -5,6 +5,10 @@ import { PostStatus } from '../Common'
 export class PostItemUser {
 	@Expose()
 	id: number
+	@Expose()
+	nickname: string
+	@Expose()
+	profilePhoto: string | null
 }
 
 export class PostItem {
@@ -15,14 +19,16 @@ export class PostItem {
 	@Expose()
 	text: string
 	@Expose()
-	status?: PostStatus
-	@Expose()
 	@Type(() => PostItemUser)
 	user: PostItemUser
 	@Expose()
 	createdAt: Date
 	@Expose()
-	updatedAt: Date
+	likeCnt: number
+	@Expose()
+	viewCnt: number
+	@Expose()
+	replyCnt: number
 }
 
 export class GetPostsResponse {

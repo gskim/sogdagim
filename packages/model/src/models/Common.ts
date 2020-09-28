@@ -16,6 +16,12 @@ export enum PostStatus {
 	DELETE = 'delete'
 }
 
+export enum ReplyStatus {
+	PUBLIC = 'public',
+	PRIVATE = 'private',
+	DELETE = 'delete'
+}
+
 export enum SignUpType {
 	Email = 'email',
 	Google = 'google',

@@ -1,4 +1,4 @@
-import { PostStatus } from '@sogdagim/model/models'
+import { PostStatus, ReplyStatus } from '@sogdagim/model/models'
 import {
 	BaseEntity,
 	Column,
@@ -10,9 +10,8 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
-import { Image } from './Image'
 import { Like } from './Like'
-import { Reply } from './Reply'
+import { Post } from './Post'
 import { User } from './User'
 
 @Entity({
@@ -20,21 +19,15 @@ import { User } from './User'
 		orderId: 'ASC'
 	}
 })
-export class Post extends BaseEntity {
+export class Reply extends BaseEntity {
 
 	@PrimaryGeneratedColumn() id: number
-
-	@Column({ type: 'varchar', nullable: true, length: 30 })
-	title: string
 
 	@Column({ type: 'text', nullable: false })
 	text: string
 
-	@Column({ type: 'enum', enum: PostStatus, default: PostStatus.PUBLIC })
-	status: PostStatus
-
-	@OneToMany((type) => Image, (image) => image.post)
-	images: Image[]
+	@Column({ type: 'enum', enum: ReplyStatus, default: ReplyStatus.PUBLIC })
+	status: ReplyStatus
 
 	@Index({ unique: true })
 	@Column()
@@ -43,8 +36,14 @@ export class Post extends BaseEntity {
 	@ManyToOne((type) => User)
 	user: User
 
-	@OneToMany((type) => Reply, (reply) => reply.post)
-	replies: Reply[]
+	@ManyToOne((type) => Post, (post) => post.replies)
+	post: Post
+
+	@ManyToOne((type) => Reply, (reply) => reply.children)
+	parent: Reply
+
+	@OneToMany((type) => Reply, (reply) => reply.parent)
+	children: Reply[]
 
 	@OneToMany((type) => Like, (like) => like.post)
 	likes: Like[]

@@ -11,9 +11,20 @@ export class PostItemUser {
 	profilePhoto: string | null
 }
 
+export class PostItemCount {
+	@Expose()
+	likeCnt: number
+	@Expose()
+	viewCnt: number
+	@Expose()
+	replyCnt: number
+}
+
 export class PostItem {
 	@Expose()
 	id: number
+	@Expose()
+	orderId: number
 	@Expose()
 	title: string
 	@Expose()
@@ -25,11 +36,8 @@ export class PostItem {
 	createdAt: Date
 
 	@Expose()
-	postCount: {
-		likeCnt: number
-		viewCnt: number
-		replyCnt: number
-	}
+	@Type(() => PostItemCount)
+	postCount: PostItemCount
 }
 
 export class GetPostsRequest {

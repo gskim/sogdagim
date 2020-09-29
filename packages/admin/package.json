@@ -8,7 +8,7 @@
 		"dev": "rimraf .next && next",
 		"start": "rimraf .next && next build && next start",
 		"prod": "next start --port 80",
-		"build": "rimraf .next && next build"
+		"_build": "rimraf .next && next build"
 	},
 	"private": true,
 	"license": "ISC",

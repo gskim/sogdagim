@@ -11,8 +11,8 @@ export class PostService {
 	@InjectRepository(Post) private readonly postRepository: PostRepository
 	@InjectRepository(PostOrderSequence) private readonly postOrderSequenceRepository: PostOrderSequenceRepository
 
-	async getPosts() {
-		return await this.postRepository.getPosts()
+	async getPosts(lastOrderId?: number) {
+		return await this.postRepository.getPosts(lastOrderId)
 	}
 
 	async addPost(title: string, text: string, status: PostStatus, user: User) {

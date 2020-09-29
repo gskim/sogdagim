@@ -9,7 +9,7 @@ import {
 import { Post } from './Post'
 
 @Entity()
-export class PostViewCount extends BaseEntity {
+export class PostCount extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number
 
 	@OneToOne((type) => Post)
@@ -17,5 +17,11 @@ export class PostViewCount extends BaseEntity {
 	post: Post
 
 	@Column({ type: 'int', default: 0 })
-	cnt: number
+	viewCnt: number
+
+	@Column({ type: 'int', default: 0 })
+	likeCnt: number
+
+	@Column({ type: 'int', default: 0 })
+	replyCnt: number
 }

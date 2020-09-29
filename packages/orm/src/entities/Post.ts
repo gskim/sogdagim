@@ -7,11 +7,13 @@ import {
 	Index,
 	ManyToOne,
 	OneToMany,
+	OneToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
 import { Image } from './Image'
 import { Like } from './Like'
+import { PostCount } from './PostCount'
 import { Reply } from './Reply'
 import { User } from './User'
 
@@ -48,6 +50,9 @@ export class Post extends BaseEntity {
 
 	@OneToMany((type) => Like, (like) => like.post)
 	likes: Like[]
+
+	@OneToOne((type) => PostCount, (postCount) => postCount.post)
+	postCount: PostCount
 
 	@CreateDateColumn() createdAt: Date
 

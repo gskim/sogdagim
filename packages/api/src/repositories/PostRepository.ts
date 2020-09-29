@@ -1,12 +1,15 @@
-import { EntityRepository, Post, Repository } from '@sogdagim/orm'
+import { EntityRepository, MoreThan, Post, Repository } from '@sogdagim/orm'
 
 @EntityRepository(Post)
 export class PostRepository extends Repository<Post> {
-	async getPosts() {
-		return this.find({
+	async getPosts(lastOrderId?: number) {
+
+		return await this.find({
+			relations: ['postCount'],
 			where: {
-				parent: null
-			}
+				orderId: MoreThan(lastOrderId)
+			},
+			take: 20
 		})
 	}
 

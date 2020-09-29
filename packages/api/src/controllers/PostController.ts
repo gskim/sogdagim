@@ -1,15 +1,15 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Inject, Param, Post, Put, SerializeOptions, UseGuards, UseInterceptors } from '@nestjs/common'
+import { Body, ClassSerializerInterceptor, Controller, Get, Inject, Param, Post, Put, Query, SerializeOptions, UseGuards, UseInterceptors } from '@nestjs/common'
 import { PostService } from '@services/PostService'
 import { ReplyService } from '@services/ReplyService'
 import { plainToClass } from '@sogdagim/model'
-import { GetPostsDetailRepliesResponse, GetPostsDetailResponse, GetPostsResponse, PostPostsDetailReplyRequest,
-	PostPostsDetailReplyResponse, PostPostsRequest, PostPostsResponse, PutPostsDetailRequest, PutPostsDetailResponse
- } from '@sogdagim/model/models'
+import { GetPostsDetailRepliesResponse, GetPostsDetailResponse, GetPostsRequest, GetPostsResponse,
+	PostPostsDetailReplyRequest, PostPostsDetailReplyResponse, PostPostsRequest, PostPostsResponse, PutPostsDetailRequest, PutPostsDetailResponse
+ } from '@sogdagim/model'
 import { User } from '@sogdagim/orm'
 import { CurrentUser, JwtAuthGuard } from '../CustomDecorator'
 
 @Controller()
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 @SerializeOptions({ excludeExtraneousValues: true })
 export class PostController {
@@ -20,8 +20,8 @@ export class PostController {
 	private readonly replyService: ReplyService
 
 	@Get('/posts')
-	async posts() {
-		const posts = await this.postService.getPosts()
+	async posts(@Query() params: GetPostsRequest) {
+		const posts = await this.postService.getPosts(params.lastOrderId)
 		return plainToClass(GetPostsResponse, { posts: posts })
 	}
 

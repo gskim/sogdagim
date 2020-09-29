@@ -7,7 +7,7 @@ export class ConfigService {
 	readonly envConfig: { [key: string]: string }
 
 	constructor() {
-		const filePath = `.env${process.env.NODE_ENV === 'local' ? '' : process.env.NODE_ENV }`
+		const filePath = `.env${process.env.NODE_ENV === 'local' ? '' : `.${process.env.NODE_ENV}` }`
 		this.envConfig = dotenv.parse(fs.readFileSync(filePath))
 	}
 

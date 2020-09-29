@@ -1,5 +1,5 @@
 import { Expose, Type } from 'class-transformer'
-import { IsDefined, IsEnum, IsNumber, IsString } from 'class-validator'
+import { IsDefined, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
 import { PostStatus } from '../Common'
 
 export class PostItemUser {
@@ -29,6 +29,12 @@ export class PostItem {
 	viewCnt: number
 	@Expose()
 	replyCnt: number
+}
+
+export class GetPostsRequest {
+	@IsOptional()
+	@IsNumber()
+	lastOrderId?: number
 }
 
 export class GetPostsResponse {

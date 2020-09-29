@@ -23,12 +23,13 @@ export class PostItem {
 	user: PostItemUser
 	@Expose()
 	createdAt: Date
+
 	@Expose()
-	likeCnt: number
-	@Expose()
-	viewCnt: number
-	@Expose()
-	replyCnt: number
+	postCount: {
+		likeCnt: number
+		viewCnt: number
+		replyCnt: number
+	}
 }
 
 export class GetPostsRequest {

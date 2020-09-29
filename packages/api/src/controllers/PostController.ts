@@ -9,7 +9,7 @@ import { User } from '@sogdagim/orm'
 import { CurrentUser, JwtAuthGuard } from '../CustomDecorator'
 
 @Controller()
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 @SerializeOptions({ excludeExtraneousValues: true })
 export class PostController {

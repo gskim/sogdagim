@@ -9,7 +9,7 @@ module.exports = {
     "password": process.env.DB_PASSWORD,
 	"database": process.env.DB_SCHEMA,
     "entities": ["./dist/entities/*.js"],
-    "migrations": ["./src/migrations/*.ts"],
+    "migrations": ["./dist/migrations/*.js"],
     "timezone": process.env.TZ,
     "charset": 'utf8mb4_unicode_ci',
     "namingStrategy": snake,

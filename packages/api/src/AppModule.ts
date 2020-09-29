@@ -36,7 +36,7 @@ import { S3Service } from '@services/S3Service'
 import { UserService } from '@services/UserService'
 import { Chat, ChatQueue, Device, Image, Like, Message, MessageOrderSequence
   ,Notification, NotificationOrderSequence, Post, PostCount, PostOrderSequence,
-  Reply, ReplyOrderSequence, User, Verification } from '@sogdagim/orm'
+  Reply, ReplyCount, ReplyOrderSequence, User, Verification } from '@sogdagim/orm'
 import connectionOptions from '@sogdagim/orm/ormConfig'
 import 'module-alias/register'
 import path from 'path'
@@ -57,7 +57,7 @@ import { jwtConstants } from './Constants'
 		Chat, Device, Image, Like, Message, MessageOrderSequence
 		,Notification, NotificationOrderSequence, Post, Reply
 		, PostOrderSequence, ReplyOrderSequence, User, Verification, ChatQueue,
-		UserRepository, PostRepository, PostOrderSequenceRepository, PostCount,
+		UserRepository, PostRepository, PostOrderSequenceRepository, PostCount, ReplyCount,
 		DeviceRepository, ChatRepository, MessageRepository, ChatQueueRepository,
 		MessageOrderSequenceRepository, ReplyRepository, ReplyOrderSequenceRepository
 		])

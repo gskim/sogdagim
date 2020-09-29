@@ -16,6 +16,7 @@ export class PostService {
 	}
 
 	async addPost(title: string, text: string, status: PostStatus, user: User) {
+		console.log(user)
 		const post = this.postRepository.create()
 		post.title = title
 		post.text = text

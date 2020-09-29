@@ -1,5 +1,6 @@
 import { PostStatus } from '@sogdagim/model/models'
 import {
+	AfterInsert,
 	BaseEntity,
 	Column,
 	CreateDateColumn,

@@ -105,6 +105,13 @@ export class ReplyItemUser {
 	profilePhoto: string | null
 }
 
+export class ReplyItemCount {
+	@Expose()
+	likeCnt: number
+	@Expose()
+	replyCnt: number
+}
+
 export class ReplyItem {
 	@Expose()
 	id: number
@@ -116,8 +123,8 @@ export class ReplyItem {
 	@Type(() => ReplyItemUser)
 	user: ReplyItemUser
 	@Expose()
-	@Type(() => ReplyItem)
-	children: ReplyItem[]
+	@Type(() => ReplyItemCount)
+	replyCount: ReplyItemCount
 }
 
 export class PostPostsDetailReplyRequest {

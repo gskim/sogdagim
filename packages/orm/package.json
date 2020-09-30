@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migration": "npx tsc && yarn typeorm migration:generate -n ",
-    "migration-run": "yarn typeorm migration:run",
+    "migration": "yarn build && yarn typeorm migration:generate -n ",
+    "migration-run": "yarn build && yarn typeorm migration:run",
     "build": "yarn clean && yarn compile",
     "clean": "rm -rf ./dist",
     "compile": "npx tsc -p tsconfig.json",

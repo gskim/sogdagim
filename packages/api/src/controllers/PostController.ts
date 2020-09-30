@@ -32,8 +32,8 @@ export class PostController {
 	}
 
 	@Get('/posts/:id')
-	async getPost(@Param('id') id: number): Promise<GetPostsDetailResponse> {
-		const post = await this.postService.getPost(id)
+	async getPost(@Param('id') id: number, @CurrentUser() currentUser: User): Promise<GetPostsDetailResponse> {
+		const post = await this.postService.getPost(id, currentUser)
 		return plainToClass(GetPostsDetailResponse, { data: post })
 	}
 

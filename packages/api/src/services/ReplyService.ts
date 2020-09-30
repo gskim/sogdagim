@@ -4,7 +4,7 @@ import { PostRepository } from '@repositories/PostRepository'
 import { ReplyOrderSequenceRepository } from '@repositories/ReplyOrderSequenceRepository'
 import { ReplyRepository } from '@repositories/ReplyRepository'
 import { PostStatus } from '@sogdagim/model/models'
-import { plainToClass, Post, PostOrderSequence, ReplyOrderSequence, User } from '@sogdagim/orm'
+import { plainToClass, Post, PostOrderSequence, Reply, ReplyOrderSequence, ReplyStatus, User } from '@sogdagim/orm'
 
 @Injectable()
 export class ReplyService {
@@ -31,6 +31,15 @@ export class ReplyService {
 		return await this.replyRepository.find({
 			where: {
 				post: plainToClass(Post, { id: postId })
+			}
+		})
+	}
+
+	async getRereplies(replyId: number) {
+		return await this.replyRepository.find({
+			relations: ['user', 'replyCount'],
+			where: {
+				parent: plainToClass(Reply, { id: replyId })
 			}
 		})
 	}

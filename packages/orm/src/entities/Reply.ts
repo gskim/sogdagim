@@ -7,11 +7,13 @@ import {
 	Index,
 	ManyToOne,
 	OneToMany,
+	OneToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn
 } from 'typeorm'
 import { Like } from './Like'
 import { Post } from './Post'
+import { ReplyCount } from './ReplyCount'
 import { User } from './User'
 
 @Entity({
@@ -47,6 +49,9 @@ export class Reply extends BaseEntity {
 
 	@OneToMany((type) => Like, (like) => like.post)
 	likes: Like[]
+
+	@OneToOne((type) => ReplyCount, (replyCount) => replyCount.reply)
+	replyCount: ReplyCount
 
 	@CreateDateColumn() createdAt: Date
 

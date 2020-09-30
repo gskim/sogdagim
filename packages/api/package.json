@@ -45,7 +45,8 @@
     "typeorm-transactional-cls-hooked": "0.1.12",
     "apple-auth": "1.0.6",
     "moment-timezone": "0.5.31",
-    "multer-s3": "2.9.0"
+    "multer-s3": "2.9.0",
+    "lodash": "4.17.20"
   },
   "devDependencies": {
     "@types/multer-s3": "2.7.7",

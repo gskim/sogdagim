@@ -1,5 +1,6 @@
+import { Text } from '@ui-kitten/components'
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { SafeAreaLayout } from '../components/SafeAreaLayout'
 import { CommonProps } from '../CommonProps'
 
@@ -15,6 +16,7 @@ const PostListScreen = (props: CommonProps): React.ReactElement => {
 	style={styles.safeArea}
 	insets='top'
 	>
+		<View><Text>asdasd</Text></View>
 	</SafeAreaLayout>
 
   )

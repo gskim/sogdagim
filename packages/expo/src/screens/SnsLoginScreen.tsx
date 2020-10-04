@@ -1,5 +1,6 @@
+import { Button, Text } from '@ui-kitten/components'
 import React, { useState } from 'react'
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
 import styled from 'styled-components/native'
 import { AuthContext } from '../contexts/AuthContext'
 import { CommonProps } from '../CommonProps'
@@ -23,55 +24,81 @@ const TextInputAvoidingView = ({ children }: AvoidingViewProps) => {
 
 const SnsLoginScreen = ({ navigation }: CommonProps) => {
 
-	const { signIn } = React.useContext(AuthContext)
+	// const { google, apple } = React.useContext(AuthContext)
 	navigation.setOptions({
 		header: () => (
 			null
 		)
 	})
   return (
-	<TextInputAvoidingView>
+	<ContainerView>
+		<HeaderView>
+			<TitleText
+			status='basic'
+			category='h1'
+			>SOGDAGIM</TitleText>
+			<DescriptionText
+			status='basic'
+			category='h1'
+			>우리 같이
+				속닥여 볼까요?
+			</DescriptionText>
+		</HeaderView>
 		<BodyView>
-		<HeaderView></HeaderView>
-				<CenterView></CenterView>
-				<FooterView></FooterView>
 		</BodyView>
-	</TextInputAvoidingView>
+		<FooterView>
+			<GoogleButton
+			status='control'
+			size='giant'
+			>
+				Google
+			</GoogleButton>
+			<AppleButton
+			status='control'
+			size='giant'
+			>
+				Apple
+			</AppleButton>
+		</FooterView>
+	</ContainerView>
   )
 }
 
-SnsLoginScreen.title = 'Login'
 export default SnsLoginScreen
 
-const BodyView = styled.View`
-	background: white;
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+const ContainerView = styled.View`
+	flex: 1;
+`
+const HeaderView = styled.View`
+	margin-top: 30;
 	justify-content: center;
+	align-items: center;
+	min-height: 216;
 `
 
-const BodyView2 = styled.View`
+const TitleText = styled(Text)`
+`
+const DescriptionText = styled(Text)`
+	margin-top: 16;
+`
+
+const BodyView = styled.View`
 	flex: 1;
-	background: black;
+	margin-top: 32;
+	padding-horizontal: 16;
 `
 
 const FooterView = styled.View`
-	height: 100;
-	margin-top: auto;
-	background: red;
+	margin-bottom: 20;
 `
 
-const CenterView = styled.View`
-	background: yellow;
-	height: 100;
-	align-self: center;
+const GoogleButton = styled(Button)`
+	margin-horizontal: 16;
 `
 
-const HeaderView = styled.View`
-	background: green;
-	height: 100;
-	margin-bottom: auto;
+const AppleButton = styled(Button)`
+	margin-horizontal: 16;
+	margin-top: 16;
 `
 
 const IosKeyboardAvoidingView = styled(KeyboardAvoidingView)`

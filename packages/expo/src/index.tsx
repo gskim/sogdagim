@@ -17,7 +17,7 @@ import { v4 } from 'react-native-uuid'
 import { AppLoading } from './components/AppLoading'
 import { SplashImage } from './components/SplashImage'
 import { AppNavigator } from './navigation/AppNavigator'
-import theme from './theme.json'
+import { default as theme } from './theme.json'
 
 YellowBox.ignoreWarnings(['Require cycle:'])
 Asset.loadAsync(StackAssets)
@@ -26,6 +26,7 @@ import '@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons
 import '@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf'
 import { ExpoDevice } from '@sogdagim/model'
 import DeviceFetcher from './fetchers/DeviceFetcher'
+import { Mapping, Theme } from './services/Theme'
 
 const DEVICE_UUID = 'DEVICE_UUID'
 const cacheImages = (images: any[]) =>
@@ -78,10 +79,10 @@ const App = () => {
 	)
 }
 
-const defaultConfig: { mapping: any, theme: any } = {
+const defaultConfig: { mapping: Mapping, theme: Theme } = {
 	mapping: 'eva',
 	theme: 'light'
-  }
+}
 
 const Splash = ({ loading }: {loading: boolean}): React.ReactElement => (
 	// @ts-ignore

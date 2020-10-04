@@ -10,7 +10,7 @@ import { MyPageNavigator } from './MyPageNavigator'
 import { PostNavigator } from './PostNavigator'
 const BottomTab = createBottomTabNavigator()
 
-const ROOT_ROUTES: string[] = ['Home', 'Layouts', 'Components', 'Themes']
+const ROOT_ROUTES: string[] = ['Post', 'Chat', 'MyPage']
 
 const isOneOfRootRoutes = (currentRoute: RouteProp<any, any>): boolean => {
   return ROOT_ROUTES.find((route) => currentRoute.name === route) !== undefined

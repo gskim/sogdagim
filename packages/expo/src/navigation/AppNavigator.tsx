@@ -7,10 +7,10 @@ const NAVIGATION_PERSISTENCE_KEY = 'NAVIGATION_STATE'
 const navigatorTheme = {
   ...DefaultTheme,
   colors: {
-	...DefaultTheme.colors,
+	...DefaultTheme.colors
 	// prevent layout blinking when performing navigation
-	background: 'transparent'
-  }
+	// background: 'transparent',
+ }
 }
 
 export const AppNavigator = (): React.ReactElement => {
@@ -34,7 +34,8 @@ export const AppNavigator = (): React.ReactElement => {
 		onStateChange={(state) =>
 		AsyncStorage.setItem(NAVIGATION_PERSISTENCE_KEY, JSON.stringify(state))
 		}
-		theme={navigatorTheme}>
+		theme={navigatorTheme}
+		>
 			<RootNavigator/>
 		</NavigationContainer>
 	)

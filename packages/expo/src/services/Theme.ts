@@ -2,7 +2,7 @@ import React from 'react'
 import { Appearance, AppearancePreferences, ColorSchemeName } from 'react-native-appearance'
 import { AppStorage } from './Storage'
 
-export type Mapping = 'eva' | 'material'
+export type Mapping = 'eva'
 export type Theme = 'light' | 'dark' | 'brand'
 
 export interface MappingContextValue {

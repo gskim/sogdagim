@@ -3,6 +3,7 @@ import { BadGatewayException, NotFoundException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { SignUpType, User } from '@sogdagim/orm'
 import Axios from 'axios'
+import jwt from 'jsonwebtoken'
 import { Strategy } from 'passport-local'
 import { AuthService } from './AuthService'
 
@@ -10,10 +11,21 @@ import { AuthService } from './AuthService'
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
 
 	constructor(private readonly authService: AuthService) {
-		super({ usernameField: 'code',passwordField: 'code' })
+		super({ usernameField: 'code',passwordField: 'idToken' })
 	}
 
-	async validate(code: string): Promise<any> {
+	async validate(code: string, idToken: string): Promise<any> {
+		if (code === 'code') {
+			const data = jwt.decode(idToken)
+				console.log(data)
+				// @ts-ignore
+				let { sub: googleId, email: email } = data
+				if (!email || email === '') {
+					email = `${googleId}@google.com`
+				}
+				const user = this.authService.getSnsUser(email, googleId, SignUpType.Google)
+				return user
+		}
 		let profileResponse
 		const param = {
 			code: code,

@@ -1,4 +1,5 @@
 import { Button, Text } from '@ui-kitten/components'
+import * as AppleAuthentication from 'expo-apple-authentication'
 import React, { useState } from 'react'
 import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
 import styled from 'styled-components/native'
@@ -24,7 +25,7 @@ const TextInputAvoidingView = ({ children }: AvoidingViewProps) => {
 
 const SnsLoginScreen = ({ navigation }: CommonProps) => {
 
-	// const { google, apple } = React.useContext(AuthContext)
+	const { google, apple } = React.useContext(AuthContext)
 	navigation.setOptions({
 		header: () => (
 			null
@@ -50,15 +51,17 @@ const SnsLoginScreen = ({ navigation }: CommonProps) => {
 			<GoogleButton
 			status='control'
 			size='giant'
+			onPress={google}
 			>
 				Google
 			</GoogleButton>
-			<AppleButton
-			status='control'
-			size='giant'
-			>
-				Apple
-			</AppleButton>
+			<AppleAuthentication.AppleAuthenticationButton
+				buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+				buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+				cornerRadius={5}
+				style={{ width: '100%', height: 45, marginTop: 16, marginHorizontal: 16 }}
+				onPress={apple}
+			/>
 		</FooterView>
 	</ContainerView>
   )

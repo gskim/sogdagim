@@ -50,16 +50,16 @@ const loadAssets = async () => {
 }
 
 const restoreState = async () => {
-	const initialUrl = await Linking.getInitialURL()
-	if (Platform.OS !== 'web' || initialUrl === null) {
-		let uuid = await AsyncStorage.getItem(DEVICE_UUID)
-		if (!uuid) {
-			uuid = v4()
-			await AsyncStorage.setItem(DEVICE_UUID, uuid)
-		}
-		await deviceFetcher.postDevice(Device as ExpoDevice, uuid)
+	// const initialUrl = await Linking.getInitialURL()
+	// if (Platform.OS !== 'web' || initialUrl === null) {
+	// 	let uuid = await AsyncStorage.getItem(DEVICE_UUID)
+	// 	if (!uuid) {
+	// 		uuid = v4()
+	// 		await AsyncStorage.setItem(DEVICE_UUID, uuid)
+	// 	}
+	// 	await deviceFetcher.postDevice(Device as ExpoDevice, uuid)
 
-	}
+	// }
 }
 
 const App = () => {

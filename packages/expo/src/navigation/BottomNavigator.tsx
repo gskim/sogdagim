@@ -18,15 +18,15 @@ export const HomeBottomNavigation = (props): React.ReactElement => {
 		selectedIndex={props.state.index}
 		onSelect={onSelect}>
 		<BottomNavigationTab
-			title='Layouts'
+			title='Post'
 			icon={LayoutIcon}
 		/>
 		<BottomNavigationTab
-			title='Components'
+			title='Chat'
 			icon={StarOutlineIcon}
 		/>
 		<BottomNavigationTab
-			title='Themes'
+			title='MyPage'
 			icon={ColorPaletteIcon}
 		/>
 		</BrandBottomNavigation>

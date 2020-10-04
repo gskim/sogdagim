@@ -1,4 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import * as AppleAuthentication from 'expo-apple-authentication'
+import * as Google from 'expo-google-app-auth'
 import React from 'react'
 import { AsyncStorage } from 'react-native'
 import { AuthContext } from '../contexts/AuthContext'
@@ -45,11 +47,51 @@ export const RootNavigator = () => {
 
 	const authContext = React.useMemo(
 	() => ({
-		apple: async (data: {token: string}) => {
-
+		apple: async () => {
+			try {
+				const credential = await AppleAuthentication.signInAsync({
+				requestedScopes: [
+					AppleAuthentication.AppleAuthenticationScope.EMAIL
+				]
+				})
+				// signed in
+				console.log('---------------')
+				console.log(credential.email)
+				console.log(credential.user)
+				console.log(credential)
+				const accessToken = await authFetcher.appleLogin(credential.identityToken)
+				await AsyncStorage.setItem('userToken', accessToken)
+				dispatch({ type: 'SIGN_IN', token: accessToken })
+			} catch (e) {
+				console.error(e)
+				if (e.code === 'ERR_CANCELED') {
+				// handle that the user canceled the sign-in flow
+				} else {
+				// handle other errors
+				}
+			}
 		},
-		google: async (data: {token: string}) => {
-
+		google: async () => {
+			try {
+				const result = await Google.logInAsync({
+					iosClientId: '329972956746-6o1bn01e8e9jdhv7dsuobfibq20ntfpr.apps.googleusercontent.com',
+					androidClientId: '329972956746-75o6v0p5a4ria6t73ppci88p07784sm0.apps.googleusercontent.com',
+					scopes: ['profile', 'email']
+				})
+				if (result.type === 'success') {
+					console.log(result)
+					const accessToken = await authFetcher.googleLogin(result.idToken)
+					console.log('-------------------------success')
+					console.log(accessToken)
+					await AsyncStorage.setItem('userToken', accessToken)
+					dispatch({ type: 'SIGN_IN', token: accessToken })
+				} else {
+					// return { cancelled: true };
+				}
+			} catch (error) {
+				console.log('erro----------------------------------------r')
+				console.error(error)
+			}
 		},
 		signIn: async (data: {email: string, password: string}) => {
 			const accessToken = await authFetcher.login({ email: data.email, password: data.password })

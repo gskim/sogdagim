@@ -4,7 +4,6 @@ import { PassportStrategy } from '@nestjs/passport'
 import { SignUpType, User } from '@sogdagim/orm'
 import AppleAuth from 'apple-auth'
 import Axios from 'axios'
-import fs from 'fs'
 import jwt from 'jsonwebtoken'
 import { Strategy } from 'passport-local'
 import path from 'path'
@@ -20,10 +19,10 @@ export class AppleStrategy extends PassportStrategy(Strategy, 'apple') {
 		private readonly configService: ConfigService,
 		private readonly s3Service: S3Service
 		) {
-		super({ usernameField: 'code',passwordField: 'code' })
+		super({ usernameField: 'code',passwordField: 'idToken' })
 	}
 
-	async validate(code: string): Promise<any> {
+	async validate(code: string, idToken: string): Promise<any> {
 		const config = {
 			client_id: 'im.sogdag.admin',
 			team_id: 'XC98724CDR',
@@ -31,16 +30,30 @@ export class AppleStrategy extends PassportStrategy(Strategy, 'apple') {
 			key_id: 'NR43RH24KC',
 			scope: 'email'
 		}
-
 		try {
+			if (code === 'code') {
+				const appleData = jwt.decode(idToken)
+				console.log(appleData)
+				// @ts-ignore
+				let { sub: appleId, email: email } = appleData
+				if (!email || email === '') {
+					email = `${appleId}@apple.com`
+				}
+				const user = this.authService.getSnsUser(email, appleId, SignUpType.Apple)
+				return user
+			}
+
 			const privateKey = await this.s3Service.getObject(this.configService.getString('APPLE_AUTH_KEY'))
+			console.log(privateKey)
 			if (privateKey) {
 				const appleAuth = new AppleAuth(
 					config,
 					privateKey,
 					'text'
 				)
+				console.log(code)
 				const apple = await appleAuth.accessToken(code)
+				console.log(apple)
 				const appleData = jwt.decode(apple.id_token)
 				console.log(appleData)
 				// @ts-ignore

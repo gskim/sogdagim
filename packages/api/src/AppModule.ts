@@ -16,6 +16,7 @@ import { ChatRepository } from '@repositories/ChatRepository'
 import { DeviceRepository } from '@repositories/DeviceRepository'
 import { MessageOrderSequenceRepository } from '@repositories/MessageOrderSequenceRepository'
 import { MessageRepository } from '@repositories/MessageRepository'
+import { PostCountRepository } from '@repositories/PostCountRepository'
 import { PostOrderSequenceRepository } from '@repositories/PostOrderSequenceRepository'
 import { PostRepository } from '@repositories/PostRepository'
 import { ReplyOrderSequenceRepository } from '@repositories/ReplyOrderSequenceRepository'
@@ -59,7 +60,8 @@ import { jwtConstants } from './Constants'
 		, PostOrderSequence, ReplyOrderSequence, User, Verification, ChatQueue,
 		UserRepository, PostRepository, PostOrderSequenceRepository, PostCount, ReplyCount,
 		DeviceRepository, ChatRepository, MessageRepository, ChatQueueRepository,
-		MessageOrderSequenceRepository, ReplyRepository, ReplyOrderSequenceRepository
+		MessageOrderSequenceRepository, ReplyRepository, ReplyOrderSequenceRepository,
+		PostCountRepository
 		])
 	],
 	controllers: [

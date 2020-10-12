@@ -9,7 +9,7 @@ import { CurrentUser, JwtAuthGuard } from '../CustomDecorator'
 export class LikeController {
 	@Inject() private readonly likeService: LikeService
 
-	@Post('/likes/like/:postId')
+	@Post('/likes/:postId')
 	async like(@CurrentUser() currentUser: User, @Param('postId') postId: number) {
 		const result = await this.likeService.like(postId, currentUser)
 		return {

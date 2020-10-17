@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Inject, Param, Post, Req, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Inject, Param, Post, Put, Req, UseGuards } from '@nestjs/common'
 import { LikeService } from '@services/LikeService'
-import { PostAuthsSignupRequest } from '@sogdagim/model'
 import { User } from '@sogdagim/orm'
 import { CurrentUser, JwtAuthGuard } from '../CustomDecorator'
 
@@ -8,12 +7,4 @@ import { CurrentUser, JwtAuthGuard } from '../CustomDecorator'
 @UseGuards(JwtAuthGuard)
 export class LikeController {
 	@Inject() private readonly likeService: LikeService
-
-	@Post('/likes/:postId')
-	async like(@CurrentUser() currentUser: User, @Param('postId') postId: number) {
-		const result = await this.likeService.like(postId, currentUser)
-		return {
-			success: result
-		}
-	}
 }

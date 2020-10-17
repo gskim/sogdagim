@@ -33,6 +33,11 @@ export enum Gender {
 	Woman = 'w'
 }
 
+export enum PointType {
+	In = 'in',
+	Out = 'out'
+}
+
 export enum NotificationType {
 	LIKE = 'like',
 	UNLIKE = 'unlike',

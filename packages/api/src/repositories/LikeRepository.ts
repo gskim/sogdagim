@@ -4,7 +4,7 @@ import { EntityRepository, Like, Post, Repository, User } from '@sogdagim/orm'
 export class LikeRepository extends Repository<Like> {
 
 	async findLike(post: Post, user: User) {
-		return await this.findOneOrFail({
+		return await this.findOne({
 			where: {
 				post: post,
 				user: user

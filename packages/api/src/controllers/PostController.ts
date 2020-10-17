@@ -1,4 +1,5 @@
 import { Body, ClassSerializerInterceptor, Controller, Get, Inject, Param, Post, Put, Query, SerializeOptions, UseGuards, UseInterceptors } from '@nestjs/common'
+import { LikeService } from '@services/LikeService'
 import { PostService } from '@services/PostService'
 import { ReplyService } from '@services/ReplyService'
 import { plainToClass } from '@sogdagim/model'
@@ -18,6 +19,8 @@ export class PostController {
 	private readonly postService: PostService
 	@Inject()
 	private readonly replyService: ReplyService
+	@Inject()
+	private readonly likeService: LikeService
 
 	@Get('/posts')
 	async posts(@Query() params: GetPostsRequest) {
@@ -56,5 +59,13 @@ export class PostController {
 	@CurrentUser() currentUser: User): Promise<PostPostsDetailReplyResponse> {
 		const reply = await this.replyService.addReply(params.postId, params.parentId, params.text, currentUser)
 		return plainToClass(PostPostsDetailReplyResponse, { data: reply })
+	}
+
+	@Put('/posts/:id/likes')
+	async like(@CurrentUser() currentUser: User, @Param('id') postId: number) {
+		const result = await this.likeService.like(postId, currentUser)
+		return {
+			success: result
+		}
 	}
 }

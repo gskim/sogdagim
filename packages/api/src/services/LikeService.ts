@@ -15,9 +15,15 @@ export class LikeService {
 		try {
 			const post = await this.postRepository.findOneOrFail(postId)
 			const like = await this.likeRepository.findLike(post, user)
-			if (!like.status) {
-				like.status = true
+			if (like) {
+				like.status = !like.status
 				await like.save()
+			} else {
+				await this.likeRepository.create({
+					post: post,
+					user: user,
+					status: true
+				}).save()
 			}
 			return true
 		} catch (error) {

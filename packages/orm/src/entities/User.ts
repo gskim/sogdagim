@@ -16,6 +16,7 @@ import {
 import { Chat } from './Chat'
 import { Device } from './Device'
 import { Like } from './Like'
+import { Point } from './Point'
 import { Post } from './Post'
 import { Reply } from './Reply'
 
@@ -85,6 +86,9 @@ export class User extends BaseEntity {
 
 	@OneToMany((type) => Device, (device) => device.user)
 	devices: Device[]
+
+	@OneToMany((type) => Point, (point) => point.user)
+	points: Point[]
 
 	comparePassword(password: string): boolean {
 		if (this.password) {

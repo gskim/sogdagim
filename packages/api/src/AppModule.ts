@@ -16,6 +16,8 @@ import { ChatRepository } from '@repositories/ChatRepository'
 import { DeviceRepository } from '@repositories/DeviceRepository'
 import { MessageOrderSequenceRepository } from '@repositories/MessageOrderSequenceRepository'
 import { MessageRepository } from '@repositories/MessageRepository'
+import { PointOrderSequenceRepository } from '@repositories/PointOrderSequenceRepository'
+import { PointRepository } from '@repositories/PointRepository'
 import { PostCountRepository } from '@repositories/PostCountRepository'
 import { PostOrderSequenceRepository } from '@repositories/PostOrderSequenceRepository'
 import { PostRepository } from '@repositories/PostRepository'
@@ -37,7 +39,7 @@ import { S3Service } from '@services/S3Service'
 import { UserService } from '@services/UserService'
 import { Chat, ChatQueue, Device, Image, Like, Message, MessageOrderSequence
   ,Notification, NotificationOrderSequence, Post, PostCount, PostOrderSequence,
-  Reply, ReplyCount, ReplyOrderSequence, User, Verification } from '@sogdagim/orm'
+  Reply, ReplyCount, ReplyOrderSequence, User } from '@sogdagim/orm'
 import connectionOptions from '@sogdagim/orm/ormConfig'
 import 'module-alias/register'
 import path from 'path'
@@ -57,11 +59,11 @@ import { jwtConstants } from './Constants'
 		TypeOrmModule.forFeature([
 		Chat, Device, Image, Like, Message, MessageOrderSequence
 		,Notification, NotificationOrderSequence, Post, Reply
-		, PostOrderSequence, ReplyOrderSequence, User, Verification, ChatQueue,
+		, PostOrderSequence, ReplyOrderSequence, User, ChatQueue,
 		UserRepository, PostRepository, PostOrderSequenceRepository, PostCount, ReplyCount,
 		DeviceRepository, ChatRepository, MessageRepository, ChatQueueRepository,
 		MessageOrderSequenceRepository, ReplyRepository, ReplyOrderSequenceRepository,
-		PostCountRepository
+		PostCountRepository, PointRepository, PointOrderSequenceRepository
 		])
 	],
 	controllers: [

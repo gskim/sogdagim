@@ -1,17 +1,41 @@
 {
-	"strict": {
-	  "text-font-family": "opensans-regular"
-	},
 	"components": {
-	  "TopNavigation": {
+	  "SafeAreaLayout": {
 		"meta": {
+		  "scope": "mobile",
+		  "parameters": {
+			"backgroundColor": {
+			  "type": "string"
+			}
+		  },
+		  "appearances": {
+			"default": {
+			  "default": true
+			}
+		  },
 		  "variantGroups": {
-			"alignment": {
-			  "center": {
-				"default": true
-			  },
-			  "start": {
+			"insets": {
+			  "top": {
 				"default": false
+			  },
+			  "bottom": {
+				"default": false
+			  }
+			}
+		  },
+		  "states": {}
+		},
+		"appearances": {
+		  "default": {
+			"mapping": {},
+			"variantGroups": {
+			  "position": {
+				"top": {
+				  "backgroundColor": "color-primary-default"
+				},
+				"bottom": {
+				  "backgroundColor": "color-primary-default"
+				}
 			  }
 			}
 		  }
@@ -44,47 +68,6 @@
 			}
 		  }
 		}
-	  },
-	  "SafeAreaLayout": {
-		"meta": {
-		  "scope": "mobile",
-		  "parameters": {
-			"backgroundColor": {
-			  "type": "string"
-			}
-		  },
-		  "appearances": {
-			"default": {
-			  "default": true
-			}
-		  },
-		  "variantGroups": {
-			"insets": {
-			  "top": {
-				"default": false
-			  },
-			  "bottom": {
-				"default": false
-			  }
-			}
-		  },
-		  "states": {}
-		},
-		"appearances": {
-		  "default": {
-			"mapping": {},
-			"variantGroups": {
-			  "position": {
-				"top": {
-				  "backgroundColor": "background-basic-color-2"
-				},
-				"bottom": {
-				  "backgroundColor": "background-basic-color-1"
-				}
-			  }
-			}
-		  }
-		}
 	  }
 	}
-  }
+}

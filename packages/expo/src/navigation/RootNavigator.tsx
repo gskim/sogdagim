@@ -115,10 +115,11 @@ export const RootNavigator = () => {
 			let userToken
 			try {
 				userToken = await AsyncStorage.getItem('userToken')
+				console.log('userToken', userToken)
 			} catch (e) {
 			// Restoring token failed
 			} finally {
-				dispatch({ type: 'RESTORE_TOKEN', token: undefined })
+				dispatch({ type: 'RESTORE_TOKEN', token: userToken })
 			}
 			// After restoring token, we may need to validate it in production apps
 

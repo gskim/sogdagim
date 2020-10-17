@@ -25,7 +25,7 @@ export const MainNavigator = () => {
 	return (
 		<BottomTab.Navigator
 		screenOptions={TabBarVisibleOnRootScreenOptions}
-		// initialRouteName={initialTabRoute}
+		initialRouteName={'Post'}
 		tabBar={(props) => <HomeBottomNavigation {...props} />}>
 		<BottomTab.Screen name='Post' component={PostNavigator}/>
 		<BottomTab.Screen name='Chat' component={ChatNavigator}/>

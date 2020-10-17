@@ -28,24 +28,22 @@ export interface SafeAreaLayoutProps extends ViewProps, StyledComponentProps {
   insets?: Inset
   children?: React.ReactNode
 }
-// @styled('SafeAreaLayoutComponent')
-export class SafeAreaLayoutComponent extends React.Component<SafeAreaLayoutProps> {
+@styled('SafeAreaLayout')
+export class SafeAreaLayout extends React.Component<SafeAreaLayoutProps> {
 
-  static styledComponentName = 'SafeAreaLayout'
+	render(): React.ReactElement<ViewProps> {
+		return (
+			<SafeAreaConsumer>
+				{this.renderComponent}
+			</SafeAreaConsumer>
+		)
+	}
 
-  render(): React.ReactElement<ViewProps> {
-	return (
-		<SafeAreaConsumer>
-		{this.renderComponent}
-		</SafeAreaConsumer>
-	)
-  }
-
-  private readonly createInsets = (insets: Inset | Inset[],
+	private readonly createInsets = (insets: Inset | Inset[],
 							safeAreaInsets: EdgeInsets,
 							style): FlexStyle[] => {
 	return React.Children.map(insets, (inset) => INSETS[inset].toStyle(safeAreaInsets, style))
-  }
+	}
 
   private readonly renderComponent = (safeAreaInsets: EdgeInsets): React.ReactElement<ViewProps> => {
 	const { style, insets, eva, ...viewProps } = this.props
@@ -58,5 +56,3 @@ export class SafeAreaLayoutComponent extends React.Component<SafeAreaLayoutProps
 	)
   }
 }
-
-export const SafeAreaLayout = styled('SafeAreaLayoutComponent')

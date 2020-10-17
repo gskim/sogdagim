@@ -6,6 +6,10 @@ export const appMappings = {
   eva: {
 	mapping: eva.mapping,
 	customMapping: appMapping
+  },
+  brand: {
+	mapping: eva.mapping,
+	customMapping: appMapping
   }
 }
 

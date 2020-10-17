@@ -16,17 +16,17 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { v4 } from 'react-native-uuid'
 import { AppLoading } from './components/AppLoading'
 import { SplashImage } from './components/SplashImage'
+import { default as mapping } from './mapping.json'
 import { AppNavigator } from './navigation/AppNavigator'
 import { default as theme } from './theme.json'
 
-YellowBox.ignoreWarnings(['Require cycle:'])
+YellowBox.ignoreWarnings(['Require cycle:', 'Expected style'])
 Asset.loadAsync(StackAssets)
 const deviceFetcher = new DeviceFetcher()
 import '@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf'
 import '@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf'
 import { ExpoDevice } from '@sogdagim/model'
 import DeviceFetcher from './fetchers/DeviceFetcher'
-import { Mapping, Theme } from './services/Theme'
 
 const DEVICE_UUID = 'DEVICE_UUID'
 const cacheImages = (images: any[]) =>
@@ -50,16 +50,16 @@ const loadAssets = async () => {
 }
 
 const restoreState = async () => {
-	// const initialUrl = await Linking.getInitialURL()
-	// if (Platform.OS !== 'web' || initialUrl === null) {
-	// 	let uuid = await AsyncStorage.getItem(DEVICE_UUID)
-	// 	if (!uuid) {
-	// 		uuid = v4()
-	// 		await AsyncStorage.setItem(DEVICE_UUID, uuid)
-	// 	}
-	// 	await deviceFetcher.postDevice(Device as ExpoDevice, uuid)
+	const initialUrl = await Linking.getInitialURL()
+	if (Platform.OS !== 'web' || initialUrl === null) {
+		let uuid = await AsyncStorage.getItem(DEVICE_UUID)
+		if (!uuid) {
+			uuid = v4()
+			await AsyncStorage.setItem(DEVICE_UUID, uuid)
+		}
+		await deviceFetcher.postDevice(Device as ExpoDevice, uuid)
 
-	// }
+	}
 }
 
 const App = () => {
@@ -68,7 +68,11 @@ const App = () => {
 		<React.Fragment>
 			<IconRegistry icons={[EvaIconsPack]}/>
 			<AppearanceProvider>
-				<ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+				<ApplicationProvider
+				{...eva}
+				theme={{ ...eva.light, ...theme }}
+				customMapping={mapping}
+				>
 					<SafeAreaProvider>
 						<StatusBar/>
 						<AppNavigator />
@@ -77,11 +81,6 @@ const App = () => {
 			</AppearanceProvider>
 		</React.Fragment>
 	)
-}
-
-const defaultConfig: { mapping: Mapping, theme: Theme } = {
-	mapping: 'eva',
-	theme: 'light'
 }
 
 const Splash = ({ loading }: {loading: boolean}): React.ReactElement => (
@@ -95,7 +94,6 @@ const Splash = ({ loading }: {loading: boolean}): React.ReactElement => (
 export default (): React.ReactElement => (
 	<AppLoading
 	tasks={[loadAssets, restoreState]}
-	initialConfig={defaultConfig}
 	placeholder={Splash}
 	>
 	{(props) => <App {...props}/>}

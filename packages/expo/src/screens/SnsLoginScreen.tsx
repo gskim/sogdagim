@@ -88,11 +88,11 @@ const DescriptionText = styled(Text)`
 const BodyView = styled.View`
 	flex: 1;
 	margin-top: 32;
-	padding-horizontal: 16;
+	padding-horizontal: 16px;
 `
 
 const FooterView = styled.View`
-	margin-bottom: 20;
+	margin-bottom: 20px;
 `
 
 const GoogleButton = styled(Button)`
@@ -100,8 +100,8 @@ const GoogleButton = styled(Button)`
 `
 
 const AppleButton = styled(Button)`
-	margin-horizontal: 16;
-	margin-top: 16;
+	margin-horizontal: 16px;
+	margin-top: 16px;
 `
 
 const IosKeyboardAvoidingView = styled(KeyboardAvoidingView)`

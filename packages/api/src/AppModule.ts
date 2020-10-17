@@ -33,6 +33,7 @@ import { EmailStrategy } from '@services/EmailStrategy'
 import { GoogleStrategy } from '@services/GoogleStrategy'
 import { IndexService } from '@services/IndexService'
 import { JwtStrategy } from '@services/JWTStrategy'
+import { LikeService } from '@services/LikeService'
 import { PointService } from '@services/PointService'
 import { PostService } from '@services/PostService'
 import { ReplyService } from '@services/ReplyService'
@@ -74,12 +75,11 @@ import { jwtConstants } from './Constants'
 	providers: [
 	IndexService, UserService, AuthService, EmailStrategy, JwtStrategy, PostService, GoogleStrategy,
 	ChatGateway, DeviceService, ChatService, AppleStrategy, ConfigService, S3Service, ReplyService,
-	PointService
+	PointService, LikeService
 	]
 
 })
-class AllModule {
-}
+class AllModule {}
 
 @Module({
 	imports: [

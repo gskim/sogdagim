@@ -31,7 +31,9 @@ module.exports = function(api) {
   ];
   const plugins = [
     // 'react-native-paper/babel',
-    ['module-resolver', moduleResolverConfig],
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ['module-resolver', moduleResolverConfig]
+
   ];
 
   return { presets, plugins };

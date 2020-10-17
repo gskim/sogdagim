@@ -1,10 +1,12 @@
-import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
+import { BadRequestException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { PostCountRepository } from '@repositories/PostCountRepository'
 import { PostOrderSequenceRepository } from '@repositories/PostOrderSequenceRepository'
 import { PostRepository } from '@repositories/PostRepository'
 import { PostStatus } from '@sogdagim/model/models'
 import { plainToClass, Equal, Not, Post, PostCount, PostOrderSequence, User } from '@sogdagim/orm'
+import { pointAmount } from '../Constants'
+import { PointService } from './PointService'
 
 @Injectable()
 export class PostService {
@@ -12,6 +14,8 @@ export class PostService {
 	@InjectRepository(Post) private readonly postRepository: PostRepository
 	@InjectRepository(PostOrderSequence) private readonly postOrderSequenceRepository: PostOrderSequenceRepository
 	@InjectRepository(PostCount) private readonly postCountRepository: PostCountRepository
+
+	@Inject() private readonly pointService: PointService
 
 	async getPosts(lastOrderId?: number) {
 		return await this.postRepository.getPosts(lastOrderId)
@@ -25,7 +29,9 @@ export class PostService {
 		post.user = user
 		const postOrderSequence = await this.postOrderSequenceRepository.save(new PostOrderSequence())
 		post.orderId = postOrderSequence.id * -1
-		return await post.save()
+		const createdPost = await post.save()
+		await this.pointService.pointUp(user, pointAmount.post)
+		return createdPost
 	}
 
 	async getPost(id: number, currentUser: User) {

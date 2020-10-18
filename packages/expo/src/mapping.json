@@ -63,8 +63,8 @@
 		"appearances": {
 		  "default": {
 			"mapping": {
-			  "barStyle": "dark-content",
-			  "backgroundColor": "background-basic-color-2"
+			  "barStyle": "light-content",
+			  "backgroundColor": "color-primary-default"
 			}
 		  }
 		}

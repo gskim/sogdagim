@@ -4,6 +4,7 @@ import {
   } from '@react-navigation/bottom-tabs'
 import { RouteProp } from '@react-navigation/core'
 import React from 'react'
+import { SafeAreaLayout } from '../components/SafeAreaLayout'
 import { HomeBottomNavigation } from './BottomNavigator'
 import { ChatNavigator } from './ChatNavigator'
 import { MyPageNavigator } from './MyPageNavigator'
@@ -23,13 +24,18 @@ const TabBarVisibleOnRootScreenOptions = ({ route }): BottomTabNavigationOptions
 
 export const MainNavigator = () => {
 	return (
-		<BottomTab.Navigator
-		screenOptions={TabBarVisibleOnRootScreenOptions}
-		initialRouteName={'Post'}
-		tabBar={(props) => <HomeBottomNavigation {...props} />}>
-		<BottomTab.Screen name='Post' component={PostNavigator}/>
-		<BottomTab.Screen name='Chat' component={ChatNavigator}/>
-		<BottomTab.Screen name='MyPage' component={MyPageNavigator}/>
-		</BottomTab.Navigator>
+		<SafeAreaLayout
+		style={{ flex:1, backgroundColor: 'white' }}
+		insets='bottom'
+		>
+			<BottomTab.Navigator
+			screenOptions={TabBarVisibleOnRootScreenOptions}
+			initialRouteName={'Post'}
+			tabBar={(props) => <HomeBottomNavigation {...props} />}>
+			<BottomTab.Screen name='Post' component={PostNavigator}/>
+			<BottomTab.Screen name='Chat' component={ChatNavigator}/>
+			<BottomTab.Screen name='MyPage' component={MyPageNavigator}/>
+			</BottomTab.Navigator>
+		</SafeAreaLayout>
 	)
 }

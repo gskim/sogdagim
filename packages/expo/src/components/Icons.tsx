@@ -2,6 +2,10 @@ import { Icon, IconElement } from '@ui-kitten/components'
 import React from 'react'
 import { ImageStyle } from 'react-native'
 
+export const EmptyLikeIcon = (style: ImageStyle): IconElement => (
+  <Icon {...style} fill='#BDBDBD'  name='heart-outline'/>
+)
+
 export const ArrowIosBackIcon = (style: ImageStyle): IconElement => (
   <Icon {...style} name='arrow-ios-back'/>
 )

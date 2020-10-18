@@ -10,7 +10,6 @@ export const HomeBottomNavigation = (props): React.ReactElement => {
   }
 
   return (
-	  <SafeAreaLayout insets='top'>
 		<BottomNavigation
 		appearance='noIndicator'
 		selectedIndex={props.state.index}
@@ -25,6 +24,5 @@ export const HomeBottomNavigation = (props): React.ReactElement => {
 			icon={ColorPaletteIcon}
 		/>
 		</BottomNavigation>
-		</SafeAreaLayout>
   )
 }

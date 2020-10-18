@@ -1,6 +1,7 @@
 import { Divider, List, ListItem, Text, TopNavigation } from '@ui-kitten/components'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
+import { PostItem } from '../components/PostItem'
 import { SafeAreaLayout } from '../components/SafeAreaLayout'
 import { CommonProps } from '../CommonProps'
 
@@ -31,12 +32,14 @@ const PostListScreen = (props: CommonProps): React.ReactElement => {
 	>
 		<TopNavigation
 			alignment='center'
-			title='SOGDAGIM'
+			title={(props) => <Text category='h1' {...props} >SOGDAGIM</Text>}
 		/>
 		<Divider />
 		<List
+			scrollEnabled={true}
+			showsVerticalScrollIndicator={false}
 			data={data}
-			renderItem={renderItem}
+			renderItem={PostItem}
 		/>
 	</SafeAreaLayout>
 

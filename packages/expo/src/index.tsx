@@ -74,7 +74,7 @@ const App = () => {
 				customMapping={mapping}
 				>
 					<SafeAreaProvider>
-						<StatusBar/>
+						<StatusBar />
 						<AppNavigator />
 					</SafeAreaProvider>
 				</ApplicationProvider>

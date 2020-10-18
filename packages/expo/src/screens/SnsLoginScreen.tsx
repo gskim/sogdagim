@@ -1,7 +1,7 @@
 import { Button, Text } from '@ui-kitten/components'
 import * as AppleAuthentication from 'expo-apple-authentication'
 import React, { useState } from 'react'
-import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { AuthContext } from '../contexts/AuthContext'
 import { CommonProps } from '../CommonProps'

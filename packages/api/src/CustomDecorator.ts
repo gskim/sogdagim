@@ -2,11 +2,9 @@ import { createParamDecorator, CanActivate, ExecutionContext, ForbiddenException
 import { Reflector } from '@nestjs/core'
 import { JwtService } from '@nestjs/jwt'
 import { AuthGuard } from '@nestjs/passport'
-import { AuthService } from '@services/AuthService'
 import { UserService } from '@services/UserService'
 import { User } from '@sogdagim/orm'
-import { Observable } from 'rxjs'
-import { jwtConstants } from './Constants'
+
 /* tslint:disable */
 export const CurrentUser = createParamDecorator(
 	(data: unknown, ctx: ExecutionContext) => {

@@ -11,21 +11,21 @@ import { AuthService } from './AuthService'
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
 
 	constructor(private readonly authService: AuthService) {
-		super({ usernameField: 'code',passwordField: 'idToken' })
+		super({ usernameField: 'code', passwordField: 'code' })
 	}
 
-	async validate(code: string, idToken: string): Promise<any> {
-		if (code === 'code') {
-			const data = jwt.decode(idToken)
-				console.log(data)
-				// @ts-ignore
-				let { sub: googleId, email: email } = data
-				if (!email || email === '') {
-					email = `${googleId}@google.com`
-				}
-				const user = this.authService.getSnsUser(email, googleId, SignUpType.Google)
-				return user
-		}
+	async validate(code: string): Promise<any> {
+		// if (code === 'code') {
+		// 	const data = jwt.decode(idToken)
+		// 		console.log(data)
+		// 		// @ts-ignore
+		// 		let { sub: googleId, email: email } = data
+		// 		if (!email || email === '') {
+		// 			email = `${googleId}@google.com`
+		// 		}
+		// 		const user = this.authService.getSnsUser(email, googleId, SignUpType.Google)
+		// 		return user
+		// }
 		let profileResponse
 		const param = {
 			code: code,
@@ -40,12 +40,15 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
 				method: 'post',
 				data: param
 			})
+			console.log(googleTokenResult)
 			const profileURL = `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleTokenResult.data.access_token}`
 			profileResponse = await Axios({
 				url: profileURL,
 				method: 'get'
 			})
+			console.log(profileURL)
 		} catch(e) {
+			console.log(e)
 			throw new NotFoundException(`존재하지 않는 이메일입니다.`)
 		}
 		// {

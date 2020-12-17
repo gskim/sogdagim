@@ -5,10 +5,11 @@
 	"scripts": {
 		"tsc-check": "npx tsc --noEmit --project .",
 		"lint-check": "npx tslint --project .",
-		"dev": "rimraf .next && next",
+		"dev": "rimraf .next && cross-env STAGE=local next",
 		"start": "rimraf .next && next build && next start",
 		"prod": "next start --port 80",
-		"_build": "rimraf .next && next build"
+		"_build": "rimraf .next && cross-env NODE_ENV=production next build",
+		"deploy": "cross-env NODE_ENV=production serverless"
 	},
 	"private": true,
 	"license": "ISC",
@@ -18,7 +19,7 @@
 		"socket.io": "2.3.0",
 		"socket.io-client": "2.3.0",
 		"node-fetch": "2.6.0",
-		"@sogdagim/model": "1.0.0",
+		"@sogdagim/model": "^1.0.0",
 		"@zeit/next-css": "^1.0.1",
 		"@zeit/next-less": "^1.0.1",
 		"antd": "4.1.2",
@@ -33,6 +34,7 @@
 		"lodash": "4.17.20",
 		"moment": "^2.24.0",
 		"next": "9.5.3",
+		"next-server": "^9.0.5",
 		"next-cookies": "2.0.3",
 		"next-routes": "1.4.2",
 		"react": "16.13.1",
@@ -44,7 +46,8 @@
 		"styled-components": "5.1.0",
 		"js-cookie": "2.2.1",
 		"cross-env": "7.0.2",
-		"reflect-metadata": "0.1.13"
+		"reflect-metadata": "0.1.13",
+		"serverless-http": "^2.6.0"
 	},
 	"devDependencies": {
 		"@types/socket.io": "1.4.33",
@@ -71,6 +74,8 @@
 		"tslint": "6.1.1",
 		"typescript": "4.0.2",
 		"@types/styled-components": "5.1.0",
-		"@types/js-cookie": "2.2.6"
+		"@types/js-cookie": "2.2.6",
+		"serverless": "^1.72.0",
+		"serverless-nextjs-plugin": "2.5.0"
 	}
 }

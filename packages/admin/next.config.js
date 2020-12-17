@@ -2,7 +2,7 @@ const withCss = require("@zeit/next-css")
 const withLess = require("@zeit/next-less")
 const path = require("path")
 const Dotenv = require('dotenv-webpack')
-require("dotenv").config({ path: path.resolve(process.cwd(), `.env.${process.env.STAGE || "development"}`) })
+require("dotenv").config({ path: path.resolve(process.cwd(), `ci/.env.${process.env.STAGE || "development"}`) })
 if (typeof require !== "undefined") {
 	require.extensions[".less"] = (file) => { }
 }

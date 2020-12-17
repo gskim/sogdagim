@@ -34,6 +34,8 @@ export class PostItem {
 	user: PostItemUser
 	@Expose()
 	createdAt: Date
+	@Expose()
+	updatedAt: Date
 
 	@Expose()
 	@Type(() => PostItemCount)

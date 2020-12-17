@@ -73,6 +73,7 @@ export default class Api {
 			const response = await this.axiosInstance.request(config)
 			return response.data
 		} catch (e) {
+			alert(e)
 			if (e.response.status === 401) {
 				if (isServer) {
 					this.context.res!.writeHead(302, { Location: '/login' })

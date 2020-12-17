@@ -1,16 +1,16 @@
 import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons'
-import { ReplyItem } from '@sogdagim/model/models'
+import { AdminReplyItem } from '@sogdagim/model/models'
 import ReplyList from '@src/components/ReplyList'
 import { Avatar, Button, Comment, Input, Space, Tooltip } from 'antd'
 import moment from 'moment'
 import React, { createElement, useState, FC } from 'react'
 import styled from 'styled-components'
 
-const Reply: FC<ReplyItem> = ({ user, text, id, createdAt, children }) => {
+const Reply: FC<AdminReplyItem> = ({ user, text, id, createdAt, children }) => {
 	const [likes, setLikes] = useState(0)
 	const [dislikes, setDislikes] = useState(0)
 	const [action, setAction] = useState<string | null>(null)
-	const [rereplies, setRereplies] = useState<ReplyItem[]>(children || [])
+	const [rereplies, setRereplies] = useState<AdminReplyItem[]>(children || [])
 	const [rereplyValue, setRereplyValue] = useState<string>('')
 
 	const like = () => {

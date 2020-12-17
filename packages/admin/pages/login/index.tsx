@@ -80,7 +80,7 @@ const Login = (props) => {
 				buttonText='Login'
 				scope={'https://www.googleapis.com/auth/userinfo.email'}
 				onSuccess={responseGoogle}
-				onFailure={() => {}}
+				onFailure={(e) => { console.log(e); alert(e)}}
 				responseType={'code'}
 			/>
 			<AppleLogin

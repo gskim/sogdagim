@@ -109,3 +109,5 @@ dist
 .vscode
 
 .idea/
+
+.serverless_nextjs

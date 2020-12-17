@@ -1,0 +1,15 @@
+# serverless.yml
+adminDev:
+  component: "@sls-next/serverless-component@1.17.0"
+  inputs:
+    bucketName: sogdagim-admin-edge-dev
+    runtime:
+      defaultLambda: "nodejs12.x"
+    name:
+      defaultLambda: sogdagim-admin-edge-dev
+    publicDirectoryCache:
+      value: public, max-age=604800
+      test: /\.(gif|jpe?g|png|txt|xml)$/i
+    cloudfront:
+      distributionId: E1VM5Z5WL9QUM7
+

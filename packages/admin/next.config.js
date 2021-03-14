@@ -20,7 +20,7 @@ module.exports = withCss(
 				...config.plugins,
 				// Read the .env file
 				new Dotenv({
-					path: path.join(__dirname, '.env'),
+					path: path.resolve(process.cwd(), `ci/.env.${process.env.STAGE || "development"}`),
 					systemvars: true
 				})
 			]

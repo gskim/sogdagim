@@ -6,7 +6,7 @@
 		"tsc-check": "npx tsc --noEmit --project .",
 		"lint-check": "npx tslint --project .",
 		"dev": "rimraf .next && cross-env STAGE=local next",
-		"start": "rimraf .next && next build && next start",
+		"start": "rimraf .next && cross-env STAGE=local next build && next start",
 		"prod": "next start --port 80",
 		"_build": "rimraf .next && cross-env NODE_ENV=production next build",
 		"deploy": "cross-env NODE_ENV=production serverless"

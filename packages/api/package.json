@@ -9,7 +9,7 @@
     "build": "nest build",
     "start": "export AWS_PROFILE=\"sogdagim\" && NODE_ENV=local nest start",
     "ecs-start": "yarn prod",
-    "dev": "export AWS_PROFILE=\"sogdagim\" && nest start --watch",
+    "dev": "export AWS_PROFILE=\"sogdagim\" && NODE_ENV=local nest start --watch",
     "debug": "export AWS_PROFILE=\"sogdagim\" && nest start --debug --watch",
     "prod": "node dist/main",
     "lint": "tslint \"{src,apps,libs,test}/**/*.ts\" --fix",

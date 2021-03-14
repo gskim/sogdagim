@@ -9,7 +9,6 @@ const authFetcher = new AuthFetcher()
 const Login = (props) => {
 
 	const responseGoogle = async (response) => {
-		console.log(response)
 		await authFetcher.googleLogin(response)
 	}
 	const formItemLayout = {

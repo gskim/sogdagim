@@ -7,7 +7,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "start": "export AWS_PROFILE=\"sogdagim\" && nest start",
+    "start": "export AWS_PROFILE=\"sogdagim\" && NODE_ENV=local nest start",
     "ecs-start": "yarn prod",
     "dev": "export AWS_PROFILE=\"sogdagim\" && nest start --watch",
     "debug": "export AWS_PROFILE=\"sogdagim\" && nest start --debug --watch",

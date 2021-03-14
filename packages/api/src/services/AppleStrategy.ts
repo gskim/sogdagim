@@ -19,10 +19,10 @@ export class AppleStrategy extends PassportStrategy(Strategy, 'apple') {
 		private readonly configService: ConfigService,
 		private readonly s3Service: S3Service
 		) {
-		super({ usernameField: 'code',passwordField: 'idToken' })
+		super({ usernameField: 'code',passwordField: 'id_token' })
 	}
 
-	async validate(code: string, idToken: string): Promise<any> {
+	async validate(code: string, id_token: string): Promise<any> {
 		const config = {
 			client_id: 'im.sogdag.admin',
 			team_id: 'XC98724CDR',
@@ -32,7 +32,7 @@ export class AppleStrategy extends PassportStrategy(Strategy, 'apple') {
 		}
 		try {
 			if (code === 'code') {
-				const appleData = jwt.decode(idToken)
+				const appleData = jwt.decode(id_token)
 				console.log(appleData)
 				// @ts-ignore
 				let { sub: appleId, email: email } = appleData

@@ -21,16 +21,7 @@ export default class AuthFetcher extends Api {
 
 	async googleLogin(data: any) {
 		const url = `/auths/google`
-		const { accessToken = '' } = await this.get(url, data, true) || {}
-		if (accessToken) {
-			cookie.set('token', accessToken)
-			Router.push('/')
-		}
-	}
-
-	async appleLogin(data: any) {
-		const url = `/auths/apple`
-		const { accessToken = '' } = await this.post(url, data, true) || {}
+		const { accessToken = '' } = await this.get(url, { ...data, idToken: ''}, true) || {}
 		if (accessToken) {
 			cookie.set('token', accessToken)
 			Router.push('/')
